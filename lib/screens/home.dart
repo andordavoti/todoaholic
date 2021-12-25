@@ -10,7 +10,7 @@ import 'package:todoaholic/data/todo_dao.dart';
 import 'package:provider/provider.dart';
 import 'package:todoaholic/data/user_dao.dart';
 
-import '../utils/datetime_extension.dart';
+import 'manage_todo_screen.dart';
 
 class Home extends StatelessWidget {
   final ScrollController _scrollController = ScrollController();
@@ -66,10 +66,11 @@ class Home extends StatelessWidget {
                 alignment: Alignment.bottomRight,
                 child: FloatingActionButton(
                   onPressed: () {
-                    todoDao.saveTodo(Todo(
-                        text: 'test',
-                        date: appState.selectedDate.getDateOnly(),
-                        isDone: false));
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const ManageTodoScreen(null)),
+                    );
                   },
                   child: const Icon(Icons.add),
                 ),
