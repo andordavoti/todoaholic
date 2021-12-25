@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todoaholic/data/todo.dart';
 import 'package:todoaholic/data/todo_dao.dart';
+import 'package:todoaholic/screens/edit_todo_screen.dart';
 
 class TodoItem extends StatelessWidget {
   final Todo todo;
@@ -20,16 +21,16 @@ class TodoItem extends StatelessWidget {
         if (direction == DismissDirection.endToStart && todo.isDone) {
           todoDao.removeTodo(todo);
         }
-        if (direction == DismissDirection.endToStart && !todo.isDone) {
-          // TODO: Should navigate to edit todo page
-        }
         if (direction == DismissDirection.startToEnd) {
           todoDao.swipeTomorrow(todo);
         }
       },
       confirmDismiss: (DismissDirection direction) {
         if (direction == DismissDirection.endToStart && !todo.isDone) {
-          // TODO: Should navigate to edit todo page
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => EditTodoScreen(todo)),
+          );
           return Future<bool?>.value(false);
         }
         return Future<bool?>.value(true);
