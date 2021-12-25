@@ -35,7 +35,8 @@ class TodoDao {
 
   Stream<QuerySnapshot>? getTodoStream(DateTime selectedDate) {
     return collection
-        ?.where('date', isEqualTo: selectedDate.getDateOnly().toString())
+        ?.orderBy('isDone')
+        .where('date', isEqualTo: selectedDate.getDateOnly().toString())
         .snapshots();
   }
 
