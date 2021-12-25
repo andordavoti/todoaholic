@@ -80,10 +80,12 @@ class TodoItem extends StatelessWidget {
             children: [
               Text(
                 todo.text,
-                style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                    decoration: todo.isDone
-                        ? TextDecoration.lineThrough
-                        : TextDecoration.none),
+                style: todo.isDone
+                    ? Theme.of(context)
+                        .textTheme
+                        .bodyText2!
+                        .copyWith(decoration: TextDecoration.lineThrough)
+                    : Theme.of(context).textTheme.bodyText1,
               ),
             ],
           ),
