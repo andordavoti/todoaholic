@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 
 import 'package:firebase_core/firebase_core.dart';
+import 'package:provider/provider.dart';
+import 'package:todoaholic/data/todo_dao.dart';
 import 'package:todoaholic/utils/theme.dart';
 import 'components/authgate.dart';
+import 'data/user_dao.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -19,11 +22,23 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'todoaholic',
-      theme: AppTheme.light(),
-      darkTheme: AppTheme.dark(),
-      home: const AuthGate(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<UserDao>(
+          lazy: false,
+          create: (_) => UserDao(),
+        ),
+        Provider<TodoDao>(
+          lazy: true,
+          create: (_) => TodoDao(),
+        ),
+      ],
+      child: MaterialApp(
+        title: 'todoaholic',
+        theme: AppTheme.light(),
+        darkTheme: AppTheme.dark(),
+        home: const AuthGate(),
+      ),
     );
   }
 }

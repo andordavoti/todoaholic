@@ -1,39 +1,51 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+const blackColor = Color(0xff1c1c1c);
+
 class AppTheme {
   static TextTheme lightTextTheme = TextTheme(
     bodyText1: GoogleFonts.exo2(
-      fontSize: 14.0,
-      fontWeight: FontWeight.w700,
-      color: Colors.black,
+      fontSize: 16.0,
+      fontWeight: FontWeight.w500,
+      color: blackColor,
+    ),
+    bodyText2: GoogleFonts.exo2(
+      fontSize: 16.0,
+      fontWeight: FontWeight.w500,
+      color: blackColor,
     ),
     headline1: GoogleFonts.exo2(
       fontSize: 32.0,
       fontWeight: FontWeight.bold,
-      color: Colors.black,
+      color: blackColor,
     ),
     headline2: GoogleFonts.exo2(
       fontSize: 21.0,
       fontWeight: FontWeight.w700,
-      color: Colors.black,
+      color: blackColor,
     ),
     headline3: GoogleFonts.exo2(
       fontSize: 16.0,
       fontWeight: FontWeight.w600,
-      color: Colors.black,
+      color: blackColor,
     ),
     headline6: GoogleFonts.exo2(
       fontSize: 20.0,
       fontWeight: FontWeight.w600,
-      color: Colors.black,
+      color: blackColor,
     ),
   );
 
   static TextTheme darkTextTheme = TextTheme(
     bodyText1: GoogleFonts.exo2(
-      fontSize: 14.0,
-      fontWeight: FontWeight.w700,
+      fontSize: 16.0,
+      fontWeight: FontWeight.w500,
+      color: Colors.white,
+    ),
+    bodyText2: GoogleFonts.exo2(
+      fontSize: 16.0,
+      fontWeight: FontWeight.w500,
       color: Colors.white,
     ),
     headline1: GoogleFonts.exo2(
@@ -60,23 +72,19 @@ class AppTheme {
 
   static ThemeData light() {
     return ThemeData(
+      primaryColor: Colors.white,
       fontFamily: GoogleFonts.exo2().fontFamily,
       brightness: Brightness.light,
-      checkboxTheme: CheckboxThemeData(
-        fillColor: MaterialStateColor.resolveWith((states) {
-          return Colors.black;
-        }),
-      ),
       appBarTheme: const AppBarTheme(
-        foregroundColor: Colors.black,
+        foregroundColor: blackColor,
         backgroundColor: Colors.white,
       ),
       floatingActionButtonTheme: const FloatingActionButtonThemeData(
         foregroundColor: Colors.white,
-        backgroundColor: Colors.black,
+        backgroundColor: blackColor,
       ),
       bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-        selectedItemColor: Colors.green,
+        selectedItemColor: Colors.white,
       ),
       textTheme: lightTextTheme,
     );
@@ -84,20 +92,43 @@ class AppTheme {
 
   static ThemeData dark() {
     return ThemeData(
-      fontFamily: GoogleFonts.exo2().fontFamily,
-      brightness: Brightness.dark,
-      appBarTheme: AppBarTheme(
-        foregroundColor: Colors.white,
-        backgroundColor: Colors.grey[900],
-      ),
-      floatingActionButtonTheme: const FloatingActionButtonThemeData(
-        foregroundColor: Colors.white,
-        backgroundColor: Colors.green,
-      ),
-      bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-        selectedItemColor: Colors.green,
-      ),
-      textTheme: darkTextTheme,
-    );
+        primaryColor: blackColor,
+        scaffoldBackgroundColor: blackColor,
+        fontFamily: GoogleFonts.exo2().fontFamily,
+        brightness: Brightness.dark,
+        appBarTheme: AppBarTheme(
+          foregroundColor: Colors.white,
+          backgroundColor: Colors.grey[900],
+        ),
+        floatingActionButtonTheme: const FloatingActionButtonThemeData(
+          foregroundColor: blackColor,
+          backgroundColor: Colors.white,
+        ),
+        bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+          selectedItemColor: Colors.white,
+        ),
+        textTheme: darkTextTheme,
+        inputDecorationTheme: InputDecorationTheme(
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(8),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(8),
+            borderSide: const BorderSide(color: Colors.white),
+          ),
+        ),
+        outlinedButtonTheme: OutlinedButtonThemeData(
+          style: ButtonStyle(
+            padding: MaterialStateProperty.all<EdgeInsets>(
+              const EdgeInsets.all(16),
+            ),
+            backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
+            foregroundColor: MaterialStateProperty.all<Color>(blackColor),
+          ),
+        ),
+        textButtonTheme: TextButtonThemeData(
+            style: TextButton.styleFrom(
+          primary: Colors.white,
+        )));
   }
 }
