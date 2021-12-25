@@ -11,4 +11,8 @@ class UserDao extends ChangeNotifier {
   String? email() {
     return auth.currentUser?.email;
   }
+
+  String? photoURL() {
+    return auth.currentUser?.photoURL;
+  }
 }
