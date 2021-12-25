@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:flutterfire_ui/auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:todoaholic/components/date_navigation_buttons.dart';
 import 'package:todoaholic/components/todo_item.dart';
 import 'package:todoaholic/data/todo.dart';
 import 'package:todoaholic/data/todo_dao.dart';
@@ -51,24 +52,17 @@ class _HomeState extends State<Home> {
           children: <Widget>[
             Align(
               alignment: Alignment.bottomLeft,
-              child: FloatingActionButton(
-                onPressed: () {
+              child: DateNavigation(
+                leftAction: () {
                   setState(() {
                     _selectedDate = _selectedDate.add(const Duration(days: -1));
                   });
                 },
-                child: const Icon(Icons.chevron_left),
-              ),
-            ),
-            Align(
-              alignment: Alignment.bottomLeft.add(const Alignment(0.4, 0)),
-              child: FloatingActionButton(
-                onPressed: () {
+                rightAction: () {
                   setState(() {
                     _selectedDate = _selectedDate.add(const Duration(days: 1));
                   });
                 },
-                child: const Icon(Icons.chevron_right),
               ),
             ),
             Align(
@@ -95,7 +89,9 @@ class _HomeState extends State<Home> {
               final selectedDate = await showDatePicker(
                 context: context,
                 initialDate: _selectedDate,
-                firstDate: currentDate,
+                firstDate: currentDate.isBefore(_selectedDate)
+                    ? currentDate
+                    : _selectedDate,
                 lastDate: DateTime(currentDate.year + 5),
               );
 
