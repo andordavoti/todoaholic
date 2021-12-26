@@ -25,8 +25,8 @@ class TodoDao {
   }
 
   Future<void> swipeTomorrow(Todo todo) async {
-    DateTime nextDay = todo.date.add(const Duration(days: 1));
-    await todo.reference?.update({'date': nextDay.toString()});
+    DateTime nextDay = todo.date.toDate().add(const Duration(days: 1));
+    await todo.reference?.update({'date': Timestamp.fromDate(nextDay)});
   }
 
   Future<void> removeTodo(Todo todo) async {
@@ -36,12 +36,17 @@ class TodoDao {
   Stream<QuerySnapshot>? getTodoStream(DateTime selectedDate) {
     return collection
         ?.orderBy('isDone')
-        .where('date', isEqualTo: selectedDate.getDateOnly().toString())
+        .where('date', isEqualTo: Timestamp.fromDate(selectedDate))
         .snapshots();
   }
 
-  // TODO: Implement paging for todo timeline, when the user scrolls to the bottom it should fetch more todos
   Stream<QuerySnapshot>? getTodoTimelineStream() {
-    return collection?.orderBy('date', descending: true).limit(200).snapshots();
+    final currentDate = DateTime.now().getDateOnly();
+    return collection
+        // TODO: needs to only show todos for and after the current day
+        // ?.where('date', isEqualTo: Timestamp.fromDate(currentDate))
+        ?.orderBy('date')
+        .limit(200)
+        .snapshots();
   }
 }
