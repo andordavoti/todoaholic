@@ -38,6 +38,7 @@ dependencies:
   flutterfire_ui: ^0.3.0
   firebase_auth: ^3.3.4
   provider: ^6.0.0
+  grouped_list: ^4.1.0
 
 dev_dependencies:
   flutter_test:
