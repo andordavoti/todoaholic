@@ -107,9 +107,7 @@ class Home extends StatelessWidget {
                   final selectedDate = await showDatePicker(
                     context: context,
                     initialDate: appState.selectedDate,
-                    firstDate: currentDate.isBefore(appState.selectedDate)
-                        ? currentDate
-                        : appState.selectedDate,
+                    firstDate: DateTime(currentDate.year - 5),
                     lastDate: DateTime(currentDate.year + 5),
                   );
 
