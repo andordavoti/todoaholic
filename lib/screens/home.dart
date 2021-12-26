@@ -162,19 +162,14 @@ class Home extends StatelessWidget {
   }
 
   Widget _buildList(BuildContext context, List<DocumentSnapshot>? snapshot) {
-    return ListView.separated(
+    return ListView(
       padding: EdgeInsets.only(
           bottom: 56 +
               kFloatingActionButtonMargin * 2 +
               MediaQuery.of(context).padding.bottom),
       controller: _scrollController,
       physics: const BouncingScrollPhysics(),
-      itemCount: snapshot!.length,
-      separatorBuilder: (BuildContext context, int index) =>
-          const Divider(height: 1),
-      itemBuilder: (BuildContext context, int index) {
-        return _buildListItem(context, snapshot[index]);
-      },
+      children: snapshot!.map((data) => _buildListItem(context, data)).toList(),
     );
   }
 

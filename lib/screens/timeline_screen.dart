@@ -71,10 +71,20 @@ class TimelineScreen extends StatelessWidget {
     return GroupedListView<Todo, String>(
       elements: snapshot!.map((doc) => Todo.fromSnapshot(doc)).toList(),
       groupBy: (element) => element.date.toString(),
-      groupSeparatorBuilder: (groupByValue) => Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Text(DateFormat.yMMMd().format(DateTime.parse(groupByValue)),
-            style: Theme.of(context).textTheme.headline2),
+      groupSeparatorBuilder: (groupByValue) => Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Align(
+              alignment: Alignment.topLeft,
+              child: Text(
+                DateFormat.yMMMd().format(DateTime.parse(groupByValue)),
+                style: Theme.of(context).textTheme.headline2,
+              ),
+            ),
+          ),
+          const Divider(height: 1)
+        ],
       ),
       itemBuilder: (context, element) => _buildListItem(context, element),
     );
