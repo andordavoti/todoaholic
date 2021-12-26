@@ -3,6 +3,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 import 'package:todoaholic/data/app_state_provider.dart';
 import 'package:todoaholic/data/todo_dao.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import '../data/todo.dart';
 
 class ManageTodoScreen extends StatefulWidget {
@@ -46,7 +47,9 @@ class _ManageTodoScreenState extends State<ManageTodoScreen> {
         todoDao.updateTodoText(originalTodo, _textController.text);
       } else {
         todoDao.saveTodo(Todo(
-            text: _textController.text, date: selectedDate, isDone: false));
+            text: _textController.text,
+            date: Timestamp.fromDate(selectedDate),
+            isDone: false));
       }
 
       Navigator.pop(context);
