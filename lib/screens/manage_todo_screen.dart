@@ -43,14 +43,7 @@ class _ManageTodoScreenState extends State<ManageTodoScreen> {
     void submitAction(DateTime selectedDate) {
       final originalTodo = widget.originalTodo;
       if (originalTodo != null) {
-        final newTodo = Todo(
-          reference: originalTodo.reference,
-          text: originalTodo.text,
-          date: originalTodo.date,
-          isDone: originalTodo.isDone,
-        );
-
-        todoDao.updateTodoText(newTodo, _textController.text);
+        todoDao.updateTodoText(originalTodo, _textController.text);
       } else {
         todoDao.saveTodo(Todo(
             text: _textController.text, date: selectedDate, isDone: false));
