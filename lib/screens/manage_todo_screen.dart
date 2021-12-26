@@ -67,7 +67,7 @@ class _ManageTodoScreenState extends State<ManageTodoScreen> {
             )
           ],
           title: Text(
-            widget.originalTodo == null ? 'Add Todo' : 'Edit Todo',
+            widget.originalTodo == null ? 'Add Task' : 'Edit Task',
           ),
         ),
         // 5
