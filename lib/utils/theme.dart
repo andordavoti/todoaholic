@@ -87,6 +87,28 @@ class AppTheme {
         selectedItemColor: Colors.white,
       ),
       textTheme: lightTextTheme,
+      inputDecorationTheme: InputDecorationTheme(
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+          borderSide: const BorderSide(color: blackColor),
+        ),
+      ),
+      outlinedButtonTheme: OutlinedButtonThemeData(
+        style: ButtonStyle(
+          padding: MaterialStateProperty.all<EdgeInsets>(
+            const EdgeInsets.all(16),
+          ),
+          backgroundColor: MaterialStateProperty.all<Color>(blackColor),
+          foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+        ),
+      ),
+      textButtonTheme: TextButtonThemeData(
+          style: TextButton.styleFrom(
+        primary: blackColor,
+      )),
     );
   }
 
