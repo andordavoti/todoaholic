@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 const blackColor = Color(0xff1c1c1c);
+const lightGreyColor = Color(0xffeeeeee);
 
 class AppTheme {
   static TextTheme lightTextTheme = TextTheme(
@@ -103,12 +104,25 @@ class AppTheme {
           ),
           backgroundColor: MaterialStateProperty.all<Color>(blackColor),
           foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+          overlayColor: MaterialStateProperty.all<Color>(Colors.black),
         ),
       ),
       textButtonTheme: TextButtonThemeData(
           style: TextButton.styleFrom(
         primary: blackColor,
       )),
+      iconTheme: const IconThemeData(
+        color: blackColor,
+      ),
+      textSelectionTheme: const TextSelectionThemeData(
+        cursorColor: blackColor,
+        selectionColor: Colors.grey,
+        selectionHandleColor: blackColor,
+      ),
+      indicatorColor: blackColor,
+      progressIndicatorTheme: const ProgressIndicatorThemeData(
+        color: blackColor,
+      ),
     );
   }
 
@@ -141,17 +155,29 @@ class AppTheme {
       ),
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: ButtonStyle(
-          padding: MaterialStateProperty.all<EdgeInsets>(
-            const EdgeInsets.all(16),
-          ),
-          backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
-          foregroundColor: MaterialStateProperty.all<Color>(blackColor),
-        ),
+            padding: MaterialStateProperty.all<EdgeInsets>(
+              const EdgeInsets.all(16),
+            ),
+            backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
+            foregroundColor: MaterialStateProperty.all<Color>(blackColor),
+            overlayColor: MaterialStateProperty.all<Color>(lightGreyColor)),
       ),
       textButtonTheme: TextButtonThemeData(
           style: TextButton.styleFrom(
         primary: Colors.white,
       )),
+      iconTheme: const IconThemeData(
+        color: Colors.white,
+      ),
+      textSelectionTheme: const TextSelectionThemeData(
+        cursorColor: Colors.white,
+        selectionColor: Colors.grey,
+        selectionHandleColor: blackColor,
+      ),
+      indicatorColor: Colors.white,
+      progressIndicatorTheme: const ProgressIndicatorThemeData(
+        color: Colors.white,
+      ),
     );
   }
 }
