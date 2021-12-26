@@ -29,7 +29,6 @@ class Home extends StatelessWidget {
           stream: todoDao.getTodoStream(appState.selectedDate),
           builder: (context, snapshot) {
             if (snapshot.hasError) {
-              print(snapshot.error);
               return const Center(
                 child: Text('Something went wrong...'),
               );
@@ -38,10 +37,28 @@ class Home extends StatelessWidget {
               return const Center(child: CircularProgressIndicator());
             }
 
-            // TODO: show empty state
             if (snapshot.data!.docs.isEmpty) {
-              return Container(
-                color: Colors.red,
+              return Center(
+                child: Flex(
+                  direction: Axis.vertical,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Nothing for today',
+                      style: Theme.of(context).textTheme.headline2,
+                      textAlign: TextAlign.center,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 8),
+                      child: Text(
+                        'Add a new task by tapping the + button',
+                        style: Theme.of(context).textTheme.bodyText2,
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  ],
+                ),
               );
             }
             return _buildList(context, snapshot.data!.docs);
