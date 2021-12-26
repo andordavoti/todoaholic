@@ -30,11 +30,7 @@ class DateNavigation extends StatelessWidget {
                   color: Theme.of(context)
                       .floatingActionButtonTheme
                       .foregroundColor),
-              onTap: () {
-                // print('left pressed');
-                // print('leftAction: ' + leftAction.toString());
-                leftAction();
-              },
+              onTap: leftAction,
             ),
           ),
         ),
