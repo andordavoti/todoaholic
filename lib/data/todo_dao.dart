@@ -44,8 +44,7 @@ class TodoDao {
     final currentDate = DateTime.now().getDateOnly();
     return collection
         // TODO: needs to only show todos for and after the current day
-        // ?.where('date', isEqualTo: Timestamp.fromDate(currentDate))
-        ?.orderBy('date')
+        ?.orderBy('isDone')
         .limit(200)
         .snapshots();
   }
