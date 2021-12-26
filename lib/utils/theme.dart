@@ -92,43 +92,44 @@ class AppTheme {
 
   static ThemeData dark() {
     return ThemeData(
-        primaryColor: blackColor,
-        scaffoldBackgroundColor: blackColor,
-        fontFamily: GoogleFonts.exo2().fontFamily,
-        brightness: Brightness.dark,
-        appBarTheme: AppBarTheme(
-          foregroundColor: Colors.white,
-          backgroundColor: Colors.grey[900],
+      primaryColor: blackColor,
+      scaffoldBackgroundColor: blackColor,
+      fontFamily: GoogleFonts.exo2().fontFamily,
+      brightness: Brightness.dark,
+      appBarTheme: AppBarTheme(
+        foregroundColor: Colors.white,
+        backgroundColor: Colors.grey[900],
+      ),
+      floatingActionButtonTheme: const FloatingActionButtonThemeData(
+        foregroundColor: blackColor,
+        backgroundColor: Colors.white,
+      ),
+      bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+        selectedItemColor: Colors.white,
+      ),
+      textTheme: darkTextTheme,
+      inputDecorationTheme: InputDecorationTheme(
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
         ),
-        floatingActionButtonTheme: const FloatingActionButtonThemeData(
-          foregroundColor: blackColor,
-          backgroundColor: Colors.white,
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+          borderSide: const BorderSide(color: Colors.white),
         ),
-        bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-          selectedItemColor: Colors.white,
-        ),
-        textTheme: darkTextTheme,
-        inputDecorationTheme: InputDecorationTheme(
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(8),
+      ),
+      outlinedButtonTheme: OutlinedButtonThemeData(
+        style: ButtonStyle(
+          padding: MaterialStateProperty.all<EdgeInsets>(
+            const EdgeInsets.all(16),
           ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(8),
-            borderSide: const BorderSide(color: Colors.white),
-          ),
+          backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
+          foregroundColor: MaterialStateProperty.all<Color>(blackColor),
         ),
-        outlinedButtonTheme: OutlinedButtonThemeData(
-          style: ButtonStyle(
-            padding: MaterialStateProperty.all<EdgeInsets>(
-              const EdgeInsets.all(16),
-            ),
-            backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
-            foregroundColor: MaterialStateProperty.all<Color>(blackColor),
-          ),
-        ),
-        textButtonTheme: TextButtonThemeData(
-            style: TextButton.styleFrom(
-          primary: Colors.white,
-        )));
+      ),
+      textButtonTheme: TextButtonThemeData(
+          style: TextButton.styleFrom(
+        primary: Colors.white,
+      )),
+    );
   }
 }

@@ -9,6 +9,7 @@ import 'package:todoaholic/data/todo.dart';
 import 'package:todoaholic/data/todo_dao.dart';
 import 'package:provider/provider.dart';
 import 'package:todoaholic/data/user_dao.dart';
+import 'package:todoaholic/screens/timeline_screen.dart';
 
 import 'manage_todo_screen.dart';
 
@@ -97,24 +98,46 @@ class Home extends StatelessWidget {
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         appBar: AppBar(
-          title: InkWell(
-              onTap: () async {
-                final currentDate = DateTime.now();
+          title: Align(
+            alignment: Alignment.topCenter,
+            child: InkWell(
+                onTap: () async {
+                  final currentDate = DateTime.now();
 
-                final selectedDate = await showDatePicker(
-                  context: context,
-                  initialDate: appState.selectedDate,
-                  firstDate: currentDate.isBefore(appState.selectedDate)
-                      ? currentDate
-                      : appState.selectedDate,
-                  lastDate: DateTime(currentDate.year + 5),
-                );
+                  final selectedDate = await showDatePicker(
+                    context: context,
+                    initialDate: appState.selectedDate,
+                    firstDate: currentDate.isBefore(appState.selectedDate)
+                        ? currentDate
+                        : appState.selectedDate,
+                    lastDate: DateTime(currentDate.year + 5),
+                  );
 
-                if (selectedDate != null) {
-                  appState.setSelectedDate(selectedDate);
-                }
-              },
-              child: Text(DateFormat.yMMMd().format(appState.selectedDate))),
+                  if (selectedDate != null) {
+                    appState.setSelectedDate(selectedDate);
+                  }
+                },
+                child: Text(DateFormat.yMMMd().format(appState.selectedDate))),
+          ),
+          leading: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: InkWell(
+                customBorder: const CircleBorder(),
+                child: (CircleAvatar(
+                  child: Icon(Icons.timeline,
+                      color: Theme.of(context).textTheme.bodyText1!.color),
+                  backgroundColor: Theme.of(context).secondaryHeaderColor,
+                  radius: 18,
+                )),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const TimelineScreen(),
+                    ),
+                  );
+                },
+              )),
           actions: [
             Padding(
                 padding: const EdgeInsets.all(8.0),
