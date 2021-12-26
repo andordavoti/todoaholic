@@ -8,7 +8,6 @@ import 'package:todoaholic/data/app_state_provider.dart';
 import 'package:todoaholic/data/todo.dart';
 import 'package:todoaholic/data/todo_dao.dart';
 import 'package:provider/provider.dart';
-import 'package:todoaholic/data/user_dao.dart';
 import 'package:todoaholic/screens/timeline_screen.dart';
 
 import 'manage_todo_screen.dart';
@@ -21,8 +20,6 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final todoDao = Provider.of<TodoDao>(context, listen: false);
-    final userDao = Provider.of<UserDao>(context, listen: false);
-    final photoURL = userDao.photoURL();
 
     return Consumer<AppState>(builder: (context, appState, child) {
       return Scaffold(
