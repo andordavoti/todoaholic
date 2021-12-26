@@ -40,32 +40,45 @@ class TodoItem extends StatelessWidget {
             return Future<bool?>.value(true);
           },
           secondaryBackground: Container(
-            color: todo.isDone ? Colors.red : Theme.of(context).backgroundColor,
+            color: todo.isDone
+                ? Colors.red
+                : Theme.of(context).floatingActionButtonTheme.backgroundColor,
             child: Align(
               alignment: Alignment.centerRight,
               child: Padding(
                 padding: const EdgeInsets.only(right: 16.0),
                 child: Icon(
                   todo.isDone ? Icons.delete : Icons.edit,
-                  color: Colors.white,
+                  color: todo.isDone
+                      ? Theme.of(context)
+                          .floatingActionButtonTheme
+                          .backgroundColor
+                      : Theme.of(context)
+                          .floatingActionButtonTheme
+                          .foregroundColor,
                 ),
               ),
             ),
           ),
           background: Container(
-            color: Theme.of(context).backgroundColor,
+            color: Theme.of(context).floatingActionButtonTheme.backgroundColor,
             child: Align(
               alignment: Alignment.centerLeft,
               child: Padding(
                 padding: const EdgeInsets.only(left: 16.0),
                 child: Row(children: [
                   Text('Tommorrow',
-                      style: Theme.of(context).textTheme.bodyText1),
+                      style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                          color: Theme.of(context)
+                              .floatingActionButtonTheme
+                              .foregroundColor)),
                   Padding(
                     padding: const EdgeInsets.only(left: 4),
                     child: Icon(
                       Icons.chevron_right,
-                      color: Theme.of(context).textTheme.bodyText1!.color,
+                      color: Theme.of(context)
+                          .floatingActionButtonTheme
+                          .foregroundColor,
                     ),
                   ),
                 ]),
