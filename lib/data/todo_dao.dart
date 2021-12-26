@@ -8,29 +8,29 @@ class TodoDao {
   CollectionReference? collection = FirebaseFirestore.instance.collection(
       "users/" + (FirebaseAuth.instance.currentUser!.uid) + "/todos");
 
-  void saveTodo(Todo todo) {
-    collection?.add(todo.toJson());
+  Future<void> saveTodo(Todo todo) async {
+    await collection?.add(todo.toJson());
   }
 
-  void updateTodoText(Todo todo, String newText) {
-    todo.reference?.update({'text': newText});
+  Future<void> updateTodoText(Todo todo, String newText) async {
+    await todo.reference?.update({'text': newText});
   }
 
-  void updateTodoDone(Todo todo) {
-    todo.reference?.update({'isDone': true});
+  Future<void> updateTodoDone(Todo todo) async {
+    await todo.reference?.update({'isDone': true});
   }
 
-  void updateTodoNotDone(Todo todo) {
-    todo.reference?.update({'isDone': false});
+  Future<void> updateTodoNotDone(Todo todo) async {
+    await todo.reference?.update({'isDone': false});
   }
 
-  void swipeTomorrow(Todo todo) {
+  Future<void> swipeTomorrow(Todo todo) async {
     DateTime nextDay = todo.date.add(const Duration(days: 1));
-    todo.reference?.update({'date': nextDay.toString()});
+    await todo.reference?.update({'date': nextDay.toString()});
   }
 
-  void removeTodo(Todo todo) {
-    todo.reference?.delete();
+  Future<void> removeTodo(Todo todo) async {
+    await todo.reference?.delete();
   }
 
   Stream<QuerySnapshot>? getTodoStream(DateTime selectedDate) {
