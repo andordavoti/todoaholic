@@ -1,11 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import '../utils/datetime_extension.dart';
-
 class Todo {
   final String text;
   final bool isDone;
-  final DateTime date;
+  final Timestamp date;
   DocumentReference? reference;
 
   Todo({
@@ -18,11 +16,11 @@ class Todo {
   factory Todo.fromJson(Map<dynamic, dynamic> json) => Todo(
         text: json['text'] as String,
         isDone: json['isDone'] as bool,
-        date: DateTime.parse(json['date'] as String),
+        date: (json['date'] as Timestamp),
       );
 
   Map<String, dynamic> toJson() => <String, dynamic>{
-        'date': date.getDateOnly().toString(),
+        'date': date,
         'isDone': isDone,
         'text': text,
       };
