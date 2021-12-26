@@ -118,58 +118,43 @@ class Home extends StatelessWidget {
                 child: Text(DateFormat.yMMMd().format(appState.selectedDate))),
           ),
           leading: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: InkWell(
-                customBorder: const CircleBorder(),
-                child: (CircleAvatar(
-                  child: Icon(Icons.timeline,
-                      color: Theme.of(context).textTheme.bodyText1!.color),
-                  backgroundColor: Theme.of(context).secondaryHeaderColor,
-                  radius: 18,
-                )),
-                onTap: () {
+            padding: const EdgeInsets.all(8.0),
+            child: (IconButton(
+                icon: Icon(Icons.timeline,
+                    color: Theme.of(context).textTheme.bodyText1!.color),
+                onPressed: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder: (context) => const TimelineScreen(),
                     ),
                   );
-                },
-              )),
+                })),
+          ),
           actions: [
             Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: InkWell(
-                  customBorder: const CircleBorder(),
-                  child: photoURL == null
-                      ? (CircleAvatar(
-                          child: Icon(Icons.person,
-                              color:
-                                  Theme.of(context).textTheme.bodyText1!.color),
-                          backgroundColor:
-                              Theme.of(context).secondaryHeaderColor,
-                          radius: 18,
-                        ))
-                      : CircleAvatar(
-                          backgroundImage: NetworkImage(photoURL),
+                child: IconButton(
+                    icon: Icon(Icons.settings,
+                        color: Theme.of(context).textTheme.bodyText1!.color),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ProfileScreen(
+                            providerConfigs: const [
+                              EmailProviderConfiguration()
+                            ],
+                            avatarSize: 100,
+                            actions: [
+                              SignedOutAction((context) {
+                                Navigator.of(context).pop();
+                              }),
+                            ],
+                          ),
                         ),
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => ProfileScreen(
-                          providerConfigs: const [EmailProviderConfiguration()],
-                          avatarSize: 100,
-                          actions: [
-                            SignedOutAction((context) {
-                              Navigator.of(context).pop();
-                            }),
-                          ],
-                        ),
-                      ),
-                    );
-                  },
-                ))
+                      );
+                    }))
           ],
         ),
       );
