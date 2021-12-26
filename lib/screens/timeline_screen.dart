@@ -6,6 +6,7 @@ import 'package:todoaholic/data/todo.dart';
 import 'package:todoaholic/data/todo_dao.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
+import '../utils/timestamp_converter.dart';
 
 class TimelineScreen extends StatelessWidget {
   const TimelineScreen({Key? key}) : super(key: key);
@@ -78,7 +79,8 @@ class TimelineScreen extends StatelessWidget {
             child: Align(
               alignment: Alignment.topLeft,
               child: Text(
-                DateFormat.yMMMd().format(DateTime.parse(groupByValue)),
+                DateFormat.yMMMd().format(
+                    (TimestampConverter.parseString(groupByValue)).toDate()),
                 style: Theme.of(context).textTheme.headline2,
               ),
             ),
