@@ -19,17 +19,6 @@ class TimelineScreen extends StatelessWidget {
       ),
       body: Container(
         padding: const EdgeInsets.all(16),
-        // child: TextField(
-        //   focusNode: textFocusNode,
-        //   controller: _textController,
-        //   onSubmitted: (_) {
-        //     submitAction(appState.selectedDate);
-        //   },
-        //   decoration: const InputDecoration(
-        //     border: OutlineInputBorder(),
-        //     hintText: 'Enter todo text',
-        //   ),
-        // ),
       ),
     );
   }
