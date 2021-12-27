@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class DateNavigation extends StatelessWidget {
   final VoidCallback leftAction;
@@ -32,8 +33,14 @@ class DateNavigation extends StatelessWidget {
                   color: Theme.of(context)
                       .floatingActionButtonTheme
                       .foregroundColor),
-              onTap: leftAction,
-              onLongPress: leftLongPressAction,
+              onTap: () {
+                leftAction();
+                HapticFeedback.selectionClick();
+              },
+              onLongPress: () {
+                leftLongPressAction();
+                HapticFeedback.mediumImpact();
+              },
             ),
           ),
         ),
@@ -53,7 +60,10 @@ class DateNavigation extends StatelessWidget {
                   color: Theme.of(context)
                       .floatingActionButtonTheme
                       .foregroundColor),
-              onTap: rightAction,
+              onTap: () {
+                rightAction();
+                HapticFeedback.selectionClick();
+              },
             ),
           ),
         ),

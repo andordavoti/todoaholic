@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:todoaholic/data/app_state_provider.dart';
 import 'package:todoaholic/data/todo_dao.dart';
@@ -53,6 +54,7 @@ class _ManageTodoScreenState extends State<ManageTodoScreen> {
     final todoDao = Provider.of<TodoDao>(context, listen: false);
 
     void submitAction() {
+      HapticFeedback.heavyImpact();
       final originalTodo = widget.originalTodo;
       if (originalTodo != null) {
         todoDao.updateTodo(originalTodo, _textController.text, selectedDate);
@@ -68,6 +70,10 @@ class _ManageTodoScreenState extends State<ManageTodoScreen> {
 
     return Scaffold(
       appBar: AppBar(
+        leading: BackButton(onPressed: () {
+          HapticFeedback.selectionClick();
+          Navigator.pop(context);
+        }),
         actions: [
           IconButton(
             icon: const Icon(Icons.check),

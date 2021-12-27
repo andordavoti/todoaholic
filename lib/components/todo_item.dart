@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:todoaholic/data/todo.dart';
 import 'package:todoaholic/data/todo_dao.dart';
@@ -21,14 +22,17 @@ class TodoItem extends StatelessWidget {
           key: ObjectKey(todo),
           onDismissed: (DismissDirection direction) {
             if (direction == DismissDirection.endToStart && todo.isDone) {
+              HapticFeedback.mediumImpact();
               todoDao.removeTodo(todo);
             }
             if (direction == DismissDirection.startToEnd) {
+              HapticFeedback.mediumImpact();
               todoDao.swipeTomorrow(todo);
             }
           },
           confirmDismiss: (DismissDirection direction) {
             if (direction == DismissDirection.endToStart && !todo.isDone) {
+              HapticFeedback.mediumImpact();
               Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -87,6 +91,7 @@ class TodoItem extends StatelessWidget {
           ),
           child: InkWell(
             onTap: () {
+              HapticFeedback.selectionClick();
               if (todo.isDone) {
                 todoDao.updateTodoNotDone(todo);
               } else {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:grouped_list/grouped_list.dart';
 import 'package:provider/provider.dart';
 import 'package:todoaholic/components/todo_item.dart';
@@ -16,6 +17,10 @@ class TimelineScreen extends StatelessWidget {
     final todoDao = Provider.of<TodoDao>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
+        leading: BackButton(onPressed: () {
+          HapticFeedback.selectionClick();
+          Navigator.pop(context);
+        }),
         actions: [
           IconButton(
             color: Colors.transparent,

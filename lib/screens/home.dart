@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:flutterfire_ui/auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -84,6 +85,7 @@ class Home extends StatelessWidget {
                 alignment: Alignment.bottomRight,
                 child: FloatingActionButton(
                   onPressed: () {
+                    HapticFeedback.selectionClick();
                     Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -120,9 +122,10 @@ class Home extends StatelessWidget {
           leading: Padding(
               padding: const EdgeInsets.all(8.0),
               child: IconButton(
-                  icon: Icon(Icons.settings,
+                  icon: Icon(Icons.person_sharp,
                       color: Theme.of(context).textTheme.bodyText1!.color),
                   onPressed: () {
+                    HapticFeedback.selectionClick();
                     Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -131,6 +134,7 @@ class Home extends StatelessWidget {
                           avatarSize: 100,
                           actions: [
                             SignedOutAction((context) {
+                              HapticFeedback.heavyImpact();
                               Navigator.of(context).pop();
                             }),
                           ],
@@ -145,6 +149,7 @@ class Home extends StatelessWidget {
                   icon: Icon(Icons.timeline,
                       color: Theme.of(context).textTheme.bodyText1!.color),
                   onPressed: () {
+                    HapticFeedback.selectionClick();
                     Navigator.push(
                       context,
                       MaterialPageRoute(
