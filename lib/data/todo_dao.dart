@@ -12,8 +12,9 @@ class TodoDao {
     await collection?.add(todo.toJson());
   }
 
-  Future<void> updateTodoText(Todo todo, String newText) async {
-    await todo.reference?.update({'text': newText});
+  Future<void> updateTodo(Todo todo, String newText, DateTime newDate) async {
+    await todo.reference
+        ?.update({'text': newText, 'date': Timestamp.fromDate(newDate)});
   }
 
   Future<void> updateTodoDone(Todo todo) async {
