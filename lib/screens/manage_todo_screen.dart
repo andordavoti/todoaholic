@@ -56,13 +56,16 @@ class _ManageTodoScreenState extends State<ManageTodoScreen> {
     void submitAction() {
       HapticFeedback.heavyImpact();
       final originalTodo = widget.originalTodo;
+      final text = _textController.text;
+
       if (originalTodo != null) {
-        todoDao.updateTodo(originalTodo, _textController.text, selectedDate);
-      } else {
+        if (text.isEmpty) {
+          todoDao.removeTodo(originalTodo);
+        }
+        todoDao.updateTodo(originalTodo, text, selectedDate);
+      } else if (text.isNotEmpty) {
         todoDao.saveTodo(Todo(
-            text: _textController.text,
-            date: Timestamp.fromDate(selectedDate),
-            isDone: false));
+            text: text, date: Timestamp.fromDate(selectedDate), isDone: false));
       }
 
       Navigator.pop(context);
