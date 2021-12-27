@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 
 class DateNavigation extends StatelessWidget {
   final VoidCallback leftAction;
+  final VoidCallback leftLongPressAction;
   final VoidCallback rightAction;
 
   const DateNavigation({
     Key? key,
     required Function() this.leftAction,
+    required Function() this.leftLongPressAction,
     required Function() this.rightAction,
   }) : super(key: key);
 
@@ -31,6 +33,7 @@ class DateNavigation extends StatelessWidget {
                       .floatingActionButtonTheme
                       .foregroundColor),
               onTap: leftAction,
+              onLongPress: leftLongPressAction,
             ),
           ),
         ),
