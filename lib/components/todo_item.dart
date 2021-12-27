@@ -7,9 +7,11 @@ import 'package:todoaholic/screens/manage_todo_screen.dart';
 
 class TodoItem extends StatelessWidget {
   final Todo todo;
+  final isInTimeline;
 
   const TodoItem(
-    this.todo, {
+    this.todo,
+    this.isInTimeline, {
     Key? key,
   }) : super(key: key);
 
@@ -71,7 +73,7 @@ class TodoItem extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.only(left: 16.0),
                 child: Row(children: [
-                  Text('Tommorrow',
+                  Text(isInTimeline ? 'Next day' : 'Tommorrow',
                       style: Theme.of(context).textTheme.bodyText1!.copyWith(
                           color: Theme.of(context)
                               .floatingActionButtonTheme

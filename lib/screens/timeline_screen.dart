@@ -98,6 +98,6 @@ class TimelineScreen extends StatelessWidget {
   }
 
   Widget _buildListItem(BuildContext context, Todo element) {
-    return TodoItem(element);
+    return TodoItem(element, true);
   }
 }

@@ -178,6 +178,6 @@ class Home extends StatelessWidget {
 
   Widget _buildListItem(BuildContext context, DocumentSnapshot snapshot) {
     final todo = Todo.fromSnapshot(snapshot);
-    return TodoItem(todo);
+    return TodoItem(todo, false);
   }
 }
