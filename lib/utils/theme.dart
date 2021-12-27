@@ -100,12 +100,13 @@ class AppTheme {
       ),
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: ButtonStyle(
+          elevation: MaterialStateProperty.all(6),
           padding: MaterialStateProperty.all<EdgeInsets>(
             const EdgeInsets.all(16),
           ),
-          backgroundColor: MaterialStateProperty.all<Color>(blackColor),
-          foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
-          overlayColor: MaterialStateProperty.all<Color>(Colors.black),
+          backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
+          foregroundColor: MaterialStateProperty.all<Color>(blackColor),
+          overlayColor: MaterialStateProperty.all<Color>(lightGreyColor),
         ),
       ),
       textButtonTheme: TextButtonThemeData(
@@ -157,12 +158,13 @@ class AppTheme {
       ),
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: ButtonStyle(
+            elevation: MaterialStateProperty.all(6),
             padding: MaterialStateProperty.all<EdgeInsets>(
               const EdgeInsets.all(16),
             ),
-            backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
-            foregroundColor: MaterialStateProperty.all<Color>(blackColor),
-            overlayColor: MaterialStateProperty.all<Color>(lightGreyColor)),
+            backgroundColor: MaterialStateProperty.all<Color>(blackColor),
+            foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+            overlayColor: MaterialStateProperty.all<Color>(Colors.black)),
       ),
       textButtonTheme: TextButtonThemeData(
           style: TextButton.styleFrom(
