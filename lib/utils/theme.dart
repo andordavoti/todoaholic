@@ -89,6 +89,7 @@ class AppTheme {
       ),
       textTheme: lightTextTheme,
       inputDecorationTheme: InputDecorationTheme(
+        labelStyle: const TextStyle(color: blackColor),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
         ),
@@ -145,6 +146,7 @@ class AppTheme {
       ),
       textTheme: darkTextTheme,
       inputDecorationTheme: InputDecorationTheme(
+        labelStyle: const TextStyle(color: Colors.white),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
         ),
