@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 const blackColor = Color(0xff1c1c1c);
+const blackColor2 = Color(0xff1c1c1c);
 const lightGreyColor = Color(0xffeeeeee);
 
 class AppTheme {
@@ -164,7 +165,7 @@ class AppTheme {
             ),
             backgroundColor: MaterialStateProperty.all<Color>(blackColor),
             foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
-            overlayColor: MaterialStateProperty.all<Color>(Colors.black)),
+            overlayColor: MaterialStateProperty.all<Color>(blackColor2)),
       ),
       textButtonTheme: TextButtonThemeData(
           style: TextButton.styleFrom(
@@ -180,8 +181,7 @@ class AppTheme {
       ),
       indicatorColor: Colors.white,
       progressIndicatorTheme: const ProgressIndicatorThemeData(
-        color: Colors.white,
-      ),
+          color: Colors.white, circularTrackColor: Colors.white),
     );
   }
 }
