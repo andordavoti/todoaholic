@@ -101,15 +101,15 @@ class Home extends StatelessWidget {
                 onTap: () async {
                   final currentDate = DateTime.now();
 
-                  final selectedDate = await showDatePicker(
+                  final pickedDate = await showDatePicker(
                     context: context,
                     initialDate: appState.selectedDate,
                     firstDate: DateTime(currentDate.year - 5),
                     lastDate: DateTime(currentDate.year + 5),
                   );
 
-                  if (selectedDate != null) {
-                    appState.setSelectedDate(selectedDate);
+                  if (pickedDate != null) {
+                    appState.setSelectedDate(pickedDate);
                   }
                 },
                 child: Text(DateFormat.yMMMd().format(appState.selectedDate))),
