@@ -32,14 +32,14 @@ class _ManageTodoScreenState extends State<ManageTodoScreen> {
     WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
       final appState = Provider.of<AppState>(context, listen: false);
 
+      SchedulerBinding.instance!.addPostFrameCallback(
+          (_) => {FocusScope.of(context).requestFocus(textFocusNode)});
+
       setState(() {
         selectedDate =
             widget.originalTodo?.date.toDate() ?? appState.selectedDate;
       });
     });
-
-    SchedulerBinding.instance!.addPostFrameCallback(
-        (_) => {FocusScope.of(context).requestFocus(textFocusNode)});
   }
 
   @override
