@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+import '../utils/datetime_extension.dart';
 import 'todo.dart';
 
 class TodoDao {
@@ -41,8 +42,9 @@ class TodoDao {
   }
 
   Stream<QuerySnapshot>? getTodoTimelineStream() {
+    var currentDate = DateTime.now().getDateOnly();
     return collection
-        ?.where('date', isGreaterThanOrEqualTo: Timestamp.now())
+        ?.where('date', isGreaterThanOrEqualTo: Timestamp.fromDate(currentDate))
         .orderBy('date')
         .orderBy('isDone')
         .limit(200)

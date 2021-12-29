@@ -7,7 +7,7 @@ import 'package:todoaholic/screens/manage_todo_screen.dart';
 
 class TodoItem extends StatelessWidget {
   final Todo todo;
-  final isInTimeline;
+  final bool isInTimeline;
 
   const TodoItem(
     this.todo,
