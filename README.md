@@ -2,7 +2,7 @@
 
 A minimalist open-source and free todo app for iOS, Android, web & macOS.
 
-## Stack
+## Tech Stack
 
 ### Frontend:
 - [Flutter](https://flutter.dev/)
