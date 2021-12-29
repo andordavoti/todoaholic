@@ -74,7 +74,7 @@ class TodoItem extends StatelessWidget {
                 padding: const EdgeInsets.only(left: 16.0),
                 child: Row(children: [
                   Text(isInTimeline ? 'Next day' : 'Tommorrow',
-                      style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                      style: Theme.of(context).textTheme.bodyText2!.copyWith(
                           color: Theme.of(context)
                               .floatingActionButtonTheme
                               .foregroundColor)),
@@ -109,9 +109,9 @@ class TodoItem extends StatelessWidget {
                     style: todo.isDone
                         ? Theme.of(context)
                             .textTheme
-                            .bodyText2!
+                            .bodyText1!
                             .copyWith(decoration: TextDecoration.lineThrough)
-                        : Theme.of(context).textTheme.bodyText1,
+                        : Theme.of(context).textTheme.bodyText2,
                   ),
                 ],
               ),

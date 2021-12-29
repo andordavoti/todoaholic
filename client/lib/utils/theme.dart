@@ -10,12 +10,12 @@ class AppTheme {
     bodyText1: GoogleFonts.exo2(
       fontSize: 16.0,
       fontWeight: FontWeight.w500,
-      color: blackColor,
+      color: Colors.grey,
     ),
     bodyText2: GoogleFonts.exo2(
       fontSize: 16.0,
       fontWeight: FontWeight.w500,
-      color: Colors.grey,
+      color: blackColor,
     ),
     headline1: GoogleFonts.exo2(
       fontSize: 32.0,
@@ -43,12 +43,12 @@ class AppTheme {
     bodyText1: GoogleFonts.exo2(
       fontSize: 16.0,
       fontWeight: FontWeight.w500,
-      color: Colors.white,
+      color: Colors.grey,
     ),
     bodyText2: GoogleFonts.exo2(
       fontSize: 16.0,
       fontWeight: FontWeight.w500,
-      color: Colors.grey,
+      color: Colors.white,
     ),
     headline1: GoogleFonts.exo2(
       fontSize: 32.0,

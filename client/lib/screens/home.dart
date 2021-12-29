@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
-import 'package:flutterfire_ui/auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:todoaholic/components/date_navigation_buttons.dart';
 import 'package:todoaholic/components/todo_item.dart';
@@ -9,6 +8,7 @@ import 'package:todoaholic/data/app_state_provider.dart';
 import 'package:todoaholic/data/todo.dart';
 import 'package:todoaholic/data/todo_dao.dart';
 import 'package:provider/provider.dart';
+import 'package:todoaholic/screens/user_profile_screen.dart';
 import 'package:todoaholic/screens/timeline_screen.dart';
 
 import 'manage_todo_screen.dart';
@@ -52,7 +52,7 @@ class Home extends StatelessWidget {
                       padding: const EdgeInsets.only(top: 8),
                       child: Text(
                         'Add a new task by tapping the + button',
-                        style: Theme.of(context).textTheme.bodyText2,
+                        style: Theme.of(context).textTheme.bodyText1,
                         textAlign: TextAlign.center,
                       ),
                     ),
@@ -123,23 +123,13 @@ class Home extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: IconButton(
                   icon: Icon(Icons.person_sharp,
-                      color: Theme.of(context).textTheme.bodyText1!.color),
+                      color: Theme.of(context).textTheme.bodyText2!.color),
                   onPressed: () {
                     HapticFeedback.selectionClick();
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => ProfileScreen(
-                          providerConfigs: const [EmailProviderConfiguration()],
-                          avatarSize: 100,
-                          actions: [
-                            SignedOutAction((context) {
-                              HapticFeedback.heavyImpact();
-                              Navigator.of(context).pop();
-                            }),
-                          ],
-                        ),
-                      ),
+                          builder: (context) => const UserProfileScreen()),
                     );
                   })),
           actions: [
@@ -147,7 +137,7 @@ class Home extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: (IconButton(
                   icon: Icon(Icons.timeline,
-                      color: Theme.of(context).textTheme.bodyText1!.color),
+                      color: Theme.of(context).textTheme.bodyText2!.color),
                   onPressed: () {
                     HapticFeedback.selectionClick();
                     Navigator.push(

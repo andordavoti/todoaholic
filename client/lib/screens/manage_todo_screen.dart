@@ -117,7 +117,7 @@ class _ManageTodoScreenState extends State<ManageTodoScreen> {
                     selectedDate != null
                         ? DateFormat.yMMMd().format(selectedDate!)
                         : '',
-                    style: Theme.of(context).textTheme.bodyText1,
+                    style: Theme.of(context).textTheme.bodyText2,
                   ),
                   IconButton(
                       icon: const Icon(Icons.date_range),

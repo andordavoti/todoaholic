@@ -59,7 +59,7 @@ class TimelineScreen extends StatelessWidget {
                     padding: const EdgeInsets.only(top: 8),
                     child: Text(
                       'Go back and add some tasks',
-                      style: Theme.of(context).textTheme.bodyText2,
+                      style: Theme.of(context).textTheme.bodyText1,
                       textAlign: TextAlign.center,
                     ),
                   ),
