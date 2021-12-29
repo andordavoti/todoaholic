@@ -6,7 +6,6 @@ import 'package:todoaholic/data/app_state_provider.dart';
 import 'package:todoaholic/data/todo_dao.dart';
 import 'package:todoaholic/utils/theme.dart';
 import 'components/authgate.dart';
-import 'data/user_dao.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -26,10 +25,6 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(
           create: (context) => AppState(),
-        ),
-        ChangeNotifierProvider<UserDao>(
-          lazy: false,
-          create: (_) => UserDao(),
         ),
         Provider<TodoDao>(
           lazy: true,
