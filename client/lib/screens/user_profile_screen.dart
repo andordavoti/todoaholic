@@ -52,10 +52,21 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
       children: [
         Padding(
           padding: const EdgeInsets.only(top: 32, bottom: 16),
-          child: Text(
-            "Developed by Davoti Solutions",
-            style: Theme.of(context).textTheme.headline6,
+          child: RichText(
             textAlign: TextAlign.center,
+            text: TextSpan(
+              children: <TextSpan>[
+                TextSpan(
+                    text: 'Developed by ',
+                    style: Theme.of(context).textTheme.headline6),
+                TextSpan(
+                    text: 'Davoti Solutions',
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline6!
+                        .copyWith(fontFamily: 'mustang')),
+              ],
+            ),
           ),
         ),
         Padding(
