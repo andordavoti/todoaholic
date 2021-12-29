@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 const blackColor = Color(0xff1c1c1c);
-const blackColor2 = Color(0xff1c1c1c);
+const blackColor2 = Colors.black12;
 const lightGreyColor = Color(0xffeeeeee);
 
 class AppTheme {
@@ -92,15 +92,20 @@ class AppTheme {
       inputDecorationTheme: InputDecorationTheme(
         labelStyle: const TextStyle(color: blackColor),
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(25),
         ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(12.5),
           borderSide: const BorderSide(color: blackColor),
         ),
       ),
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: ButtonStyle(
+          shape: MaterialStateProperty.all(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(25),
+            ),
+          ),
           elevation: MaterialStateProperty.all(6),
           padding: MaterialStateProperty.all<EdgeInsets>(
             const EdgeInsets.all(16),
@@ -150,15 +155,20 @@ class AppTheme {
       inputDecorationTheme: InputDecorationTheme(
         labelStyle: const TextStyle(color: Colors.white),
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(25),
         ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(12.5),
           borderSide: const BorderSide(color: Colors.white),
         ),
       ),
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: ButtonStyle(
+            shape: MaterialStateProperty.all(
+              RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(25),
+              ),
+            ),
             elevation: MaterialStateProperty.all(6),
             padding: MaterialStateProperty.all<EdgeInsets>(
               const EdgeInsets.all(16),
