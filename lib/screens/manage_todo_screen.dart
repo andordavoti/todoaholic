@@ -23,7 +23,7 @@ class ManageTodoScreen extends StatefulWidget {
 class _ManageTodoScreenState extends State<ManageTodoScreen> {
   final _textController = TextEditingController();
   final textFocusNode = FocusNode();
-  late DateTime selectedDate;
+  DateTime? selectedDate;
 
   @override
   void initState() {
@@ -33,13 +33,13 @@ class _ManageTodoScreenState extends State<ManageTodoScreen> {
     WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
       final appState = Provider.of<AppState>(context, listen: false);
 
-      SchedulerBinding.instance!.addPostFrameCallback(
-          (_) => {FocusScope.of(context).requestFocus(textFocusNode)});
-
       setState(() {
         selectedDate =
             widget.originalTodo?.date.toDate() ?? appState.selectedDate;
       });
+
+      SchedulerBinding.instance!.addPostFrameCallback(
+          (_) => {FocusScope.of(context).requestFocus(textFocusNode)});
     });
   }
 
@@ -62,10 +62,14 @@ class _ManageTodoScreenState extends State<ManageTodoScreen> {
         if (text.isEmpty) {
           todoDao.removeTodo(originalTodo);
         }
-        todoDao.updateTodo(originalTodo, text, selectedDate);
-      } else if (text.isNotEmpty) {
+        if (selectedDate != null) {
+          todoDao.updateTodo(originalTodo, text, selectedDate!);
+        }
+      } else if (text.isNotEmpty && selectedDate != null) {
         todoDao.saveTodo(Todo(
-            text: text, date: Timestamp.fromDate(selectedDate), isDone: false));
+            text: text,
+            date: Timestamp.fromDate(selectedDate!),
+            isDone: false));
       }
 
       Navigator.pop(context);
@@ -110,25 +114,29 @@ class _ManageTodoScreenState extends State<ManageTodoScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    DateFormat.yMMMd().format(selectedDate),
+                    selectedDate != null
+                        ? DateFormat.yMMMd().format(selectedDate!)
+                        : '',
                     style: Theme.of(context).textTheme.bodyText1,
                   ),
                   IconButton(
                       icon: const Icon(Icons.date_range),
                       onPressed: () async {
-                        final currentDate = DateTime.now();
+                        if (selectedDate != null) {
+                          final currentDate = DateTime.now();
 
-                        final pickedDate = await showDatePicker(
-                          context: context,
-                          initialDate: selectedDate,
-                          firstDate: DateTime(currentDate.year - 5),
-                          lastDate: DateTime(currentDate.year + 5),
-                        );
+                          final pickedDate = await showDatePicker(
+                            context: context,
+                            initialDate: selectedDate!,
+                            firstDate: DateTime(currentDate.year - 5),
+                            lastDate: DateTime(currentDate.year + 5),
+                          );
 
-                        if (pickedDate != null) {
-                          setState(() {
-                            selectedDate = pickedDate;
-                          });
+                          if (pickedDate != null) {
+                            setState(() {
+                              selectedDate = pickedDate;
+                            });
+                          }
                         }
                       }),
                 ],
