@@ -10,8 +10,10 @@ import 'package:todoaholic/data/todo_dao.dart';
 import 'package:provider/provider.dart';
 import 'package:todoaholic/screens/user_profile_screen.dart';
 import 'package:todoaholic/screens/timeline_screen.dart';
+import 'package:async/async.dart';
 
 import 'manage_todo_screen.dart';
+import '../utils/datetime_extension.dart';
 
 class Home extends StatelessWidget {
   final ScrollController _scrollController = ScrollController();
@@ -22,10 +24,17 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     final todoDao = Provider.of<TodoDao>(context, listen: false);
 
+    final currentDate = DateTime.now().getDateOnly();
+
     return Consumer<AppState>(builder: (context, appState, child) {
       return Scaffold(
         body: StreamBuilder<QuerySnapshot>(
-          stream: todoDao.getTodoStream(appState.selectedDate),
+          stream: appState.selectedDate == currentDate
+              ? StreamGroup.merge([
+                  todoDao.getTodoPresentStream(appState.selectedDate),
+                  todoDao.getTodoRelevantPastStream(appState.selectedDate),
+                ])
+              : todoDao.getTodoPresentStream(appState.selectedDate),
           builder: (context, snapshot) {
             if (snapshot.hasError) {
               return const Center(

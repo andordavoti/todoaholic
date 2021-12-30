@@ -34,20 +34,36 @@ class TodoDao {
     await todo.reference?.delete();
   }
 
-  Stream<QuerySnapshot>? getTodoStream(DateTime selectedDate) {
-    return collection
-        ?.orderBy('isDone')
-        .where('date', isEqualTo: Timestamp.fromDate(selectedDate))
+  Stream<QuerySnapshot> getTodoPresentStream(DateTime selectedDate) {
+    final currentDate = DateTime.now().getDateOnly();
+
+    if (selectedDate.isBefore(currentDate)) {
+      return collection!
+          .where('date', isEqualTo: Timestamp.fromDate(selectedDate))
+          .where('isDone', isEqualTo: true)
+          .snapshots();
+    } else {
+      return collection!
+          .where('date', isEqualTo: Timestamp.fromDate(selectedDate))
+          .orderBy('isDone')
+          .snapshots();
+    }
+  }
+
+  Stream<QuerySnapshot> getTodoRelevantPastStream(DateTime selectedDate) {
+    return collection!
+        .where('isDone', isEqualTo: false)
+        .where('date', isLessThan: Timestamp.fromDate(selectedDate))
         .snapshots();
   }
 
-  Stream<QuerySnapshot>? getTodoTimelineStream() {
+  Stream<QuerySnapshot> getTodoTimelineStream() {
     var currentDate = DateTime.now().getDateOnly();
-    return collection
-        ?.where('date', isGreaterThanOrEqualTo: Timestamp.fromDate(currentDate))
+
+    return collection!
+        .where('date', isGreaterThanOrEqualTo: Timestamp.fromDate(currentDate))
         .orderBy('date')
         .orderBy('isDone')
-        .limit(200)
         .snapshots();
   }
 }
