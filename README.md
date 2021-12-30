@@ -1,8 +1,14 @@
 # todoaholic
 
-A minimalist open-source and free todo app for iOS, Android, web & macOS.
+A minimalist open-source and free todo app for iOS, Android, macOS & web.
 
-## Stack
+## Get the app
+- iOS (coming soon)
+- Android (coming soon)
+- macOS (coming soon)
+- web (coming soon)
+
+## Tech Stack
 
 ### Frontend:
 - [Flutter](https://flutter.dev/)
