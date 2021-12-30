@@ -7,6 +7,7 @@ import 'package:todoaholic/data/todo.dart';
 import 'package:todoaholic/data/todo_dao.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
+
 import '../utils/timestamp_converter.dart';
 
 class TimelineScreen extends StatelessWidget {
@@ -32,7 +33,7 @@ class TimelineScreen extends StatelessWidget {
             alignment: Alignment.topCenter, child: Text('Timeline')),
       ),
       body: StreamBuilder<QuerySnapshot>(
-        stream: todoDao.getTodoTimelineStream(),
+        stream: todoDao.getTimelineStream(),
         builder: (context, snapshot) {
           if (snapshot.hasError) {
             return const Center(

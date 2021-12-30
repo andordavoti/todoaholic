@@ -60,13 +60,13 @@ class _ManageTodoScreenState extends State<ManageTodoScreen> {
 
       if (originalTodo != null) {
         if (text.isEmpty) {
-          todoDao.removeTodo(originalTodo);
+          todoDao.remove(originalTodo);
         }
         if (selectedDate != null) {
-          todoDao.updateTodo(originalTodo, text, selectedDate!);
+          todoDao.update(originalTodo, text, selectedDate!);
         }
       } else if (text.isNotEmpty && selectedDate != null) {
-        todoDao.saveTodo(Todo(
+        todoDao.save(Todo(
             text: text,
             date: Timestamp.fromDate(selectedDate!),
             isDone: false));

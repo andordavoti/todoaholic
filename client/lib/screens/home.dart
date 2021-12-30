@@ -31,10 +31,10 @@ class Home extends StatelessWidget {
         body: StreamBuilder<QuerySnapshot>(
           stream: appState.selectedDate == currentDate
               ? StreamGroup.merge([
-                  todoDao.getTodoPresentStream(appState.selectedDate),
-                  todoDao.getTodoRelevantPastStream(appState.selectedDate),
+                  todoDao.getPresentStream(appState.selectedDate),
+                  todoDao.getUndonePastStream(appState.selectedDate),
                 ])
-              : todoDao.getTodoPresentStream(appState.selectedDate),
+              : todoDao.getPresentStream(appState.selectedDate),
           builder: (context, snapshot) {
             if (snapshot.hasError) {
               return const Center(

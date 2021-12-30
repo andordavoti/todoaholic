@@ -25,7 +25,7 @@ class TodoItem extends StatelessWidget {
           onDismissed: (DismissDirection direction) {
             if (direction == DismissDirection.endToStart && todo.isDone) {
               HapticFeedback.mediumImpact();
-              todoDao.removeTodo(todo);
+              todoDao.remove(todo);
             }
             if (direction == DismissDirection.startToEnd) {
               HapticFeedback.mediumImpact();
@@ -95,9 +95,9 @@ class TodoItem extends StatelessWidget {
             onTap: () {
               HapticFeedback.selectionClick();
               if (todo.isDone) {
-                todoDao.updateTodoNotDone(todo);
+                todoDao.setNotDone(todo);
               } else {
-                todoDao.updateTodoDone(todo);
+                todoDao.setDone(todo);
               }
             },
             child: Padding(
