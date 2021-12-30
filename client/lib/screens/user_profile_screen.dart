@@ -51,7 +51,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
       ],
       children: [
         Padding(
-          padding: const EdgeInsets.only(top: 32, bottom: 16),
+          padding: const EdgeInsets.only(top: 32),
           child: RichText(
             textAlign: TextAlign.center,
             text: TextSpan(
@@ -70,7 +70,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
           ),
         ),
         Padding(
-            padding: const EdgeInsets.only(top: 8, bottom: 8),
+            padding: const EdgeInsets.only(top: 16, bottom: 8),
             child: TouchableOpacity(
               activeOpacity: 0.4,
               onTap: () {
@@ -100,7 +100,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
               label: const Text('Contact us')),
         ),
         Padding(
-            padding: const EdgeInsets.only(top: 16, bottom: 16),
+            padding: const EdgeInsets.only(top: 8, bottom: 16),
             child: OutlinedButton.icon(
                 onPressed: () {
                   launch('https://github.com/andordavoti/todoaholic');
