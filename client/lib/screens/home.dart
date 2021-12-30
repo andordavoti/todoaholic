@@ -29,49 +29,60 @@ class Home extends StatelessWidget {
     return Consumer<AppState>(builder: (context, appState, child) {
       return Scaffold(
         body: StreamBuilder<QuerySnapshot>(
-          stream: appState.selectedDate == currentDate
-              ? StreamGroup.merge([
-                  todoDao.getPresentStream(appState.selectedDate),
-                  todoDao.getUndonePastStream(appState.selectedDate),
-                ])
-              : todoDao.getPresentStream(appState.selectedDate),
-          builder: (context, snapshot) {
-            if (snapshot.hasError) {
-              return const Center(
-                child: Text('Something went wrong...'),
-              );
-            }
-            if (!snapshot.hasData) {
-              return const Center(child: CircularProgressIndicator());
-            }
+            stream: todoDao.getPresentStream(appState.selectedDate),
+            builder: (context, _) {
+              return StreamBuilder<QuerySnapshot>(
+                  stream: todoDao.getUndonePastStream(appState.selectedDate),
+                  builder: (context, _) {
+                    return StreamBuilder<QuerySnapshot>(
+                      stream: appState.selectedDate == currentDate
+                          ? StreamGroup.merge([
+                              todoDao.getPresentStream(appState.selectedDate),
+                              todoDao
+                                  .getUndonePastStream(appState.selectedDate),
+                            ])
+                          : todoDao.getPresentStream(appState.selectedDate),
+                      builder: (context, snapshot) {
+                        if (snapshot.hasError) {
+                          return const Center(
+                            child: Text('Something went wrong...'),
+                          );
+                        }
+                        if (!snapshot.hasData) {
+                          return const Center(
+                              child: CircularProgressIndicator());
+                        }
 
-            if (snapshot.data!.docs.isEmpty) {
-              return Center(
-                child: Flex(
-                  direction: Axis.vertical,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Nothing for today',
-                      style: Theme.of(context).textTheme.headline2,
-                      textAlign: TextAlign.center,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 8),
-                      child: Text(
-                        'Add a new task by tapping the + button',
-                        style: Theme.of(context).textTheme.bodyText1,
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  ],
-                ),
-              );
-            }
-            return _buildList(context, snapshot.data!.docs);
-          },
-        ),
+                        if (snapshot.data!.docs.isEmpty) {
+                          return Center(
+                            child: Flex(
+                              direction: Axis.vertical,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Text(
+                                  'Nothing for today',
+                                  style: Theme.of(context).textTheme.headline2,
+                                  textAlign: TextAlign.center,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 8),
+                                  child: Text(
+                                    'Add a new task by tapping the + button',
+                                    style:
+                                        Theme.of(context).textTheme.bodyText1,
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
+                        }
+                        return _buildList(context, snapshot.data!.docs);
+                      },
+                    );
+                  });
+            }),
         floatingActionButton: Padding(
           padding: const EdgeInsets.only(left: 20, right: 20),
           child: Stack(
