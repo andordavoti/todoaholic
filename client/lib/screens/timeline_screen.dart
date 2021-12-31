@@ -3,10 +3,12 @@ import 'package:flutter/services.dart';
 import 'package:grouped_list/grouped_list.dart';
 import 'package:provider/provider.dart';
 import 'package:todoaholic/components/todo_item.dart';
+import 'package:todoaholic/components/todo_list_header.dart';
 import 'package:todoaholic/data/todo.dart';
 import 'package:todoaholic/data/todo_dao.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
+import 'package:todoaholic/data/todo_item_type.dart';
 
 import '../utils/timestamp_converter.dart';
 
@@ -78,27 +80,14 @@ class TimelineScreen extends StatelessWidget {
     return GroupedListView<Todo, String>(
       elements: snapshot!.map((doc) => Todo.fromSnapshot(doc)).toList(),
       groupBy: (element) => element.date.toString(),
-      groupSeparatorBuilder: (groupByValue) => Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Align(
-              alignment: Alignment.topLeft,
-              child: Text(
-                DateFormat.yMMMd().format(
-                    (TimestampConverter.parseString(groupByValue)).toDate()),
-                style: Theme.of(context).textTheme.headline2,
-              ),
-            ),
-          ),
-          const Divider(height: 1)
-        ],
-      ),
+      groupSeparatorBuilder: (groupByValue) => TodoListHeader(
+          title: DateFormat.yMMMd()
+              .format((TimestampConverter.parseString(groupByValue)).toDate())),
       itemBuilder: (context, element) => _buildListItem(context, element),
     );
   }
 
   Widget _buildListItem(BuildContext context, Todo element) {
-    return TodoItem(element, true);
+    return TodoItem(element, TodoItemType.timeline);
   }
 }

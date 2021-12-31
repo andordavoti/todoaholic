@@ -1,26 +1,62 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:todoaholic/data/app_state_provider.dart';
 import 'package:todoaholic/data/todo.dart';
 import 'package:todoaholic/data/todo_dao.dart';
+import 'package:todoaholic/data/todo_item_type.dart';
 import 'package:todoaholic/screens/manage_todo_screen.dart';
 
 class TodoItem extends StatelessWidget {
   final Todo todo;
-  final bool isInTimeline;
+  final TodoItemType type;
 
   const TodoItem(
     this.todo,
-    this.isInTimeline, {
+    this.type, {
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final todoDao = Provider.of<TodoDao>(context, listen: false);
-    return Column(
-      children: [
-        Dismissible(
+
+    String getSwipeNextTitle() {
+      switch (type) {
+        case TodoItemType.past:
+          return 'Move to today';
+        case TodoItemType.present:
+          return 'Tommorrow';
+        case TodoItemType.timeline:
+          return 'Next day';
+      }
+    }
+
+    void swipeNextAction() {
+      switch (type) {
+        case TodoItemType.past:
+          todoDao.moveToToday(todo);
+          break;
+        case TodoItemType.present:
+          todoDao.swipeTomorrow(todo);
+          break;
+        case TodoItemType.timeline:
+          todoDao.swipeTomorrow(todo);
+          break;
+      }
+    }
+
+    return Consumer<AppState>(builder: (context, appState, child) {
+      return Container(
+        decoration: BoxDecoration(
+          border: Border(
+            bottom: BorderSide(
+              width: 1,
+              color: Theme.of(context).dividerColor,
+            ),
+          ),
+        ),
+        child: Dismissible(
           key: ObjectKey(todo),
           onDismissed: (DismissDirection direction) {
             if (direction == DismissDirection.endToStart && todo.isDone) {
@@ -29,7 +65,7 @@ class TodoItem extends StatelessWidget {
             }
             if (direction == DismissDirection.startToEnd) {
               HapticFeedback.mediumImpact();
-              todoDao.swipeTomorrow(todo);
+              swipeNextAction();
             }
           },
           confirmDismiss: (DismissDirection direction) {
@@ -73,7 +109,7 @@ class TodoItem extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.only(left: 16.0),
                 child: Row(children: [
-                  Text(isInTimeline ? 'Next day' : 'Tommorrow',
+                  Text(getSwipeNextTitle(),
                       style: Theme.of(context).textTheme.bodyText2!.copyWith(
                           color: Theme.of(context)
                               .floatingActionButtonTheme
@@ -118,8 +154,7 @@ class TodoItem extends StatelessWidget {
             ),
           ),
         ),
-        const Divider(height: 1)
-      ],
-    );
+      );
+    });
   }
 }

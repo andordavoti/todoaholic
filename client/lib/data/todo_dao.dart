@@ -30,6 +30,11 @@ class TodoDao {
     await todo.reference?.update({'date': Timestamp.fromDate(nextDay)});
   }
 
+  Future<void> moveToToday(Todo todo) async {
+    final currentDate = DateTime.now().getDateOnly();
+    await todo.reference?.update({'date': Timestamp.fromDate(currentDate)});
+  }
+
   Future<void> remove(Todo todo) async {
     await todo.reference?.delete();
   }
@@ -60,10 +65,21 @@ class TodoDao {
   Stream<QuerySnapshot> getTimelineStream() {
     final currentDate = DateTime.now().getDateOnly();
 
-    return collection!
-        .where('date', isGreaterThanOrEqualTo: Timestamp.fromDate(currentDate))
+    return collection
+        // .where('date', isGreaterThanOrEqualTo: Timestamp.fromDate(currentDate))
+        !
         .orderBy('date')
         .orderBy('isDone')
+        .snapshots();
+  }
+
+  Stream<QuerySnapshot> getUndonePastTimelineStream() {
+    final currentDate = DateTime.now().getDateOnly();
+
+    return collection!
+        .where('isDone', isEqualTo: false)
+        .where('date', isLessThan: Timestamp.fromDate(currentDate))
+        .orderBy('date')
         .snapshots();
   }
 }

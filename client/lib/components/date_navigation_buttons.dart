@@ -5,12 +5,14 @@ class DateNavigation extends StatelessWidget {
   final VoidCallback leftAction;
   final VoidCallback leftLongPressAction;
   final VoidCallback rightAction;
+  final VoidCallback rightLongPressAction;
 
   const DateNavigation({
     Key? key,
     required Function() this.leftAction,
     required Function() this.leftLongPressAction,
     required Function() this.rightAction,
+    required Function() this.rightLongPressAction,
   }) : super(key: key);
 
   @override
@@ -63,6 +65,10 @@ class DateNavigation extends StatelessWidget {
               onTap: () {
                 rightAction();
                 HapticFeedback.selectionClick();
+              },
+              onLongPress: () {
+                rightLongPressAction();
+                HapticFeedback.mediumImpact();
               },
             ),
           ),
