@@ -65,21 +65,10 @@ class TodoDao {
   Stream<QuerySnapshot> getTimelineStream() {
     final currentDate = DateTime.now().getDateOnly();
 
-    return collection
-        // .where('date', isGreaterThanOrEqualTo: Timestamp.fromDate(currentDate))
-        !
+    return collection!
+        .where('date', isGreaterThanOrEqualTo: Timestamp.fromDate(currentDate))
         .orderBy('date')
         .orderBy('isDone')
-        .snapshots();
-  }
-
-  Stream<QuerySnapshot> getUndonePastTimelineStream() {
-    final currentDate = DateTime.now().getDateOnly();
-
-    return collection!
-        .where('isDone', isEqualTo: false)
-        .where('date', isLessThan: Timestamp.fromDate(currentDate))
-        .orderBy('date')
         .snapshots();
   }
 }
