@@ -12,8 +12,9 @@ const MAX_CONCURRENT = 3;
  * Deletion of user data is handled by the Remove User Data extension.
  * Manually run the task here https://console.cloud.google.com/cloudscheduler
  */
-exports.accountcleanup = functions.pubsub
-  .schedule("every sunday 00:00")
+exports.accountcleanup = functions
+  .region("europe-west1")
+  .pubsub.schedule("every sunday 00:00")
   .onRun(async () => {
     // Fetch all user details.
     const inactiveUsers = await getInactiveUsers();
