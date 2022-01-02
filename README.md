@@ -14,9 +14,12 @@ A minimalist open-source and free todo app for iOS, Android, macOS & web.
 - [Flutter](https://flutter.dev/)
 
 ### Backend:
-- DB: [Firestore](https://firebase.google.com/products/firestore)
 - Auth: [Firebase Auth](https://firebase.google.com/products/auth)
+- DB: [Firestore](https://firebase.google.com/products/firestore)
+- [Firebase Cloud Functions](https://firebase.google.com/docs/functions)
 - [Firebase Delete User Data Extension](https://firebase.google.com/products/extensions/firebase-delete-user-data)
 
-## How to run the project:
-...
+### Services used:
+- [Firebase Analytics](https://firebase.google.com/products/analytics)
+- [Firebase Crashlytics](https://firebase.google.com/products/crashlytics)
+- [Firebase Performance Monitoring](https://firebase.google.com/products/performance)
