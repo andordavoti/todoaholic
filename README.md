@@ -19,6 +19,9 @@ A minimalist open-source and free todo app for iOS, Android, macOS & web.
 - [Firebase Cloud Functions](https://firebase.google.com/docs/functions)
 - [Firebase Delete User Data Extension](https://firebase.google.com/products/extensions/firebase-delete-user-data)
 
+### Hosting (web):
+- [Firebase Hosting](https://firebase.google.com/docs/hosting) with a custom [GitHub Action](https://github.com/features/actions) that auto builds the Flutter web app, and deploys it when there is a push to the master branch or a PR merge.
+
 ### Services used:
 - [Firebase Analytics](https://firebase.google.com/products/analytics)
 - [Firebase Crashlytics](https://firebase.google.com/products/crashlytics)
