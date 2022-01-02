@@ -23,8 +23,6 @@ class TodoList extends StatelessWidget {
         stream: todoDao.getStream(appState.selectedDate),
         builder: (context, snapshot) {
           if (snapshot.hasError) {
-            print(snapshot.error);
-            return Text('Error: ${snapshot.error}');
             return const Center(
               child: Text('Something went wrong...'),
             );
