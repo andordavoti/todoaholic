@@ -8,11 +8,11 @@ import 'package:todoaholic/data/todo_dao.dart';
 import 'package:provider/provider.dart';
 import 'package:todoaholic/data/todo_item_type.dart';
 
-class PresentTodoList extends StatelessWidget {
+class TodoList extends StatelessWidget {
   final ScrollController _scrollController = ScrollController();
   final bool noPastTasks;
 
-  PresentTodoList({Key? key, required this.noPastTasks}) : super(key: key);
+  TodoList({Key? key, required this.noPastTasks}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +23,8 @@ class PresentTodoList extends StatelessWidget {
         stream: todoDao.getStream(appState.selectedDate),
         builder: (context, snapshot) {
           if (snapshot.hasError) {
+            print(snapshot.error);
+            return Text('Error: ${snapshot.error}');
             return const Center(
               child: Text('Something went wrong...'),
             );

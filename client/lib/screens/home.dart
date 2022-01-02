@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:todoaholic/components/date_navigation_buttons.dart';
 import 'package:todoaholic/components/past_todo_list.dart';
-import 'package:todoaholic/components/present_todo_list.dart';
+import 'package:todoaholic/components/todo_list.dart';
 import 'package:todoaholic/data/app_state_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:todoaholic/data/todo_dao.dart';
@@ -40,11 +40,11 @@ class Home extends StatelessWidget {
                       child: Column(
                         children: [
                           const PastTodoList(type: TodoItemType.past),
-                          PresentTodoList(noPastTasks: false),
+                          TodoList(noPastTasks: false),
                         ],
                       ),
                     )
-                  : PresentTodoList(
+                  : TodoList(
                       noPastTasks: true,
                     );
             }),
