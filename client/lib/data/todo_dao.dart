@@ -17,6 +17,10 @@ class TodoDao {
         ?.update({'text': newText, 'date': Timestamp.fromDate(newDate)});
   }
 
+  Future<void> setOrder(Todo todo, int order) async {
+    await todo.reference?.update({'order': order});
+  }
+
   Future<void> setDone(Todo todo) async {
     await todo.reference?.update({'isDone': true});
   }
@@ -27,19 +31,21 @@ class TodoDao {
 
   Future<void> swipeTomorrow(Todo todo) async {
     DateTime nextDay = todo.date.toDate().add(const Duration(days: 1));
-    await todo.reference?.update({'date': Timestamp.fromDate(nextDay)});
+    await todo.reference
+        ?.update({'date': Timestamp.fromDate(nextDay), 'order': 0});
   }
 
   Future<void> moveToToday(Todo todo) async {
     final currentDate = DateTime.now().getDateOnly();
-    await todo.reference?.update({'date': Timestamp.fromDate(currentDate)});
+    await todo.reference
+        ?.update({'date': Timestamp.fromDate(currentDate), 'order': 0});
   }
 
   Future<void> remove(Todo todo) async {
     await todo.reference?.delete();
   }
 
-  Stream<QuerySnapshot> getPresentStream(DateTime selectedDate) {
+  Stream<QuerySnapshot> getStream(DateTime selectedDate) {
     final currentDate = DateTime.now().getDateOnly();
 
     if (selectedDate.isBefore(currentDate)) {
@@ -50,6 +56,7 @@ class TodoDao {
     } else {
       return collection!
           .where('date', isEqualTo: Timestamp.fromDate(selectedDate))
+          .orderBy('order')
           .orderBy('isDone')
           .snapshots();
     }
@@ -65,10 +72,10 @@ class TodoDao {
 
   Stream<QuerySnapshot> getTimelineStream() {
     final currentDate = DateTime.now().getDateOnly();
-
     return collection!
         .where('date', isGreaterThanOrEqualTo: Timestamp.fromDate(currentDate))
         .orderBy('date')
+        .orderBy('order')
         .orderBy('isDone')
         .snapshots();
   }

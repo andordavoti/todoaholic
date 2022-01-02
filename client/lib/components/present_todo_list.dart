@@ -20,7 +20,7 @@ class PresentTodoList extends StatelessWidget {
 
     return Consumer<AppState>(builder: (context, appState, child) {
       return StreamBuilder<QuerySnapshot>(
-        stream: todoDao.getPresentStream(appState.selectedDate),
+        stream: todoDao.getStream(appState.selectedDate),
         builder: (context, snapshot) {
           if (snapshot.hasError) {
             return const Center(
@@ -63,14 +63,23 @@ class PresentTodoList extends StatelessWidget {
 
   Widget _buildPresentList(
       BuildContext context, List<DocumentSnapshot> snapshot) {
+    final todoDao = Provider.of<TodoDao>(context, listen: false);
     return Column(
       children: [
         noPastTasks
             ? const SizedBox.shrink()
             : const TodoListHeader(title: "Today's tasks"),
-        ListView(
+        ReorderableListView(
+          onReorder: (int oldIndex, int newIndex) {
+            if (oldIndex < newIndex) {
+              newIndex -= 1;
+            }
+
+            final todoMoved = Todo.fromSnapshot(snapshot.elementAt(oldIndex));
+            todoDao.setOrder(todoMoved, newIndex);
+          },
           shrinkWrap: true,
-          controller: _scrollController,
+          scrollController: _scrollController,
           physics: noPastTasks
               ? const BouncingScrollPhysics()
               : const NeverScrollableScrollPhysics(),
@@ -87,6 +96,10 @@ class PresentTodoList extends StatelessWidget {
 
   Widget _buildListItem(BuildContext context, DocumentSnapshot snapshot) {
     final todo = Todo.fromSnapshot(snapshot);
-    return TodoItem(todo, TodoItemType.present);
+    return TodoItem(
+      todo,
+      TodoItemType.present,
+      key: ObjectKey(todo),
+    );
   }
 }

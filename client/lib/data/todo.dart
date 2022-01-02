@@ -4,12 +4,14 @@ class Todo {
   final String text;
   final bool isDone;
   final Timestamp date;
+  int? order;
   DocumentReference? reference;
 
   Todo({
     required this.text,
     required this.isDone,
     required this.date,
+    required this.order,
     this.reference,
   });
 
@@ -17,12 +19,14 @@ class Todo {
         text: json['text'] as String,
         isDone: json['isDone'] as bool,
         date: (json['date'] as Timestamp),
+        order: (json['order'] as int?),
       );
 
   Map<String, dynamic> toJson() => <String, dynamic>{
-        'date': date,
-        'isDone': isDone,
         'text': text,
+        'isDone': isDone,
+        'date': date,
+        'order': order,
       };
 
   factory Todo.fromSnapshot(DocumentSnapshot snapshot) {

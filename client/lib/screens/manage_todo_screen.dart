@@ -6,7 +6,9 @@ import 'package:todoaholic/data/app_state_provider.dart';
 import 'package:todoaholic/data/todo_dao.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
+
 import '../data/todo.dart';
+import '../utils/datetime_extension.dart';
 
 class ManageTodoScreen extends StatefulWidget {
   final Todo? originalTodo;
@@ -53,7 +55,7 @@ class _ManageTodoScreenState extends State<ManageTodoScreen> {
   Widget build(BuildContext context) {
     final todoDao = Provider.of<TodoDao>(context, listen: false);
 
-    void submitAction() {
+    void submitAction(AsyncSnapshot<QuerySnapshot<Object?>> snapshot) {
       HapticFeedback.heavyImpact();
       final originalTodo = widget.originalTodo;
       final text = _textController.text;
@@ -67,82 +69,89 @@ class _ManageTodoScreenState extends State<ManageTodoScreen> {
         }
       } else if (text.isNotEmpty && selectedDate != null) {
         todoDao.save(Todo(
-            text: text,
-            date: Timestamp.fromDate(selectedDate!),
-            isDone: false));
+          text: text,
+          date: Timestamp.fromDate(selectedDate!),
+          isDone: false,
+          order: snapshot.data!.docs.length,
+        ));
       }
 
       Navigator.pop(context);
     }
 
-    return Scaffold(
-      appBar: AppBar(
-        leading: BackButton(onPressed: () {
-          HapticFeedback.selectionClick();
-          Navigator.pop(context);
-        }),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.check),
-            onPressed: submitAction,
-          )
-        ],
-        title: Text(
-          widget.originalTodo == null ? 'Add Task' : 'Edit Task',
-        ),
-      ),
-      // 5
-      body: Column(
-        children: [
-          Container(
-            padding: const EdgeInsets.all(16),
-            child: TextField(
-              focusNode: textFocusNode,
-              controller: _textController,
-              onSubmitted: (_) {
-                submitAction();
-              },
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: 'Enter task here',
+    return StreamBuilder<QuerySnapshot>(
+        stream: todoDao.getStream(selectedDate ?? DateTime.now().getDateOnly()),
+        builder: (context, snapshot) {
+          return Scaffold(
+            appBar: AppBar(
+              leading: BackButton(onPressed: () {
+                HapticFeedback.selectionClick();
+                Navigator.pop(context);
+              }),
+              actions: [
+                IconButton(
+                  icon: const Icon(Icons.check),
+                  onPressed: () {
+                    submitAction(snapshot);
+                  },
+                )
+              ],
+              title: Text(
+                widget.originalTodo == null ? 'Add Task' : 'Edit Task',
               ),
             ),
-          ),
-          Container(
-              padding: const EdgeInsets.only(left: 25, right: 20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    selectedDate != null
-                        ? DateFormat.yMMMd().format(selectedDate!)
-                        : '',
-                    style: Theme.of(context).textTheme.bodyText2,
+            body: Column(
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(16),
+                  child: TextField(
+                    focusNode: textFocusNode,
+                    controller: _textController,
+                    onSubmitted: (_) {
+                      submitAction(snapshot);
+                    },
+                    decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
+                      hintText: 'Enter task here',
+                    ),
                   ),
-                  IconButton(
-                      icon: const Icon(Icons.date_range),
-                      onPressed: () async {
-                        if (selectedDate != null) {
-                          final currentDate = DateTime.now();
+                ),
+                Container(
+                    padding: const EdgeInsets.only(left: 25, right: 20),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          selectedDate != null
+                              ? DateFormat.yMMMd().format(selectedDate!)
+                              : '',
+                          style: Theme.of(context).textTheme.bodyText2,
+                        ),
+                        IconButton(
+                            icon: const Icon(Icons.date_range),
+                            onPressed: () async {
+                              if (selectedDate != null) {
+                                final currentDate = DateTime.now();
 
-                          final pickedDate = await showDatePicker(
-                            context: context,
-                            initialDate: selectedDate!,
-                            firstDate: DateTime(currentDate.year - 5),
-                            lastDate: DateTime(currentDate.year + 5),
-                          );
+                                final pickedDate = await showDatePicker(
+                                  context: context,
+                                  initialDate: selectedDate!,
+                                  firstDate: DateTime(currentDate.year - 5),
+                                  lastDate: DateTime(currentDate.year + 5),
+                                );
 
-                          if (pickedDate != null) {
-                            setState(() {
-                              selectedDate = pickedDate;
-                            });
-                          }
-                        }
-                      }),
-                ],
-              )),
-        ],
-      ),
-    );
+                                if (pickedDate != null) {
+                                  setState(() {
+                                    selectedDate = pickedDate;
+                                  });
+                                }
+                              }
+                            }),
+                      ],
+                    )),
+              ],
+            ),
+          );
+        });
   }
 }
