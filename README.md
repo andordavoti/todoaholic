@@ -1,4 +1,6 @@
-<img src="resources/logo/todoaholic-logo.jpg" width="250" >
+<img src="resources/icon/todoaholic-icon.png" width="250" >
+
+# todoaholic
 
 A minimalist open-source and free todo app for iOS, Android, macOS & web.
 
