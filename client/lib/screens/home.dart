@@ -38,6 +38,7 @@ class Home extends StatelessWidget {
             : PresentTodoList(
                 noPastTasks: true,
               ),
+        resizeToAvoidBottomInset: false,
         floatingActionButton: Padding(
           padding: const EdgeInsets.only(left: 20, right: 20),
           child: Stack(
