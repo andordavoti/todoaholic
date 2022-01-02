@@ -6,7 +6,7 @@ A minimalist open-source and free todo app for iOS, Android, macOS & web.
 - iOS (coming soon)
 - Android (coming soon)
 - macOS (coming soon)
-- [web](https://todoaholic.com/)
+- web: [todoaholic.com](https://todoaholic.com/)
 
 ## Tech Stack
 
