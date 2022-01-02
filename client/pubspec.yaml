@@ -44,6 +44,7 @@ dependencies:
   url_launcher: ^6.0.17
   touchable_opacity: 1.2.0
   firebase_analytics: ^9.0.4
+  firebase_crashlytics: ^2.4.4
 
 dev_dependencies:
   flutter_test:
