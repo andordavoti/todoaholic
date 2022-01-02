@@ -55,10 +55,11 @@ class TodoDao {
     }
   }
 
-  Stream<QuerySnapshot> getUndonePastStream(DateTime selectedDate) {
+  Stream<QuerySnapshot> getUndonePastStream() {
     return collection!
         .where('isDone', isEqualTo: false)
-        .where('date', isLessThan: Timestamp.fromDate(selectedDate))
+        .where('date',
+            isLessThan: Timestamp.fromDate(DateTime.now().getDateOnly()))
         .snapshots();
   }
 

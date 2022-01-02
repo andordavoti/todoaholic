@@ -6,9 +6,11 @@ import 'package:todoaholic/components/past_todo_list.dart';
 import 'package:todoaholic/components/present_todo_list.dart';
 import 'package:todoaholic/data/app_state_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:todoaholic/data/todo_dao.dart';
 import 'package:todoaholic/data/todo_item_type.dart';
 import 'package:todoaholic/screens/user_profile_screen.dart';
 import 'package:todoaholic/screens/timeline_screen.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'manage_todo_screen.dart';
 import '../utils/datetime_extension.dart';
@@ -21,23 +23,31 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final currentDate = DateTime.now().getDateOnly();
+    final todoDao = Provider.of<TodoDao>(context, listen: false);
 
     return Consumer<AppState>(builder: (context, appState, child) {
       return Scaffold(
-        body: appState.selectedDate == currentDate
-            ? SingleChildScrollView(
-                physics: const BouncingScrollPhysics(),
-                controller: _scrollController,
-                child: Column(
-                  children: [
-                    const PastTodoList(type: TodoItemType.past),
-                    PresentTodoList(noPastTasks: false),
-                  ],
-                ),
-              )
-            : PresentTodoList(
-                noPastTasks: true,
-              ),
+        body: StreamBuilder<QuerySnapshot>(
+            stream: todoDao.getUndonePastStream(),
+            builder: (context, pastSnapshot) {
+              final bool pastTasksExist =
+                  pastSnapshot.hasData && pastSnapshot.data!.docs.isNotEmpty;
+
+              return appState.selectedDate == currentDate && pastTasksExist
+                  ? SingleChildScrollView(
+                      physics: const BouncingScrollPhysics(),
+                      controller: _scrollController,
+                      child: Column(
+                        children: [
+                          const PastTodoList(type: TodoItemType.past),
+                          PresentTodoList(noPastTasks: false),
+                        ],
+                      ),
+                    )
+                  : PresentTodoList(
+                      noPastTasks: true,
+                    );
+            }),
         resizeToAvoidBottomInset: false,
         floatingActionButton: Padding(
           padding: const EdgeInsets.only(left: 20, right: 20),

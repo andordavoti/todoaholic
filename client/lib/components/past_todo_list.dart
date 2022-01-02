@@ -19,9 +19,7 @@ class PastTodoList extends StatelessWidget {
 
     return Consumer<AppState>(builder: (context, appState, child) {
       return StreamBuilder<QuerySnapshot>(
-        stream: todoDao.getUndonePastStream(type == TodoItemType.pastTimeline
-            ? DateTime.now()
-            : appState.selectedDate),
+        stream: todoDao.getUndonePastStream(),
         builder: (context, snapshot) {
           if (snapshot.hasError) {
             return const SizedBox.shrink();
@@ -29,7 +27,6 @@ class PastTodoList extends StatelessWidget {
           if (!snapshot.hasData) {
             return const SizedBox.shrink();
           }
-
           if (snapshot.data!.docs.isEmpty) {
             return const SizedBox.shrink();
           }
