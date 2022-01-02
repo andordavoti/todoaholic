@@ -52,12 +52,13 @@ class TodoDao {
       return collection!
           .where('date', isEqualTo: Timestamp.fromDate(selectedDate))
           .where('isDone', isEqualTo: true)
+          .orderBy('order')
           .snapshots();
     } else {
       return collection!
           .where('date', isEqualTo: Timestamp.fromDate(selectedDate))
-          .orderBy('order')
           .orderBy('isDone')
+          .orderBy('order')
           .snapshots();
     }
   }
@@ -75,8 +76,8 @@ class TodoDao {
     return collection!
         .where('date', isGreaterThanOrEqualTo: Timestamp.fromDate(currentDate))
         .orderBy('date')
-        .orderBy('order')
         .orderBy('isDone')
+        .orderBy('order')
         .snapshots();
   }
 }
