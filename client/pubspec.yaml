@@ -45,6 +45,7 @@ dependencies:
   touchable_opacity: 1.2.0
   firebase_analytics: ^9.0.4
   firebase_crashlytics: ^2.4.4
+  firebase_performance: ^0.8.0+3
 
 dev_dependencies:
   flutter_test:
