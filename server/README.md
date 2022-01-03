@@ -18,7 +18,7 @@ yarn serve
 
 ## Deployment
 
-To deploy the app, go into the `functions/src` directory and run the following command:
+To deploy the app to Firebase, log into the Firebase CLI, go into the `functions/src` directory and run the following command:
 
 ```sh
 yarn deploy
