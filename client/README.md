@@ -4,7 +4,7 @@
 
 This is a Flutter project. To set up your environment, please refer to [this guide](https://docs.flutter.dev/get-started/install).
 
-To run the app, open the `main.dart` file in the `client` directory and run the following command:
+To run the app, open the `main.dart` file in the `lib` directory and run the following command:
 
 ```sh
 flutter run
