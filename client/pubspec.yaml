@@ -48,6 +48,13 @@ dependencies:
   firebase_performance: ^0.8.0+3
 
 dev_dependencies:
+  flutter_launcher_icons: "^0.9.2"
+
+flutter_icons:
+  ios: false
+  android: true
+  image_path: "../resources/icon/todoaholic-icon.png"
+
   flutter_test:
     sdk: flutter
 
