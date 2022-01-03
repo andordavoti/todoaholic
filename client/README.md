@@ -10,9 +10,43 @@ To run the app, open the `main.dart` file in the `lib` directory and run the fol
 flutter run
 ```
 
+## Production Build
+
+### **Android**
+
+Build app bundle (for Google Play Store submission):
+
+```sh
+flutter build appbundle
+```
+
+Build APK (for sideloading):
+
+```sh
+flutter build apk --split-per-abi
+```
+
+### **iOS**
+
+Open the project in xcode with the following command:
+
+```sh
+open ios/Runner.xcworkspace
+```
+
+Then in the menu bar, select `Product -> Archive`.
+
+### **web**
+
+Run the following command:
+
+```sh
+flutter build web
+```
+
 ## Generate new native launcher icons
 
-### Android
+### **Android**
 
 Update the icon located at: /resources/icon/todoaholic-icon.png
 
@@ -22,19 +56,19 @@ Then run:
 flutter pub run flutter_launcher_icons:main
 ```
 
-### iOS & macOS
+### **iOS & macOS**
 
 Use [this app](https://apps.apple.com/us/app/icon-set-creator/id939343785), drag in the icon and generate the icons.
 
 Then open the project in xcode with the following command:
 
-iOS
+**iOS**
 
 ```sh
 open ios/Runner.xcworkspace
 ```
 
-macOS
+**macOS**
 
 ```sh
 open macos/Runner.xcworkspace
@@ -42,13 +76,13 @@ open macos/Runner.xcworkspace
 
 Go to the Assets -> AppIcon in xcode, and drag in the icons.
 
-### web
+### **web**
 
 Use [this tool](https://realfavicongenerator.net/) to generate the icons. Then replace the icons in web/icons.
 
 ## Generate new native splash screens
 
-### iOS, Android and web
+### **iOS, Android and web**
 
 ```sh
 flutter pub run flutter_native_splash:create
