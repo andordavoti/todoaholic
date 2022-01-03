@@ -10,7 +10,7 @@ To run the app, open the `main.dart` file in the `lib` directory and run the fol
 flutter run
 ```
 
-## Generate new launcher icons
+## Generate new native launcher icons
 
 ### Android
 
@@ -45,3 +45,17 @@ Go to the Assets -> AppIcon in xcode, and drag in the icons.
 ### web
 
 Use [this tool](https://realfavicongenerator.net/) to generate the icons. Then replace the icons in web/icons.
+
+## Generate new native splash screens
+
+### iOS, Android and web
+
+```sh
+flutter pub run flutter_native_splash:create
+```
+
+### Removing the splash screen
+
+```sh
+flutter pub run flutter_native_splash:remove
+```
