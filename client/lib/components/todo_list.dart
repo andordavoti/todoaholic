@@ -23,37 +23,43 @@ class TodoList extends StatelessWidget {
         stream: todoDao.getStream(appState.selectedDate),
         builder: (context, snapshot) {
           if (snapshot.hasError) {
-            return const Center(
-              child: Text('Something went wrong...'),
-            );
+            return noPastTasks
+                ? const Center(
+                    child: Text('Something went wrong...'),
+                  )
+                : const SizedBox.shrink();
           }
           if (!snapshot.hasData) {
-            return const Center(child: CircularProgressIndicator());
+            return noPastTasks
+                ? const Center(child: CircularProgressIndicator())
+                : const SizedBox.shrink();
           }
 
           if (snapshot.data!.docs.isEmpty) {
-            return Center(
-              child: Flex(
-                direction: Axis.vertical,
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Text(
-                    'Nothing for today',
-                    style: Theme.of(context).textTheme.headline2,
-                    textAlign: TextAlign.center,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 8),
-                    child: Text(
-                      'Add a new task by tapping the + button',
-                      style: Theme.of(context).textTheme.bodyText1,
-                      textAlign: TextAlign.center,
+            return noPastTasks
+                ? Center(
+                    child: Flex(
+                      direction: Axis.vertical,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Nothing for today',
+                          style: Theme.of(context).textTheme.headline2,
+                          textAlign: TextAlign.center,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 8),
+                          child: Text(
+                            'Add a new task by tapping the + button',
+                            style: Theme.of(context).textTheme.bodyText1,
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ],
                     ),
-                  ),
-                ],
-              ),
-            );
+                  )
+                : const SizedBox.shrink();
           }
           return _buildPresentList(context, snapshot.data!.docs);
         },
