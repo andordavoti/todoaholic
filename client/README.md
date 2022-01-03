@@ -28,8 +28,16 @@ Use [this app](https://apps.apple.com/us/app/icon-set-creator/id939343785), drag
 
 Then open the project in xcode with the following command:
 
+iOS
+
 ```sh
 open ios/Runner.xcworkspace
+```
+
+macOS
+
+```sh
+open macos/Runner.xcworkspace
 ```
 
 Go to the Assets -> AppIcon in xcode, and drag in the icons.
