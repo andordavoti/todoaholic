@@ -26,12 +26,20 @@ Build APK (for sideloading):
 flutter build apk --split-per-abi
 ```
 
-### **iOS**
+### **iOS & macOS**
 
 Open the project in xcode with the following command:
 
+**iOS**
+
 ```sh
 open ios/Runner.xcworkspace
+```
+
+**macOS**
+
+```sh
+open macos/Runner.xcworkspace
 ```
 
 Then in the menu bar, select `Product -> Archive`.
