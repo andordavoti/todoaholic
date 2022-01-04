@@ -11,4 +11,4 @@ PRODUCT_NAME = todoaholic
 PRODUCT_BUNDLE_IDENTIFIER = com.andordavoti.todoaholic
 
 // The copyright displayed in application information
-PRODUCT_COPYRIGHT = Copyright © 2021 com.andordavoti. All rights reserved.
+PRODUCT_COPYRIGHT = Copyright © 2022 com.andordavoti. All rights reserved.
