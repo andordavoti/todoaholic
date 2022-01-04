@@ -123,7 +123,7 @@ class _ManageTodoScreenState extends State<ManageTodoScreen> {
                       children: [
                         Text(
                           selectedDate != null
-                              ? DateFormat.yMMMd().format(selectedDate!)
+                              ? DateFormat('EEEE, MMMM d').format(selectedDate!)
                               : '',
                           style: Theme.of(context).textTheme.bodyText2,
                         ),

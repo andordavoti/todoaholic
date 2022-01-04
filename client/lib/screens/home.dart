@@ -107,7 +107,8 @@ class Home extends StatelessWidget {
                     appState.setSelectedDate(pickedDate);
                   }
                 },
-                child: Text(DateFormat.yMMMd().format(appState.selectedDate))),
+                child: Text(
+                    DateFormat('EEEE, MMMM d').format(appState.selectedDate))),
           ),
           leading: Padding(
               padding: const EdgeInsets.all(8.0),

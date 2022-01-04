@@ -80,7 +80,7 @@ class TimelineTodoList extends StatelessWidget {
       elements: snapshot!.map((doc) => Todo.fromSnapshot(doc)).toList(),
       groupBy: (element) => element.date.toString(),
       groupSeparatorBuilder: (groupByValue) => TodoListHeader(
-          title: DateFormat.yMMMd()
+          title: DateFormat('EEEE, MMMM d')
               .format((TimestampConverter.parseString(groupByValue)).toDate())),
       itemBuilder: (context, element) => _buildListItem(context, element),
     );
