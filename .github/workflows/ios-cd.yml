@@ -1,4 +1,5 @@
-name: IOS CD
+name: iOS CD
+
 on:
   push:
     branches: [master]
@@ -9,19 +10,29 @@ on:
   workflow_dispatch:
 
 jobs:
-  deploy:
-    name: Deploying to Testflight
+  deploy_ios:
+    name: Deploy beta build to TestFlight
     runs-on: macOS-latest
-
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v1
-
+      - name: Checkout code from ref
+        uses: actions/checkout@v2
+        # with:
+        #  ref: ${{ github.ref }}
+      # The flutter action needs java so include it
+      - uses: actions/setup-java@v1
+        with:
+          java-version: "12.x"
+      - name: Run Flutter tasks
+        uses: subosito/flutter-action@v1
+        with:
+          channel: "stable"
+      - run: cd client && flutter pub get
+      - run: cd client && flutter build ios --release --no-codesign
       - name: Deploy iOS Beta to TestFlight via Fastlane
         uses: maierj/fastlane-action@v1.4.0
         with:
           lane: closed_beta
-          working-directory: ./client/ios
+          subdirectory: client/ios
         env:
           APP_STORE_CONNECT_TEAM_ID: "${{ secrets.APP_STORE_CONNECT_TEAM_ID }}"
           DEVELOPER_APP_ID: "${{ secrets.DEVELOPER_APP_ID }}"
