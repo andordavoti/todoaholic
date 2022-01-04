@@ -5,11 +5,11 @@ import '../utils/datetime_extension.dart';
 import 'todo.dart';
 
 class TodoDao {
-  CollectionReference? collection = FirebaseFirestore.instance.collection(
-      "users/" + (FirebaseAuth.instance.currentUser!.uid) + "/todos");
-
   Future<void> save(Todo todo) async {
-    await collection?.add(todo.toJson());
+    CollectionReference? collection = FirebaseFirestore.instance.collection(
+        "users/" + (FirebaseAuth.instance.currentUser!.uid) + "/todos");
+
+    await collection.add(todo.toJson());
   }
 
   Future<void> update(Todo todo, String newText, DateTime newDate) async {
@@ -46,16 +46,19 @@ class TodoDao {
   }
 
   Stream<QuerySnapshot> getStream(DateTime selectedDate) {
+    CollectionReference? collection = FirebaseFirestore.instance.collection(
+        "users/" + (FirebaseAuth.instance.currentUser!.uid) + "/todos");
+
     final currentDate = DateTime.now().getDateOnly();
 
     if (selectedDate.isBefore(currentDate)) {
-      return collection!
+      return collection
           .where('date', isEqualTo: Timestamp.fromDate(selectedDate))
           .where('isDone', isEqualTo: true)
           .orderBy('order')
           .snapshots();
     } else {
-      return collection!
+      return collection
           .where('date', isEqualTo: Timestamp.fromDate(selectedDate))
           .orderBy('isDone')
           .orderBy('order')
@@ -64,7 +67,10 @@ class TodoDao {
   }
 
   Stream<QuerySnapshot> getUndonePastStream() {
-    return collection!
+    CollectionReference? collection = FirebaseFirestore.instance.collection(
+        "users/" + (FirebaseAuth.instance.currentUser!.uid) + "/todos");
+
+    return collection
         .where('isDone', isEqualTo: false)
         .where('date',
             isLessThan: Timestamp.fromDate(DateTime.now().getDateOnly()))
@@ -72,8 +78,11 @@ class TodoDao {
   }
 
   Stream<QuerySnapshot> getTimelineStream() {
+    CollectionReference? collection = FirebaseFirestore.instance.collection(
+        "users/" + (FirebaseAuth.instance.currentUser!.uid) + "/todos");
+
     final currentDate = DateTime.now().getDateOnly();
-    return collection!
+    return collection
         .where('date', isGreaterThanOrEqualTo: Timestamp.fromDate(currentDate))
         .orderBy('date')
         .orderBy('isDone')
