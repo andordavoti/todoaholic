@@ -18,6 +18,7 @@ jobs:
         uses: actions/checkout@v1
 
       - name: Deploy iOS Beta to TestFlight via Fastlane
+        working-directory: ./client/ios
         uses: maierj/fastlane-action@v1.4.0
         with:
           lane: closed_beta
