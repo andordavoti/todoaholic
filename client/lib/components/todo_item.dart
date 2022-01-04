@@ -92,9 +92,7 @@ class TodoItem extends StatelessWidget {
                 child: Icon(
                   todo.isDone ? Icons.delete : Icons.edit,
                   color: todo.isDone
-                      ? Theme.of(context)
-                          .floatingActionButtonTheme
-                          .backgroundColor
+                      ? Colors.white
                       : Theme.of(context)
                           .floatingActionButtonTheme
                           .foregroundColor,
