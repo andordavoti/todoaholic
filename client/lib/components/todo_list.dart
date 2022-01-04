@@ -61,14 +61,13 @@ class TodoList extends StatelessWidget {
                   )
                 : const SizedBox.shrink();
           }
-          return _buildPresentList(context, snapshot.data!.docs);
+          return _buildList(context, snapshot.data!.docs);
         },
       );
     });
   }
 
-  Widget _buildPresentList(
-      BuildContext context, List<DocumentSnapshot> snapshot) {
+  Widget _buildList(BuildContext context, List<DocumentSnapshot> snapshot) {
     final todoDao = Provider.of<TodoDao>(context, listen: false);
     return Column(
       children: [

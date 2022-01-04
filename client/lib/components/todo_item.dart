@@ -27,8 +27,6 @@ class TodoItem extends StatelessWidget {
           return 'Move to today';
         case TodoItemType.present:
           return 'Tommorrow';
-        case TodoItemType.pastTimeline:
-          return 'Move to today';
         case TodoItemType.timeline:
           return 'Next day';
       }
@@ -41,9 +39,6 @@ class TodoItem extends StatelessWidget {
           break;
         case TodoItemType.present:
           todoDao.swipeTomorrow(todo);
-          break;
-        case TodoItemType.pastTimeline:
-          todoDao.moveToToday(todo);
           break;
         case TodoItemType.timeline:
           todoDao.swipeTomorrow(todo);

@@ -42,7 +42,7 @@ class TimelineScreen extends StatelessWidget {
                     controller: _scrollController,
                     child: Column(
                       children: [
-                        const PastTodoList(type: TodoItemType.pastTimeline),
+                        const PastTodoList(type: TodoItemType.past),
                         TimelineTodoList(noPastTasks: false),
                       ],
                     ),
