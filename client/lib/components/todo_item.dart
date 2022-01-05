@@ -136,16 +136,18 @@ class TodoItem extends StatelessWidget {
             },
             child: Padding(
               padding: const EdgeInsets.all(16.0),
-              child: Flexible(
-                child: Text(
-                  todo.text,
-                  style: todo.isDone
-                      ? Theme.of(context)
-                          .textTheme
-                          .bodyText1!
-                          .copyWith(decoration: TextDecoration.lineThrough)
-                      : Theme.of(context).textTheme.bodyText2,
-                ),
+              child: Column(
+                children: [
+                  Text(
+                    todo.text,
+                    style: todo.isDone
+                        ? Theme.of(context)
+                            .textTheme
+                            .bodyText1!
+                            .copyWith(decoration: TextDecoration.lineThrough)
+                        : Theme.of(context).textTheme.bodyText2,
+                  ),
+                ],
               ),
             ),
           ),
