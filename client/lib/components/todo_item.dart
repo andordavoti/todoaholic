@@ -48,7 +48,6 @@ class TodoItem extends StatelessWidget {
 
     return Consumer<AppState>(builder: (context, appState, child) {
       return Container(
-        width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
           border: Border(
             bottom: BorderSide(
@@ -137,17 +136,18 @@ class TodoItem extends StatelessWidget {
             },
             child: Padding(
               padding: const EdgeInsets.all(16.0),
-              child: Column(
+              child: Row(
                 children: [
-                  Text(
-                    todo.text,
-                    style: todo.isDone
-                        ? Theme.of(context)
-                            .textTheme
-                            .bodyText1!
-                            .copyWith(decoration: TextDecoration.lineThrough)
-                        : Theme.of(context).textTheme.bodyText2,
-                    textAlign: TextAlign.left,
+                  Expanded(
+                    child: Text(
+                      todo.text,
+                      style: todo.isDone
+                          ? Theme.of(context)
+                              .textTheme
+                              .bodyText1!
+                              .copyWith(decoration: TextDecoration.lineThrough)
+                          : Theme.of(context).textTheme.bodyText2,
+                    ),
                   ),
                 ],
               ),
