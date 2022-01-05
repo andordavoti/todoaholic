@@ -3,6 +3,10 @@ name: Deploy web app to Firebase Hosting on merge
   push:
     branches:
       - master
+
+  # Allows you to run this workflow manually from the Actions a tab
+  workflow_dispatch:
+
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest

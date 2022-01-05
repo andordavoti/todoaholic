@@ -1,10 +1,8 @@
 name: Deploy iOS app to TestFlight on merge
-
-on:
+"on":
   push:
-    branches: [master]
-  pull_request:
-    branches: [master]
+    branches:
+      - master
 
   # Allows you to run this workflow manually from the Actions a tab
   workflow_dispatch:
