@@ -38,7 +38,7 @@ A minimalist open-source and free todo app for iOS, Android, macOS & web.
 (coming soon)
 
 ### web: 
-A [GitHub Action](https://github.com/features/actions) automatically builds the Flutter web app, and deploys it to [Firebase Hosting](https://firebase.google.com/docs/hosting) when there is a push to the master branch or a PR merge.
+A [GitHub Action](https://github.com/features/actions) automatically builds the Flutter web app, and deploys it to [Firebase Hosting](https://firebase.google.com/docs/hosting) when there is a push to the master branch or a PR merge. There is also a [GitHub Action](https://github.com/features/actions) that deploys a preview of the app for the PR for testing before you merge to master.
 
 ### Services used:
 - [Firebase Analytics](https://firebase.google.com/products/analytics)
