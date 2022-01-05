@@ -1,4 +1,4 @@
-name: Deploy to Firebase Hosting on merge
+name: Deploy web app to Firebase Hosting on merge
 "on":
   push:
     branches:

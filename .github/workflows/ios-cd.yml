@@ -1,4 +1,4 @@
-name: iOS CD
+name: Deploy iOS app to TestFlight on merge
 
 on:
   push:
