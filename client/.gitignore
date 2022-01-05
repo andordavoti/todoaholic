@@ -51,3 +51,6 @@ app.*.map.json
 # iOS build artifacts
 *.ipa
 *.zip
+
+# macOS build artifacts
+*.app
