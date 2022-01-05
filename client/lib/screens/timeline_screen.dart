@@ -21,11 +21,11 @@ class TimelineScreen extends StatelessWidget {
           HapticFeedback.selectionClick();
           Navigator.pop(context);
         }),
-        actions: [
+        actions: const [
           IconButton(
             color: Colors.transparent,
-            icon: const Icon(Icons.check),
-            onPressed: () {},
+            icon: SizedBox.shrink(),
+            onPressed: null,
           )
         ],
         title: const Align(
