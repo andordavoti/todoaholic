@@ -29,7 +29,7 @@ A minimalist open-source and free todo app for iOS, Android, macOS & web.
 ## Deployment (CI/CD pipeline)
 
 ### iOS:
-(coming soon)
+A [GitHub Action](https://github.com/features/actions) automatically builds the Flutter iOS app, and deploys it to TestFlight throught the App Store Connect API when there is a push to the master branch or a PR merge.
 
 ### Android:
 (coming soon)
