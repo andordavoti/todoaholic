@@ -1,4 +1,5 @@
 name: Deploy web app to Firebase Hosting on PR
+
 on:
   pull_request:
     paths:
