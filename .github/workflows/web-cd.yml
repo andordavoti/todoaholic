@@ -5,8 +5,6 @@ on:
       - master
     paths:
       - "client/**"
-    paths-ignore:
-      - "**/README.md"
 
   # Allows you to run this workflow manually from the Actions a tab
   workflow_dispatch:

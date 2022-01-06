@@ -4,8 +4,6 @@ on:
   pull_request:
     paths:
       - "client/**"
-    paths-ignore:
-      - "**/README.md"
 
 jobs:
   build_and_preview:
