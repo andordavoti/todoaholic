@@ -8,6 +8,8 @@ import 'package:todoaholic/components/timeline_todo_list.dart';
 import 'package:todoaholic/data/todo_dao.dart';
 import 'package:todoaholic/data/todo_item_type.dart';
 
+class BackIntent extends Intent {}
+
 class TimelineScreen extends StatelessWidget {
   const TimelineScreen({Key? key}) : super(key: key);
 
@@ -15,40 +17,54 @@ class TimelineScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final ScrollController _scrollController = ScrollController();
     final todoDao = Provider.of<TodoDao>(context, listen: false);
-    return Scaffold(
-      appBar: AppBar(
-        leading: BackButton(onPressed: () {
-          HapticFeedback.selectionClick();
-          Navigator.pop(context);
-        }),
-        actions: const [
-          IconButton(
-            color: Colors.transparent,
-            icon: SizedBox.shrink(),
-            onPressed: null,
-          )
-        ],
-        title: const Align(
-            alignment: Alignment.topCenter, child: Text('Timeline')),
+    return Shortcuts(
+      shortcuts: {
+        LogicalKeySet(LogicalKeyboardKey.escape): BackIntent(),
+      },
+      child: Actions(
+        actions: {
+          BackIntent: CallbackAction<BackIntent>(
+              onInvoke: (intent) => Navigator.pop(context)),
+        },
+        child: Focus(
+          autofocus: true,
+          child: Scaffold(
+            appBar: AppBar(
+              leading: BackButton(onPressed: () {
+                HapticFeedback.selectionClick();
+                Navigator.pop(context);
+              }),
+              actions: const [
+                IconButton(
+                  color: Colors.transparent,
+                  icon: SizedBox.shrink(),
+                  onPressed: null,
+                )
+              ],
+              title: const Align(
+                  alignment: Alignment.topCenter, child: Text('Timeline')),
+            ),
+            body: StreamBuilder<QuerySnapshot>(
+                stream: todoDao.getUndonePastStream(),
+                builder: (context, pastSnapshot) {
+                  final bool pastTasksExist = pastSnapshot.hasData &&
+                      pastSnapshot.data!.docs.isNotEmpty;
+                  return pastTasksExist
+                      ? SingleChildScrollView(
+                          physics: const BouncingScrollPhysics(),
+                          controller: _scrollController,
+                          child: Column(
+                            children: [
+                              const PastTodoList(type: TodoItemType.past),
+                              TimelineTodoList(noPastTasks: false),
+                            ],
+                          ),
+                        )
+                      : TimelineTodoList(noPastTasks: true);
+                }),
+          ),
+        ),
       ),
-      body: StreamBuilder<QuerySnapshot>(
-          stream: todoDao.getUndonePastStream(),
-          builder: (context, pastSnapshot) {
-            final bool pastTasksExist =
-                pastSnapshot.hasData && pastSnapshot.data!.docs.isNotEmpty;
-            return pastTasksExist
-                ? SingleChildScrollView(
-                    physics: const BouncingScrollPhysics(),
-                    controller: _scrollController,
-                    child: Column(
-                      children: [
-                        const PastTodoList(type: TodoItemType.past),
-                        TimelineTodoList(noPastTasks: false),
-                      ],
-                    ),
-                  )
-                : TimelineTodoList(noPastTasks: true);
-          }),
     );
   }
 }

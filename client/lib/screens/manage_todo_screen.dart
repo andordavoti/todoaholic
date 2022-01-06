@@ -10,6 +10,8 @@ import 'package:intl/intl.dart';
 import '../data/todo.dart';
 import '../utils/datetime_extension.dart';
 
+class BackIntent extends Intent {}
+
 class ManageTodoScreen extends StatefulWidget {
   final Todo? originalTodo;
 
@@ -82,74 +84,91 @@ class _ManageTodoScreenState extends State<ManageTodoScreen> {
     return StreamBuilder<QuerySnapshot>(
         stream: todoDao.getStream(selectedDate ?? DateTime.now().getDateOnly()),
         builder: (context, snapshot) {
-          return Scaffold(
-            appBar: AppBar(
-              leading: BackButton(onPressed: () {
-                HapticFeedback.selectionClick();
-                Navigator.pop(context);
-              }),
-              actions: [
-                IconButton(
-                  icon: const Icon(Icons.check),
-                  onPressed: () {
-                    submitAction(snapshot);
-                  },
-                )
-              ],
-              title: Text(
-                widget.originalTodo == null ? 'Add Task' : 'Edit Task',
-              ),
-            ),
-            body: Column(
-              children: [
-                Container(
-                  padding: const EdgeInsets.all(16),
-                  child: TextField(
-                    focusNode: textFocusNode,
-                    controller: _textController,
-                    onSubmitted: (_) {
-                      submitAction(snapshot);
-                    },
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      hintText: 'Enter task here',
+          return Shortcuts(
+            shortcuts: {
+              LogicalKeySet(LogicalKeyboardKey.escape): BackIntent(),
+            },
+            child: Actions(
+              actions: {
+                BackIntent: CallbackAction<BackIntent>(
+                    onInvoke: (intent) => Navigator.pop(context)),
+              },
+              child: Focus(
+                autofocus: true,
+                child: Scaffold(
+                  appBar: AppBar(
+                    leading: BackButton(onPressed: () {
+                      HapticFeedback.selectionClick();
+                      Navigator.pop(context);
+                    }),
+                    actions: [
+                      IconButton(
+                        icon: const Icon(Icons.check),
+                        onPressed: () {
+                          submitAction(snapshot);
+                        },
+                      )
+                    ],
+                    title: Text(
+                      widget.originalTodo == null ? 'Add Task' : 'Edit Task',
                     ),
                   ),
-                ),
-                Container(
-                    padding: const EdgeInsets.only(left: 25, right: 20),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          selectedDate != null
-                              ? DateFormat('EEEE, MMMM d').format(selectedDate!)
-                              : '',
-                          style: Theme.of(context).textTheme.bodyText2,
+                  body: Column(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(16),
+                        child: TextField(
+                          focusNode: textFocusNode,
+                          controller: _textController,
+                          onSubmitted: (_) {
+                            submitAction(snapshot);
+                          },
+                          decoration: const InputDecoration(
+                            border: OutlineInputBorder(),
+                            hintText: 'Enter task here',
+                          ),
                         ),
-                        IconButton(
-                            icon: const Icon(Icons.date_range),
-                            onPressed: () async {
-                              if (selectedDate != null) {
-                                final currentDate = DateTime.now();
+                      ),
+                      Container(
+                          padding: const EdgeInsets.only(left: 25, right: 20),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                selectedDate != null
+                                    ? DateFormat('EEEE, MMMM d')
+                                        .format(selectedDate!)
+                                    : '',
+                                style: Theme.of(context).textTheme.bodyText2,
+                              ),
+                              IconButton(
+                                  icon: const Icon(Icons.date_range),
+                                  onPressed: () async {
+                                    if (selectedDate != null) {
+                                      final currentDate = DateTime.now();
 
-                                final pickedDate = await showDatePicker(
-                                  context: context,
-                                  initialDate: selectedDate!,
-                                  firstDate: DateTime(currentDate.year - 5),
-                                  lastDate: DateTime(currentDate.year + 5),
-                                );
+                                      final pickedDate = await showDatePicker(
+                                        context: context,
+                                        initialDate: selectedDate!,
+                                        firstDate:
+                                            DateTime(currentDate.year - 5),
+                                        lastDate:
+                                            DateTime(currentDate.year + 5),
+                                      );
 
-                                if (pickedDate != null) {
-                                  setState(() {
-                                    selectedDate = pickedDate;
-                                  });
-                                }
-                              }
-                            }),
-                      ],
-                    )),
-              ],
+                                      if (pickedDate != null) {
+                                        setState(() {
+                                          selectedDate = pickedDate;
+                                        });
+                                      }
+                                    }
+                                  }),
+                            ],
+                          )),
+                    ],
+                  ),
+                ),
+              ),
             ),
           );
         });
