@@ -18,7 +18,6 @@ jobs:
       - run: cd client && flutter pub get
       # Build web app
       - run: cd client && flutter build web
-      - run: cd client && flutter build web
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: "${{ secrets.GITHUB_TOKEN }}"
