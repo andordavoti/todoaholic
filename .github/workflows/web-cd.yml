@@ -1,8 +1,12 @@
 name: Deploy web app to Firebase Hosting on merge
-"on":
+on:
   push:
     branches:
       - master
+    paths:
+      - "client/**"
+    paths-ignore:
+      - "**/README.md"
 
   # Allows you to run this workflow manually from the Actions a tab
   workflow_dispatch:

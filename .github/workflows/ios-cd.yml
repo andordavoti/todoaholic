@@ -3,6 +3,17 @@ name: Deploy iOS app to TestFlight on merge
   push:
     branches:
       - master
+    paths:
+      - "client/**"
+    paths-ignore:
+      - "**/README.md"
+  pull_request:
+    branches:
+      - master
+    paths:
+      - "client/**"
+    paths-ignore:
+      - "**/README.md"
 
   # Allows you to run this workflow manually from the Actions a tab
   workflow_dispatch:

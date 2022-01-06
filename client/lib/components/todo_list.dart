@@ -74,26 +74,28 @@ class TodoList extends StatelessWidget {
         noPastTasks
             ? const SizedBox.shrink()
             : const TodoListHeader(title: "Today's tasks"),
-        ReorderableListView(
-          onReorder: (int oldIndex, int newIndex) {
-            if (oldIndex < newIndex) {
-              newIndex -= 1;
-            }
+        Expanded(
+          child: ReorderableListView(
+            onReorder: (int oldIndex, int newIndex) {
+              if (oldIndex < newIndex) {
+                newIndex -= 1;
+              }
 
-            final todoMoved = Todo.fromSnapshot(snapshot.elementAt(oldIndex));
-            todoDao.setOrder(todoMoved, newIndex);
-          },
-          shrinkWrap: true,
-          scrollController: _scrollController,
-          physics: noPastTasks
-              ? const BouncingScrollPhysics()
-              : const NeverScrollableScrollPhysics(),
-          padding: EdgeInsets.only(
-              bottom: 56 +
-                  kFloatingActionButtonMargin * 2 +
-                  MediaQuery.of(context).padding.bottom),
-          children:
-              snapshot.map((data) => _buildListItem(context, data)).toList(),
+              final todoMoved = Todo.fromSnapshot(snapshot.elementAt(oldIndex));
+              todoDao.setOrder(todoMoved, newIndex);
+            },
+            shrinkWrap: true,
+            scrollController: _scrollController,
+            physics: noPastTasks
+                ? const BouncingScrollPhysics()
+                : const NeverScrollableScrollPhysics(),
+            padding: EdgeInsets.only(
+                bottom: 56 +
+                    kFloatingActionButtonMargin * 2 +
+                    MediaQuery.of(context).padding.bottom),
+            children:
+                snapshot.map((data) => _buildListItem(context, data)).toList(),
+          ),
         ),
       ],
     );

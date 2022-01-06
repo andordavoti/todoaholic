@@ -1,5 +1,11 @@
 name: Deploy web app to Firebase Hosting on PR
-"on": pull_request
+
+on:
+  pull_request:
+    paths:
+      - "client/**"
+    paths-ignore:
+      - "**/README.md"
 
 jobs:
   build_and_preview:
@@ -7,6 +13,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      # The flutter action needs java so include it
+      - uses: actions/setup-java@v1
+        with:
+          java-version: "12.x"
+      # Include the flutter action
+      - uses: subosito/flutter-action@v1
+        with:
+          channel: "stable"
+      # Get flutter packages
+      - run: cd client && flutter pub get
+      # Build web app
       - run: cd client && flutter build web
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:

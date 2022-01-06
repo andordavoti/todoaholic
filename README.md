@@ -11,6 +11,22 @@ A minimalist open-source and free todo app for iOS, Android, macOS & web.
 - macOS (coming soon)
 - web (PWA): [todoaholic.com](https://todoaholic.com/)
 
+## Features
+
+- Manage tasks cross-platform in real-time. No need to refresh the browser if you made a change through the mobile app. Everything syncs across all of your devices in real-time automatically.
+- Intuitive gestures to cross out, move, remove and edit tasks.
+  - Tap a task to cross it of your list
+  - Slide a task to the right to move it to the next day
+  - Slide an undone task to the left to edit it
+  - Slide a done task to the left to delete it
+- Task timeline. Get an overview of what you have going on in the coming days.
+- Offline support for the mobile and desktop apps.
+- Keyboard shortcuts for desktop and web:
+  - Navigate the day you are viewing on the home screen with the left and right arrow keys
+  - Press "A" or "+" on the home screen to quickly add a task
+  - Press "T" on the home screen to view the timeline
+  - Press "ESC" to go back
+
 ## Tech Stack
 
 ### Frontend:
@@ -22,8 +38,8 @@ A minimalist open-source and free todo app for iOS, Android, macOS & web.
 - Auth: [Firebase Auth](https://firebase.google.com/products/auth)
 - DB: [Firestore](https://firebase.google.com/products/firestore)
   - Composite indexes on collection ID "todos":
-    -     date Ascending, isDone Ascending, order Ascending
-    -     date Ascending, order Ascending, isDone Ascending
+    - date Ascending, isDone Ascending, order Ascending
+    - date Ascending, order Ascending, isDone Ascending
     - date Ascending, order Ascending, isDone Descending
     - isDone Ascending, date Ascending
 - [Firebase Cloud Functions](https://firebase.google.com/docs/functions)
