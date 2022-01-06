@@ -7,6 +7,8 @@ import 'package:todoaholic/data/todo_dao.dart';
 import 'package:todoaholic/data/todo_item_type.dart';
 import 'package:todoaholic/screens/manage_todo_screen.dart';
 
+import '../utils/datetime_extension.dart';
+
 class TodoItem extends StatelessWidget {
   final Todo todo;
   final TodoItemType type;
@@ -21,12 +23,16 @@ class TodoItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final todoDao = Provider.of<TodoDao>(context, listen: false);
 
-    String getSwipeNextTitle() {
+    String getSwipeNextTitle(DateTime selectedDate) {
       switch (type) {
         case TodoItemType.past:
           return 'Move to today';
         case TodoItemType.present:
-          return 'Tommorrow';
+          if (selectedDate.isAtSameMomentAs(DateTime.now().getDateOnly())) {
+            return 'Tommorrow';
+          } else {
+            return 'Next day';
+          }
         case TodoItemType.timeline:
           return 'Next day';
       }
@@ -107,7 +113,7 @@ class TodoItem extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.only(left: 16.0),
                 child: Row(children: [
-                  Text(getSwipeNextTitle(),
+                  Text(getSwipeNextTitle(appState.selectedDate),
                       style: Theme.of(context).textTheme.bodyText2!.copyWith(
                           color: Theme.of(context)
                               .floatingActionButtonTheme
