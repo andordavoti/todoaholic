@@ -1,61 +1,61 @@
 {
   "images" : [
     {
-      "filename" : "todoaholic-icon-16.png",
+      "filename" : "todoaholic-01-16.png",
       "idiom" : "mac",
       "scale" : "1x",
       "size" : "16x16"
     },
     {
-      "filename" : "todoaholic-icon-33.png",
+      "filename" : "todoaholic-01-33.png",
       "idiom" : "mac",
       "scale" : "2x",
       "size" : "16x16"
     },
     {
-      "filename" : "todoaholic-icon-32.png",
+      "filename" : "todoaholic-01-32.png",
       "idiom" : "mac",
       "scale" : "1x",
       "size" : "32x32"
     },
     {
-      "filename" : "todoaholic-icon-64.png",
+      "filename" : "todoaholic-01-64.png",
       "idiom" : "mac",
       "scale" : "2x",
       "size" : "32x32"
     },
     {
-      "filename" : "todoaholic-icon-128.png",
+      "filename" : "todoaholic-01-128.png",
       "idiom" : "mac",
       "scale" : "1x",
       "size" : "128x128"
     },
     {
-      "filename" : "todoaholic-icon-256.png",
+      "filename" : "todoaholic-01-257.png",
       "idiom" : "mac",
       "scale" : "2x",
       "size" : "128x128"
     },
     {
-      "filename" : "todoaholic-icon-257.png",
+      "filename" : "todoaholic-01-256.png",
       "idiom" : "mac",
       "scale" : "1x",
       "size" : "256x256"
     },
     {
-      "filename" : "todoaholic-icon-513.png",
+      "filename" : "todoaholic-01-513.png",
       "idiom" : "mac",
       "scale" : "2x",
       "size" : "256x256"
     },
     {
-      "filename" : "todoaholic-icon-512.png",
+      "filename" : "todoaholic-01-512.png",
       "idiom" : "mac",
       "scale" : "1x",
       "size" : "512x512"
     },
     {
-      "filename" : "todoaholic-icon-1024.png",
+      "filename" : "todoaholic-01-1025.png",
       "idiom" : "mac",
       "scale" : "2x",
       "size" : "512x512"

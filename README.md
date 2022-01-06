@@ -1,4 +1,4 @@
-<img src="resources/icon/todoaholic-icon.png" width="250" >
+<img src="resources/icon/todoaholic-icon-macos.png" width="250" >
 
 # todoaholic
 
