@@ -48,7 +48,11 @@ jobs:
         with:
           java-version: 12.x
       - name: Decrypt Android keys
-        run: sh ./.github/scripts/decrypt_android_keys.sh
+      - name: Run script file
+        run: |
+          chmod +x ./.github/scripts/decrypt_android_keys.sh
+          ./.github/scripts/decrypt_android_keys.sh
+        shell: bash
         env:
           ANDROID_KEYS_SECRET_PASSPHRASE: ${{ secrets.ANDROID_KEYS_SECRET_PASSPHRASE }}
       - name: Setup Flutter
