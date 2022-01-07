@@ -45,8 +45,13 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
-# Android Keystore
+# Android Credentials
+# Ignore Android keys
+key.properties
+service_account_key.json
+android_keys.zip
 *.jks
+android/app/google-services.json
 
 # iOS build artifacts
 *.ipa
