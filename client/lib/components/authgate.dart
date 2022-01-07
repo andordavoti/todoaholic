@@ -13,9 +13,14 @@ class AuthGate extends StatelessWidget {
         MediaQuery.of(context).platformBrightness == Brightness.dark;
 
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      statusBarColor: isDarkMode ? Colors.white : Colors.black,
-      statusBarBrightness: isDarkMode ? Brightness.dark : Brightness.light,
+      statusBarColor: Theme.of(context).primaryColor,
+      statusBarBrightness: isDarkMode ? Brightness.light : Brightness.dark,
+      systemNavigationBarColor:
+          Theme.of(context).primaryColor, // navigation bar color
+      systemNavigationBarIconBrightness:
+          isDarkMode ? Brightness.light : Brightness.dark,
     ));
+
     return StreamBuilder<User?>(
       stream: FirebaseAuth.instance.authStateChanges(),
       builder: (context, snapshot) {
