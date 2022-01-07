@@ -1,11 +1,6 @@
 name: Deploy iOS app to TestFlight on merge
-"on":
+on:
   push:
-    branches:
-      - master
-    paths:
-      - "client/**"
-  pull_request:
     branches:
       - master
     paths:
