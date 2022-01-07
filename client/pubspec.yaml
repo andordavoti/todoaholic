@@ -64,6 +64,9 @@ flutter_icons:
   ios: false
   android: true
   image_path: "../resources/icon/todoaholic-icon.png"
+  # Android spesific options
+  adaptive_icon_background: "#1c1c1c"
+  adaptive_icon_foreground: "../resources/icon/todoaholic-icon-android-adaptive.png"
 
 flutter_native_splash:
   # color or background_image is the only required parameter.  Use color to set the background
