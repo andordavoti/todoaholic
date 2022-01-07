@@ -48,7 +48,6 @@ jobs:
         with:
           java-version: 12.x
       - name: Decrypt Android keys
-      - name: Run script file
         run: |
           chmod +x ./.github/scripts/decrypt_android_keys.sh
           ./.github/scripts/decrypt_android_keys.sh
