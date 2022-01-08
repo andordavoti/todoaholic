@@ -53,7 +53,7 @@ A [GitHub Action](https://github.com/features/actions) automatically builds the 
 
 ### Android:
 
-(coming soon)
+A [GitHub Action](https://github.com/features/actions) automatically builds the Flutter Android app bundle, and deploys it to Google Play Store Internal Test Track with [Fastlane](https://fastlane.tools/), when there is a push to the master branch or a PR merge.
 
 ### macOS:
 
