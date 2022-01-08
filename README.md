@@ -7,7 +7,7 @@ A minimalist open-source and free todo app for iOS, Android, macOS & web.
 ## Get the app
 
 - iOS (coming soon)
-- Android (coming soon)
+- Android: [Google Play Store](https://play.google.com/store/apps/details?id=com.andordavoti.todoaholic)
 - macOS (coming soon)
 - web (PWA): [todoaholic.com](https://todoaholic.com/)
 
