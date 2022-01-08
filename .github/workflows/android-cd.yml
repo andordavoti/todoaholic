@@ -30,11 +30,11 @@ jobs:
         with:
           channel: "stable"
       - name: Install Flutter dependencies
-        run: flutter pub get
+        run: cd client && flutter pub get
       - name: Build the app bundle
-        run: flutter build appbundle
+        run: cd client && flutter build appbundle
       - name: Run Fastlane
         uses: maierj/fastlane-action@v1.4.0
         with:
           lane: internal
-          subdirectory: android
+          subdirectory: client/android
