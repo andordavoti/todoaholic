@@ -57,13 +57,13 @@ A [GitHub Action](https://github.com/features/actions) automatically builds the 
 
 ### macOS:
 
-(coming soon)
+Manual build and deployment through Xcode for now...
 
 ### web:
 
 A [GitHub Action](https://github.com/features/actions) automatically builds the Flutter web app, and deploys it to [Firebase Hosting](https://firebase.google.com/docs/hosting) when there is a push to the master branch or a PR merge. There is also a [GitHub Action](https://github.com/features/actions) that deploys a preview of the app for the PR for testing before you merge to master.
 
-### Services used:
+### Other services used:
 
 - [Firebase Analytics](https://firebase.google.com/products/analytics)
 - [Firebase Crashlytics](https://firebase.google.com/products/crashlytics)
