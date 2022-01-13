@@ -22,7 +22,7 @@ A minimalist open-source and free todo app for iOS, Android, macOS & web.
 - Task timeline. Get an overview of what you have going on in the coming days.
 - Offline support for the mobile and desktop apps.
 - Keyboard shortcuts for desktop and web:
-  - Navigate the day you are viewing on the home screen with the left and right arrow keys
+  - Navigate the day you are viewing on the home screen with the left and right arrow keys (current date with arrow down)
   - Press "A" or "+" on the home screen to quickly add a task
   - Press "T" on the home screen to view the timeline
   - Press "ESC" to go back
