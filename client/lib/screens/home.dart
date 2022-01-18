@@ -23,6 +23,8 @@ class NextDayIntent extends Intent {}
 
 class TimelineIntent extends Intent {}
 
+class ProfileIntent extends Intent {}
+
 class AddTaskIntent extends Intent {}
 
 class Home extends StatelessWidget {
@@ -50,6 +52,7 @@ class Home extends StatelessWidget {
           LogicalKeySet(LogicalKeyboardKey.arrowDown): CurrentDayIntent(),
           LogicalKeySet(LogicalKeyboardKey.arrowRight): NextDayIntent(),
           LogicalKeySet(LogicalKeyboardKey.keyT): TimelineIntent(),
+          LogicalKeySet(LogicalKeyboardKey.keyP): ProfileIntent(),
           LogicalKeySet(LogicalKeyboardKey.keyA): AddTaskIntent(),
           LogicalKeySet(LogicalKeyboardKey.add): AddTaskIntent(),
         },
@@ -64,6 +67,9 @@ class Home extends StatelessWidget {
             TimelineIntent: CallbackAction<TimelineIntent>(
                 onInvoke: (intent) => Navigator.pushReplacementNamed(
                     context, ScreenRoutes.timeline)),
+            ProfileIntent: CallbackAction<ProfileIntent>(
+                onInvoke: (intent) => Navigator.pushReplacementNamed(
+                    context, ScreenRoutes.profile)),
             AddTaskIntent: CallbackAction<AddTaskIntent>(
                 onInvoke: (intent) => Navigator.push(
                       context,
