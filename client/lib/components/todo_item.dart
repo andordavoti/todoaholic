@@ -87,7 +87,7 @@ class TodoItem extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => ManageTodoScreen(todo),
+                  builder: (context) => ManageTodoScreen(todo, type),
                 ),
               );
               return Future<bool?>.value(false);

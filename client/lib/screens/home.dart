@@ -71,7 +71,8 @@ class Home extends StatelessWidget {
                 onInvoke: (intent) => Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const ManageTodoScreen(null)),
+                          builder: (context) => const ManageTodoScreen(
+                              null, TodoItemType.present)),
                     )),
           },
           child: Focus(
@@ -122,8 +123,8 @@ class Home extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) =>
-                                    const ManageTodoScreen(null)),
+                                builder: (context) => const ManageTodoScreen(
+                                    null, TodoItemType.present)),
                           );
                         },
                         child: const Icon(Icons.add),

@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:todoaholic/components/app_drawer.dart';
 import 'package:todoaholic/components/custom_todo_list.dart';
 import 'package:todoaholic/data/app_state_provider.dart';
+import 'package:todoaholic/data/todo_item_type.dart';
 
 import 'manage_todo_screen.dart';
 
@@ -31,7 +32,8 @@ class CustomListScreen extends StatelessWidget {
                 onInvoke: (intent) => Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const ManageTodoScreen(null)),
+                          builder: (context) => const ManageTodoScreen(
+                              null, TodoItemType.custom)),
                     )),
             BackIntent: CallbackAction<BackIntent>(
                 onInvoke: (intent) => Navigator.pop(context)),
@@ -59,7 +61,8 @@ class CustomListScreen extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const ManageTodoScreen(null)),
+                            builder: (context) => const ManageTodoScreen(
+                                null, TodoItemType.custom)),
                       );
                     }
                   },

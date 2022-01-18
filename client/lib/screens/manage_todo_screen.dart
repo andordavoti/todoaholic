@@ -3,9 +3,11 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:todoaholic/data/app_state_provider.dart';
+import 'package:todoaholic/data/custom_list_dao.dart';
 import 'package:todoaholic/data/todo_dao.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
+import 'package:todoaholic/data/todo_item_type.dart';
 
 import '../data/todo.dart';
 import '../utils/datetime_extension.dart';
@@ -14,9 +16,11 @@ class BackIntent extends Intent {}
 
 class ManageTodoScreen extends StatefulWidget {
   final Todo? originalTodo;
+  final TodoItemType type;
 
   const ManageTodoScreen(
-    this.originalTodo, {
+    this.originalTodo,
+    this.type, {
     Key? key,
   }) : super(key: key);
 
@@ -55,29 +59,56 @@ class _ManageTodoScreenState extends State<ManageTodoScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final appState = Provider.of<AppState>(context, listen: false);
     final todoDao = Provider.of<TodoDao>(context, listen: false);
 
-    void submitAction(AsyncSnapshot<QuerySnapshot<Object?>> snapshot) {
+    void submitAction(AsyncSnapshot<QuerySnapshot<Object?>> snapshot) async {
       HapticFeedback.heavyImpact();
+      final list = appState.selectedList;
       final originalTodo = widget.originalTodo;
       final text = _textController.text;
 
-      if (originalTodo != null) {
-        if (text.isEmpty) {
-          todoDao.remove(originalTodo);
-        }
-        if (selectedDate != null) {
-          todoDao.update(originalTodo, text, selectedDate!);
-        }
-      } else if (text.isNotEmpty && selectedDate != null) {
-        todoDao.save(Todo(
-          text: text,
-          date: Timestamp.fromDate(selectedDate!),
-          isDone: false,
-          order: snapshot.data!.docs.length,
-        ));
-      }
+      // TODO: how do I know that it isn't a regular task?
+      // If it's a custom list
+      if (list != null && widget.type == TodoItemType.custom) {
+        final customListDao =
+            Provider.of<CustomListDao>(context, listen: false);
 
+        if (originalTodo != null) {
+          if (text.isEmpty) {
+            customListDao.remove(originalTodo);
+          }
+          if (selectedDate != null) {
+            customListDao.update(originalTodo, text, selectedDate!);
+          }
+        } else if (text.isNotEmpty && selectedDate != null) {
+          customListDao.save(
+              list,
+              Todo(
+                text: text,
+                date: Timestamp.fromDate(selectedDate!),
+                isDone: false,
+                order: 0,
+              ));
+        }
+      } else {
+        // If it's the regular list
+        if (originalTodo != null) {
+          if (text.isEmpty) {
+            todoDao.remove(originalTodo);
+          }
+          if (selectedDate != null) {
+            todoDao.update(originalTodo, text, selectedDate!);
+          }
+        } else if (text.isNotEmpty && selectedDate != null) {
+          todoDao.save(Todo(
+            text: text,
+            date: Timestamp.fromDate(selectedDate!),
+            isDone: false,
+            order: snapshot.data!.docs.length,
+          ));
+        }
+      }
       Navigator.pop(context);
     }
 
@@ -115,7 +146,7 @@ class _ManageTodoScreenState extends State<ManageTodoScreen> {
                   ),
                   body: Column(
                     children: [
-                      Container(
+                      Padding(
                         padding: const EdgeInsets.all(16),
                         child: TextField(
                           focusNode: textFocusNode,
@@ -129,7 +160,7 @@ class _ManageTodoScreenState extends State<ManageTodoScreen> {
                           ),
                         ),
                       ),
-                      Container(
+                      Padding(
                           padding: const EdgeInsets.only(left: 25, right: 20),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
