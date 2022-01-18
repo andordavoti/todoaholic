@@ -127,29 +127,35 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                     )),
                 Padding(
                   padding: const EdgeInsets.only(top: 16, bottom: 16),
-                  child: OutlinedButton.icon(
-                      icon: const Icon(Icons.email_outlined),
-                      onPressed: () {
-                        final Uri emailLaunchUri = Uri(
-                          scheme: 'mailto',
-                          path: 'contact@davotisolutions.com',
-                          query: encodeQueryParameters(<String, String>{
-                            'subject': 'Regarding todoaholic'
-                          }),
-                        );
+                  child: SizedBox(
+                    width: 275,
+                    child: OutlinedButton.icon(
+                        icon: const Icon(Icons.email_outlined),
+                        onPressed: () {
+                          final Uri emailLaunchUri = Uri(
+                            scheme: 'mailto',
+                            path: 'contact@davotisolutions.com',
+                            query: encodeQueryParameters(<String, String>{
+                              'subject': 'Regarding todoaholic'
+                            }),
+                          );
 
-                        launch(emailLaunchUri.toString());
-                      },
-                      label: const Text('Contact us')),
+                          launch(emailLaunchUri.toString());
+                        },
+                        label: const Text('Contact us')),
+                  ),
                 ),
                 Padding(
                     padding: const EdgeInsets.only(top: 8, bottom: 16),
-                    child: OutlinedButton.icon(
-                        onPressed: () {
-                          launch('https://github.com/andordavoti/todoaholic');
-                        },
-                        icon: const Icon(MdiIcons.github),
-                        label: const Text('Source-Code on GitHub'))),
+                    child: SizedBox(
+                      width: 275,
+                      child: OutlinedButton.icon(
+                          onPressed: () {
+                            launch('https://github.com/andordavoti/todoaholic');
+                          },
+                          icon: const Icon(MdiIcons.github),
+                          label: const Text('Source-Code on GitHub')),
+                    )),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
@@ -160,7 +166,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                 ),
                 const Padding(
                   padding: EdgeInsets.only(top: 16, bottom: 16),
-                  child: DeleteAccountButton(),
+                  child: SizedBox(width: 275, child: DeleteAccountButton()),
                 ),
               ],
             ),
