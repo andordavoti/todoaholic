@@ -2,15 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:provider/provider.dart';
+import 'package:todoaholic/components/app_drawer.dart';
 
 import 'package:todoaholic/components/past_todo_list.dart';
 import 'package:todoaholic/components/timeline_todo_list.dart';
 import 'package:todoaholic/data/todo_dao.dart';
 import 'package:todoaholic/data/todo_item_type.dart';
+import 'package:todoaholic/screens/screen_routes.dart';
 
-class BackIntent extends Intent {}
+class TasksIntent extends Intent {}
+
+class ProfileIntent extends Intent {}
 
 class TimelineScreen extends StatelessWidget {
+  static const String routeName = '/timeline';
+
   const TimelineScreen({Key? key}) : super(key: key);
 
   @override
@@ -19,21 +25,23 @@ class TimelineScreen extends StatelessWidget {
     final todoDao = Provider.of<TodoDao>(context, listen: false);
     return Shortcuts(
       shortcuts: {
-        LogicalKeySet(LogicalKeyboardKey.escape): BackIntent(),
+        LogicalKeySet(LogicalKeyboardKey.keyH): TasksIntent(),
+        LogicalKeySet(LogicalKeyboardKey.keyP): ProfileIntent(),
       },
       child: Actions(
         actions: {
-          BackIntent: CallbackAction<BackIntent>(
-              onInvoke: (intent) => Navigator.pop(context)),
+          TasksIntent: CallbackAction<TasksIntent>(
+              onInvoke: (intent) =>
+                  Navigator.pushReplacementNamed(context, ScreenRoutes.home)),
+          ProfileIntent: CallbackAction<ProfileIntent>(
+              onInvoke: (intent) => Navigator.pushReplacementNamed(
+                  context, ScreenRoutes.profile)),
         },
         child: Focus(
           autofocus: true,
           child: Scaffold(
+            drawer: const AppDrawer(),
             appBar: AppBar(
-              leading: BackButton(onPressed: () {
-                HapticFeedback.selectionClick();
-                Navigator.pop(context);
-              }),
               actions: const [
                 IconButton(
                   color: Colors.transparent,

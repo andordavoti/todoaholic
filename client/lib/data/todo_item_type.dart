@@ -1,1 +1,1 @@
-enum TodoItemType { past, present, timeline }
+enum TodoItemType { past, present, timeline, custom }

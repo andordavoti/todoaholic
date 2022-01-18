@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
+import 'package:todoaholic/components/app_drawer.dart';
 import 'package:todoaholic/components/date_navigation_buttons.dart';
 import 'package:todoaholic/components/past_todo_list.dart';
 import 'package:todoaholic/components/todo_list.dart';
@@ -8,8 +9,7 @@ import 'package:todoaholic/data/app_state_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:todoaholic/data/todo_dao.dart';
 import 'package:todoaholic/data/todo_item_type.dart';
-import 'package:todoaholic/screens/user_profile_screen.dart';
-import 'package:todoaholic/screens/timeline_screen.dart';
+import 'package:todoaholic/screens/screen_routes.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'manage_todo_screen.dart';
@@ -17,13 +17,19 @@ import '../utils/datetime_extension.dart';
 
 class PrevDayIntent extends Intent {}
 
+class CurrentDayIntent extends Intent {}
+
 class NextDayIntent extends Intent {}
 
 class TimelineIntent extends Intent {}
 
+class ProfileIntent extends Intent {}
+
 class AddTaskIntent extends Intent {}
 
 class Home extends StatelessWidget {
+  static const String routeName = '/home';
+
   final ScrollController _scrollController = ScrollController();
 
   Home({Key? key}) : super(key: key);
@@ -43,8 +49,10 @@ class Home extends StatelessWidget {
       return Shortcuts(
         shortcuts: {
           LogicalKeySet(LogicalKeyboardKey.arrowLeft): PrevDayIntent(),
+          LogicalKeySet(LogicalKeyboardKey.arrowDown): CurrentDayIntent(),
           LogicalKeySet(LogicalKeyboardKey.arrowRight): NextDayIntent(),
           LogicalKeySet(LogicalKeyboardKey.keyT): TimelineIntent(),
+          LogicalKeySet(LogicalKeyboardKey.keyP): ProfileIntent(),
           LogicalKeySet(LogicalKeyboardKey.keyA): AddTaskIntent(),
           LogicalKeySet(LogicalKeyboardKey.add): AddTaskIntent(),
         },
@@ -52,24 +60,28 @@ class Home extends StatelessWidget {
           actions: {
             PrevDayIntent:
                 CallbackAction<PrevDayIntent>(onInvoke: (intent) => prevDay()),
+            CurrentDayIntent: CallbackAction<CurrentDayIntent>(
+                onInvoke: (intent) => currentDay()),
             NextDayIntent:
                 CallbackAction<NextDayIntent>(onInvoke: (intent) => nextDay()),
             TimelineIntent: CallbackAction<TimelineIntent>(
-                onInvoke: (intent) => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const TimelineScreen()),
-                    )),
+                onInvoke: (intent) => Navigator.pushReplacementNamed(
+                    context, ScreenRoutes.timeline)),
+            ProfileIntent: CallbackAction<ProfileIntent>(
+                onInvoke: (intent) => Navigator.pushReplacementNamed(
+                    context, ScreenRoutes.profile)),
             AddTaskIntent: CallbackAction<AddTaskIntent>(
                 onInvoke: (intent) => Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const ManageTodoScreen(null)),
+                          builder: (context) => const ManageTodoScreen(
+                              null, TodoItemType.present)),
                     )),
           },
           child: Focus(
             autofocus: true,
             child: Scaffold(
+              drawer: const AppDrawer(),
               body: StreamBuilder<QuerySnapshot>(
                   stream: todoDao.getUndonePastStream(),
                   builder: (context, pastSnapshot) {
@@ -114,8 +126,8 @@ class Home extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) =>
-                                    const ManageTodoScreen(null)),
+                                builder: (context) => const ManageTodoScreen(
+                                    null, TodoItemType.present)),
                           );
                         },
                         child: const Icon(Icons.add),
@@ -147,38 +159,12 @@ class Home extends StatelessWidget {
                       child: Text(DateFormat('EEEE, MMMM d')
                           .format(appState.selectedDate))),
                 ),
-                leading: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: IconButton(
-                        icon: Icon(Icons.person_sharp,
-                            color:
-                                Theme.of(context).textTheme.bodyText2!.color),
-                        onPressed: () {
-                          HapticFeedback.selectionClick();
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    const UserProfileScreen()),
-                          );
-                        })),
-                actions: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: (IconButton(
-                        icon: Icon(Icons.timeline,
-                            color:
-                                Theme.of(context).textTheme.bodyText2!.color),
-                        onPressed: () {
-                          HapticFeedback.selectionClick();
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const TimelineScreen(),
-                            ),
-                          );
-                        })),
-                  ),
+                actions: const [
+                  IconButton(
+                    color: Colors.transparent,
+                    icon: SizedBox.shrink(),
+                    onPressed: null,
+                  )
                 ],
               ),
             ),

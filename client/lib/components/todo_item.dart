@@ -35,6 +35,8 @@ class TodoItem extends StatelessWidget {
           }
         case TodoItemType.timeline:
           return 'Next day';
+        case TodoItemType.custom:
+          return '';
       }
     }
 
@@ -48,6 +50,8 @@ class TodoItem extends StatelessWidget {
           break;
         case TodoItemType.timeline:
           todoDao.swipeTomorrow(todo);
+          break;
+        case TodoItemType.custom:
           break;
       }
     }
@@ -64,6 +68,9 @@ class TodoItem extends StatelessWidget {
         ),
         child: Dismissible(
           key: ObjectKey(todo),
+          direction: type == TodoItemType.custom
+              ? DismissDirection.endToStart
+              : DismissDirection.horizontal,
           onDismissed: (DismissDirection direction) {
             if (direction == DismissDirection.endToStart && todo.isDone) {
               HapticFeedback.mediumImpact();
@@ -80,7 +87,7 @@ class TodoItem extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => ManageTodoScreen(todo),
+                  builder: (context) => ManageTodoScreen(todo, type),
                 ),
               );
               return Future<bool?>.value(false);
