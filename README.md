@@ -27,6 +27,10 @@ A minimalist open-source and free todo app for iOS, Android, macOS & web.
   - Press "T" on the home screen to view the timeline
   - Press "ESC" to go back
 
+## Known issues
+
+- Reordering tasks is not working properly for now.
+
 ## Tech Stack
 
 ### Frontend:
