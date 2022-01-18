@@ -69,7 +69,7 @@ class MyApp extends StatelessWidget {
               ),
           ScreenRoutes.home: (context) => Home(),
           ScreenRoutes.timeline: (context) => const TimelineScreen(),
-          //  ScreenRoutes.customList: (context) => const CustomListScreen(),
+          ScreenRoutes.customList: (context) => const CustomListScreen(),
           ScreenRoutes.profile: (context) => const UserProfileScreen(),
         },
       ),
