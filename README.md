@@ -42,6 +42,7 @@ A minimalist open-source and free todo app for iOS, Android, macOS & web.
     - date Ascending, order Ascending, isDone Ascending
     - date Ascending, order Ascending, isDone Descending
     - isDone Ascending, date Ascending
+    - isDone Ascending order Ascending
 - [Firebase Cloud Functions](https://firebase.google.com/docs/functions)
   - Custom schedule function that runs once every week to check for users that have been inactive for three months and removes them. Their user data is then removed by this extension: [Firebase Delete User Data Extension](https://firebase.google.com/products/extensions/firebase-delete-user-data).
 
