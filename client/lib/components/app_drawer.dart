@@ -62,10 +62,10 @@ class AppDrawer extends StatelessWidget {
               ),
             ),
             ListTile(
-              leading: Icon(Icons.home,
+              leading: Icon(Icons.task_alt,
                   color: Theme.of(context).textTheme.bodyText2!.color),
               title: Text(
-                'Home',
+                'Tasks',
                 style: Theme.of(context).textTheme.bodyText2,
               ),
               onTap: () {
