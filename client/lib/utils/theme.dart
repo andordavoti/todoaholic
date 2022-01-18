@@ -75,6 +75,7 @@ class AppTheme {
   static ThemeData light() {
     return ThemeData(
       primaryColor: Colors.white,
+      colorScheme: const ColorScheme.light().copyWith(secondary: blackColor),
       fontFamily: GoogleFonts.exo2().fontFamily,
       brightness: Brightness.light,
       appBarTheme: const AppBarTheme(
@@ -137,6 +138,7 @@ class AppTheme {
   static ThemeData dark() {
     return ThemeData(
       primaryColor: blackColor,
+      colorScheme: const ColorScheme.dark().copyWith(secondary: Colors.white),
       scaffoldBackgroundColor: blackColor,
       fontFamily: GoogleFonts.exo2().fontFamily,
       brightness: Brightness.dark,
