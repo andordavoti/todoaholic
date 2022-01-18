@@ -94,14 +94,6 @@ class AppDrawer extends StatelessWidget {
               onTap: () {
                 HapticFeedback.selectionClick();
                 Navigator.pushReplacementNamed(context, ScreenRoutes.home);
-                // Navigator.pop(context);
-
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(
-                //     builder: (context) => const TimelineScreen(),
-                //   ),
-                // );
               },
             ),
             ListTile(
@@ -114,14 +106,6 @@ class AppDrawer extends StatelessWidget {
               onTap: () {
                 HapticFeedback.selectionClick();
                 Navigator.pushReplacementNamed(context, ScreenRoutes.timeline);
-                // Navigator.pop(context);
-
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(
-                //     builder: (context) => const TimelineScreen(),
-                //   ),
-                // );
               },
             ),
             ListTile(
@@ -134,13 +118,6 @@ class AppDrawer extends StatelessWidget {
               onTap: () {
                 HapticFeedback.selectionClick();
                 Navigator.pushReplacementNamed(context, ScreenRoutes.profile);
-                // Navigator.pop(context);
-                // HapticFeedback.selectionClick();
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(
-                //       builder: (context) => const UserProfileScreen()),
-                // );
               },
             ),
             const Divider(),
@@ -205,6 +182,7 @@ class AppDrawer extends StatelessWidget {
   }
 
   Widget _buildListItem(BuildContext context, DocumentSnapshot snapshot) {
+    final appState = Provider.of<AppState>(context, listen: false);
     final listsDao = Provider.of<ListsDao>(context, listen: false);
     final list = CustomList.fromSnapshot(snapshot);
     return Dismissible(
@@ -262,14 +240,9 @@ class AppDrawer extends StatelessWidget {
           key: ObjectKey(list),
           title: Text(list.name, style: Theme.of(context).textTheme.bodyText2),
           onTap: () {
-            Navigator.pop(context);
+            appState.setSelectedList(list);
             HapticFeedback.selectionClick();
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => CustomListScreen(list),
-              ),
-            );
+            Navigator.pushReplacementNamed(context, ScreenRoutes.customList);
           }),
     );
   }
