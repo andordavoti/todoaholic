@@ -5,8 +5,15 @@ import 'package:todoaholic/components/app_drawer.dart';
 import 'package:todoaholic/components/custom_todo_list.dart';
 import 'package:todoaholic/data/app_state_provider.dart';
 import 'package:todoaholic/data/todo_item_type.dart';
+import 'package:todoaholic/screens/screen_routes.dart';
 
 import 'manage_todo_screen.dart';
+
+class TasksIntent extends Intent {}
+
+class TimelineIntent extends Intent {}
+
+class ProfileIntent extends Intent {}
 
 class AddTaskIntent extends Intent {}
 
@@ -22,12 +29,24 @@ class CustomListScreen extends StatelessWidget {
     return Consumer<AppState>(builder: (context, appState, child) {
       return Shortcuts(
         shortcuts: {
+          LogicalKeySet(LogicalKeyboardKey.keyH): TasksIntent(),
+          LogicalKeySet(LogicalKeyboardKey.keyT): TimelineIntent(),
+          LogicalKeySet(LogicalKeyboardKey.keyP): ProfileIntent(),
           LogicalKeySet(LogicalKeyboardKey.keyA): AddTaskIntent(),
           LogicalKeySet(LogicalKeyboardKey.add): AddTaskIntent(),
           LogicalKeySet(LogicalKeyboardKey.escape): BackIntent(),
         },
         child: Actions(
           actions: {
+            TasksIntent: CallbackAction<TasksIntent>(
+                onInvoke: (intent) =>
+                    Navigator.pushReplacementNamed(context, ScreenRoutes.home)),
+            TimelineIntent: CallbackAction<TimelineIntent>(
+                onInvoke: (intent) => Navigator.pushReplacementNamed(
+                    context, ScreenRoutes.timeline)),
+            ProfileIntent: CallbackAction<ProfileIntent>(
+                onInvoke: (intent) => Navigator.pushReplacementNamed(
+                    context, ScreenRoutes.profile)),
             AddTaskIntent: CallbackAction<AddTaskIntent>(
                 onInvoke: (intent) => Navigator.push(
                       context,
@@ -35,8 +54,6 @@ class CustomListScreen extends StatelessWidget {
                           builder: (context) => const ManageTodoScreen(
                               null, TodoItemType.custom)),
                     )),
-            BackIntent: CallbackAction<BackIntent>(
-                onInvoke: (intent) => Navigator.pop(context)),
           },
           child: Focus(
             autofocus: true,
