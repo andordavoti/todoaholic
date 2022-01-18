@@ -68,7 +68,6 @@ class _ManageTodoScreenState extends State<ManageTodoScreen> {
       final originalTodo = widget.originalTodo;
       final text = _textController.text;
 
-      // TODO: how do I know that it isn't a regular task?
       // If it's a custom list
       if (list != null && widget.type == TodoItemType.custom) {
         final customListDao =
