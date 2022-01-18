@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:provider/provider.dart';
+import 'package:todoaholic/components/app_drawer.dart';
 
 import 'package:todoaholic/components/past_todo_list.dart';
 import 'package:todoaholic/components/timeline_todo_list.dart';
@@ -11,6 +12,8 @@ import 'package:todoaholic/data/todo_item_type.dart';
 class BackIntent extends Intent {}
 
 class TimelineScreen extends StatelessWidget {
+  static const String routeName = '/timeline';
+
   const TimelineScreen({Key? key}) : super(key: key);
 
   @override
@@ -29,11 +32,8 @@ class TimelineScreen extends StatelessWidget {
         child: Focus(
           autofocus: true,
           child: Scaffold(
+            drawer: const AppDrawer(),
             appBar: AppBar(
-              leading: BackButton(onPressed: () {
-                HapticFeedback.selectionClick();
-                Navigator.pop(context);
-              }),
               actions: const [
                 IconButton(
                   color: Colors.transparent,
