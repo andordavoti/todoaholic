@@ -4,10 +4,10 @@ import 'package:flutter/services.dart';
 import 'package:flutterfire_ui/auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:provider/provider.dart';
+import 'package:todoaholic/components/manage_custom_list_dialog.dart';
 import 'package:todoaholic/data/app_state_provider.dart';
 import 'package:todoaholic/data/custom_list.dart';
 import 'package:todoaholic/data/lists_dao.dart';
-import 'package:todoaholic/screens/custom_list_screen.dart';
 import 'package:todoaholic/screens/screen_routes.dart';
 
 class AppDrawer extends StatelessWidget {
@@ -36,29 +36,6 @@ class AppDrawer extends StatelessWidget {
       } else {
         return 'Good evening${_getFirstName().isNotEmpty ? ', ${_getFirstName()}!' : '!'}';
       }
-    }
-
-    // TODO: implement this dialog properly
-    _showSimpleModalDialog() {
-      showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return Dialog(
-              backgroundColor: Theme.of(context).backgroundColor,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16.0)),
-              child: Container(
-                constraints: const BoxConstraints(maxHeight: 350),
-                child: Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [Text('Hello')],
-                  ),
-                ),
-              ),
-            );
-          });
     }
 
     return Drawer(
@@ -128,15 +105,22 @@ class AppDrawer extends StatelessWidget {
               ),
             ),
             _buildList(context),
-            ListTile(
-                leading: Icon(Icons.add,
-                    color: Theme.of(context).textTheme.bodyText2!.color),
-                title: Text('Add new list',
-                    style: Theme.of(context).textTheme.bodyText2),
-                onTap: () {
-                  // TODO: show add modal here
-                  listsDao.save(CustomList(name: 'New list', order: 10));
-                }),
+            Padding(
+              padding: EdgeInsets.only(
+                  bottom: MediaQuery.of(context).padding.bottom),
+              child: ListTile(
+                  leading: Icon(Icons.add,
+                      color: Theme.of(context).textTheme.bodyText2!.color),
+                  title: Text('Add a new list',
+                      style: Theme.of(context).textTheme.bodyText2),
+                  onTap: () {
+                    showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return const ManageCustomListDialog(editList: null);
+                        });
+                  }),
+            ),
           ],
         );
       }),
@@ -187,44 +171,23 @@ class AppDrawer extends StatelessWidget {
     final list = CustomList.fromSnapshot(snapshot);
     return Dismissible(
       key: ObjectKey(list),
-      onDismissed: (DismissDirection direction) {
+      direction: DismissDirection.endToStart,
+      confirmDismiss: (DismissDirection direction) {
         if (direction == DismissDirection.endToStart) {
           HapticFeedback.mediumImpact();
-          listsDao.remove(list);
-        }
-        if (direction == DismissDirection.startToEnd) {
-          HapticFeedback.mediumImpact();
-          listsDao.update(list, 'New list name...');
-        }
-      },
-      confirmDismiss: (DismissDirection direction) {
-        if (direction == DismissDirection.startToEnd) {
-          HapticFeedback.mediumImpact();
-          // TODO: implement edit functionality
-          // Navigator.push(
-          //   context,
-          //   MaterialPageRoute(
-          //     builder: (context) => ManageTodoScreen(todo),
-          //   ),
-          // );
+          showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return ManageCustomListDialog(editList: list);
+              });
           return Future<bool?>.value(false);
         }
         return Future<bool?>.value(true);
       },
-      secondaryBackground: Container(
-        color: Colors.red,
-        child: const Align(
-          alignment: Alignment.centerRight,
-          child: Padding(
-            padding: EdgeInsets.only(right: 16.0),
-            child: Icon(Icons.delete, color: Colors.white),
-          ),
-        ),
-      ),
       background: Container(
         color: Theme.of(context).floatingActionButtonTheme.backgroundColor,
         child: Align(
-          alignment: Alignment.centerLeft,
+          alignment: Alignment.centerRight,
           child: Padding(
               padding: const EdgeInsets.only(left: 16.0),
               child: Padding(
