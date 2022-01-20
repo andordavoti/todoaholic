@@ -15,7 +15,6 @@ class AppDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final listsDao = Provider.of<ListsDao>(context, listen: false);
     final displayName = FirebaseAuth.instance.currentUser!.displayName;
 
     _getFirstName() {
@@ -167,7 +166,6 @@ class AppDrawer extends StatelessWidget {
 
   Widget _buildListItem(BuildContext context, DocumentSnapshot snapshot) {
     final appState = Provider.of<AppState>(context, listen: false);
-    final listsDao = Provider.of<ListsDao>(context, listen: false);
     final list = CustomList.fromSnapshot(snapshot);
     return Dismissible(
       key: ObjectKey(list),
