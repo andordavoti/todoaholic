@@ -4,6 +4,8 @@
 
 A minimalist open-source and free todo app for iOS, Android, macOS & web.
 
+<a href="https://www.buymeacoffee.com/andordavoti" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
+
 ## Get the app
 
 - iOS: [App Store](https://apps.apple.com/us/app/todoaholic/id1601535769)
