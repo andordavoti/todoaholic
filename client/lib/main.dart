@@ -1,5 +1,7 @@
+import 'dart:io' show Platform;
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:window_size/window_size.dart';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutterfire_ui/auth.dart';
@@ -21,6 +23,15 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+  try {
+    if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
+      setWindowMinSize(const Size(400, 300));
+      setWindowMaxSize(Size.infinite);
+    }
+    // ignore: empty_catches
+  } catch (e) {}
+
   runApp(const MyApp());
 }
 
