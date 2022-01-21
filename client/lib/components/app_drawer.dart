@@ -18,8 +18,8 @@ class AppDrawer extends StatelessWidget {
     final displayName = FirebaseAuth.instance.currentUser!.displayName;
 
     _getFirstName() {
-      List<String> wordList = displayName!.split(" ");
-      if (wordList.isNotEmpty) {
+      if (displayName != null) {
+        List<String> wordList = displayName.split(" ");
         return wordList[0];
       } else {
         return '';
