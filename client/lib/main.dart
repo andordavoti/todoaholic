@@ -38,6 +38,10 @@ void main() async {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
+  static final providerConfigs = [
+    const EmailProviderConfiguration(),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -74,9 +78,7 @@ class MyApp extends StatelessWidget {
                         .pushReplacementNamed(ScreenRoutes.home);
                   }),
                 ],
-                providerConfigs: const [
-                  EmailProviderConfiguration(),
-                ],
+                providerConfigs: providerConfigs,
               ),
           ScreenRoutes.home: (context) => Home(),
           ScreenRoutes.timeline: (context) => const TimelineScreen(),

@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:todoaholic/components/app_drawer.dart';
+import 'package:todoaholic/main.dart';
 import 'package:todoaholic/screens/screen_routes.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:touchable_opacity/touchable_opacity.dart';
@@ -105,10 +106,9 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                         padding: const EdgeInsets.only(top: 32),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
-                          children: const [
-                            LinkedProvidersRow(providerConfigs: [
-                              EmailProviderConfiguration(),
-                            ]),
+                          children: [
+                            LinkedProvidersRow(
+                                providerConfigs: MyApp.providerConfigs),
                           ],
                         ),
                       ),
