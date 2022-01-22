@@ -113,6 +113,7 @@ class AppDrawer extends StatelessWidget {
                   title: Text('Add a new list',
                       style: Theme.of(context).textTheme.bodyText2),
                   onTap: () {
+                    HapticFeedback.selectionClick();
                     showDialog(
                         context: context,
                         builder: (BuildContext context) {
