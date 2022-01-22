@@ -9,20 +9,14 @@ import 'package:provider/provider.dart';
 import 'package:todoaholic/data/app_state_provider.dart';
 import 'package:todoaholic/data/lists_dao.dart';
 import 'package:todoaholic/data/todo_dao.dart';
-import 'package:todoaholic/screens/custom_list_screen.dart';
-import 'package:todoaholic/screens/home.dart';
-import 'package:todoaholic/screens/screen_routes.dart';
-import 'package:todoaholic/screens/timeline_screen.dart';
-import 'package:todoaholic/screens/user_profile_screen.dart';
+import 'package:todoaholic/screens/routes.dart';
 import 'package:todoaholic/utils/theme.dart';
 import 'data/custom_list_dao.dart';
 import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   try {
     if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
@@ -62,30 +56,18 @@ class MyApp extends StatelessWidget {
           create: (_) => CustomListDao(),
         ),
       ],
-      child: MaterialApp(
-        title: 'todoaholic',
-        theme: AppTheme.light(),
-        darkTheme: AppTheme.dark(),
-        debugShowCheckedModeBanner: false,
-        initialRoute: FirebaseAuth.instance.currentUser == null
-            ? ScreenRoutes.auth
-            : ScreenRoutes.home,
-        routes: {
-          ScreenRoutes.auth: (context) => SignInScreen(
-                actions: [
-                  AuthStateChangeAction<SignedIn>((context, _) {
-                    Navigator.of(context)
-                        .pushReplacementNamed(ScreenRoutes.home);
-                  }),
-                ],
-                providerConfigs: providerConfigs,
-              ),
-          ScreenRoutes.home: (context) => Home(),
-          ScreenRoutes.timeline: (context) => const TimelineScreen(),
-          ScreenRoutes.customList: (context) => const CustomListScreen(),
-          ScreenRoutes.profile: (context) => const UserProfileScreen(),
-        },
-      ),
+      child: StreamBuilder<User?>(
+          stream: FirebaseAuth.instance.authStateChanges(),
+          builder: (context, snapshot) {
+            return MaterialApp(
+              title: 'todoaholic',
+              theme: AppTheme.light(),
+              darkTheme: AppTheme.dark(),
+              debugShowCheckedModeBanner: false,
+              initialRoute: !snapshot.hasData ? Routes.auth : Routes.home,
+              routes: Routes.appRoutes,
+            );
+          }),
     );
   }
 }

@@ -8,7 +8,7 @@ import 'package:todoaholic/components/manage_custom_list_dialog.dart';
 import 'package:todoaholic/data/app_state_provider.dart';
 import 'package:todoaholic/data/custom_list.dart';
 import 'package:todoaholic/data/lists_dao.dart';
-import 'package:todoaholic/screens/screen_routes.dart';
+import 'package:todoaholic/screens/routes.dart';
 
 class AppDrawer extends StatelessWidget {
   const AppDrawer({Key? key}) : super(key: key);
@@ -69,7 +69,7 @@ class AppDrawer extends StatelessWidget {
               ),
               onTap: () {
                 HapticFeedback.selectionClick();
-                Navigator.pushReplacementNamed(context, ScreenRoutes.home);
+                Navigator.pushReplacementNamed(context, Routes.home);
               },
             ),
             ListTile(
@@ -81,7 +81,7 @@ class AppDrawer extends StatelessWidget {
               ),
               onTap: () {
                 HapticFeedback.selectionClick();
-                Navigator.pushReplacementNamed(context, ScreenRoutes.timeline);
+                Navigator.pushReplacementNamed(context, Routes.timeline);
               },
             ),
             ListTile(
@@ -93,7 +93,7 @@ class AppDrawer extends StatelessWidget {
               ),
               onTap: () {
                 HapticFeedback.selectionClick();
-                Navigator.pushReplacementNamed(context, ScreenRoutes.profile);
+                Navigator.pushReplacementNamed(context, Routes.profile);
               },
             ),
             const Divider(),
@@ -203,7 +203,7 @@ class AppDrawer extends StatelessWidget {
           onTap: () {
             appState.setSelectedList(list);
             HapticFeedback.selectionClick();
-            Navigator.pushReplacementNamed(context, ScreenRoutes.customList);
+            Navigator.pushReplacementNamed(context, Routes.customList);
           }),
     );
   }

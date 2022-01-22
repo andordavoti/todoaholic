@@ -5,7 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:todoaholic/data/app_state_provider.dart';
 import 'package:todoaholic/data/lists_dao.dart';
 import 'package:todoaholic/data/custom_list.dart';
-import 'package:todoaholic/screens/screen_routes.dart';
+import 'package:todoaholic/screens/routes.dart';
 
 import 'manage_custom_list_dialog.dart';
 
@@ -97,7 +97,7 @@ class CustomLists extends StatelessWidget {
           onTap: () {
             appState.setSelectedList(list);
             HapticFeedback.selectionClick();
-            Navigator.pushReplacementNamed(context, ScreenRoutes.customList);
+            Navigator.pushReplacementNamed(context, Routes.customList);
           }),
     );
   }
