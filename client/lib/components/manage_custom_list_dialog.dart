@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:todoaholic/data/custom_list.dart';
 import 'package:todoaholic/data/lists_dao.dart';
@@ -42,6 +43,7 @@ class _ManageCustomListDialogState extends State<ManageCustomListDialog> {
     final editList = widget.editList;
 
     void onSubmit() async {
+      HapticFeedback.heavyImpact();
       final text = _textController.text.trim();
 
       if (editList != null) {
@@ -78,6 +80,7 @@ class _ManageCustomListDialogState extends State<ManageCustomListDialog> {
             ? OutlinedButton(
                 child: const Text("Remove"),
                 onPressed: () {
+                  HapticFeedback.heavyImpact();
                   listsDao.remove(editList);
                   Navigator.of(context).pop(null);
                 },

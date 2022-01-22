@@ -5,7 +5,7 @@ import 'package:todoaholic/components/app_drawer.dart';
 import 'package:todoaholic/components/custom_todo_list.dart';
 import 'package:todoaholic/data/app_state_provider.dart';
 import 'package:todoaholic/data/todo_item_type.dart';
-import 'package:todoaholic/screens/screen_routes.dart';
+import 'package:todoaholic/screens/routes.dart';
 
 import 'manage_todo_screen.dart';
 
@@ -40,13 +40,13 @@ class CustomListScreen extends StatelessWidget {
           actions: {
             TasksIntent: CallbackAction<TasksIntent>(
                 onInvoke: (intent) =>
-                    Navigator.pushReplacementNamed(context, ScreenRoutes.home)),
+                    Navigator.pushReplacementNamed(context, Routes.home)),
             TimelineIntent: CallbackAction<TimelineIntent>(
-                onInvoke: (intent) => Navigator.pushReplacementNamed(
-                    context, ScreenRoutes.timeline)),
+                onInvoke: (intent) =>
+                    Navigator.pushReplacementNamed(context, Routes.timeline)),
             ProfileIntent: CallbackAction<ProfileIntent>(
-                onInvoke: (intent) => Navigator.pushReplacementNamed(
-                    context, ScreenRoutes.profile)),
+                onInvoke: (intent) =>
+                    Navigator.pushReplacementNamed(context, Routes.profile)),
             AddTaskIntent: CallbackAction<AddTaskIntent>(
                 onInvoke: (intent) => Navigator.push(
                       context,

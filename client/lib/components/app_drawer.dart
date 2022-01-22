@@ -8,19 +8,18 @@ import 'package:todoaholic/components/manage_custom_list_dialog.dart';
 import 'package:todoaholic/data/app_state_provider.dart';
 import 'package:todoaholic/data/custom_list.dart';
 import 'package:todoaholic/data/lists_dao.dart';
-import 'package:todoaholic/screens/screen_routes.dart';
+import 'package:todoaholic/screens/routes.dart';
 
 class AppDrawer extends StatelessWidget {
   const AppDrawer({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final listsDao = Provider.of<ListsDao>(context, listen: false);
     final displayName = FirebaseAuth.instance.currentUser!.displayName;
 
     _getFirstName() {
-      List<String> wordList = displayName!.split(" ");
-      if (wordList.isNotEmpty) {
+      if (displayName != null) {
+        List<String> wordList = displayName.split(" ");
         return wordList[0];
       } else {
         return '';
@@ -70,7 +69,7 @@ class AppDrawer extends StatelessWidget {
               ),
               onTap: () {
                 HapticFeedback.selectionClick();
-                Navigator.pushReplacementNamed(context, ScreenRoutes.home);
+                Navigator.pushReplacementNamed(context, Routes.home);
               },
             ),
             ListTile(
@@ -82,7 +81,7 @@ class AppDrawer extends StatelessWidget {
               ),
               onTap: () {
                 HapticFeedback.selectionClick();
-                Navigator.pushReplacementNamed(context, ScreenRoutes.timeline);
+                Navigator.pushReplacementNamed(context, Routes.timeline);
               },
             ),
             ListTile(
@@ -94,7 +93,7 @@ class AppDrawer extends StatelessWidget {
               ),
               onTap: () {
                 HapticFeedback.selectionClick();
-                Navigator.pushReplacementNamed(context, ScreenRoutes.profile);
+                Navigator.pushReplacementNamed(context, Routes.profile);
               },
             ),
             const Divider(),
@@ -114,6 +113,7 @@ class AppDrawer extends StatelessWidget {
                   title: Text('Add a new list',
                       style: Theme.of(context).textTheme.bodyText2),
                   onTap: () {
+                    HapticFeedback.selectionClick();
                     showDialog(
                         context: context,
                         builder: (BuildContext context) {
@@ -167,7 +167,6 @@ class AppDrawer extends StatelessWidget {
 
   Widget _buildListItem(BuildContext context, DocumentSnapshot snapshot) {
     final appState = Provider.of<AppState>(context, listen: false);
-    final listsDao = Provider.of<ListsDao>(context, listen: false);
     final list = CustomList.fromSnapshot(snapshot);
     return Dismissible(
       key: ObjectKey(list),
@@ -205,7 +204,7 @@ class AppDrawer extends StatelessWidget {
           onTap: () {
             appState.setSelectedList(list);
             HapticFeedback.selectionClick();
-            Navigator.pushReplacementNamed(context, ScreenRoutes.customList);
+            Navigator.pushReplacementNamed(context, Routes.customList);
           }),
     );
   }
