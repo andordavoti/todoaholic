@@ -140,7 +140,9 @@ class _ManageTodoScreenState extends State<ManageTodoScreen> {
                       )
                     ],
                     title: Text(
-                      widget.originalTodo == null ? 'Add Task' : 'Edit Task',
+                      widget.originalTodo == null
+                          ? 'Add${widget.type == TodoItemType.custom ? '' : ' Task'}'
+                          : 'Edit${widget.type == TodoItemType.custom ? '' : ' Task'}',
                     ),
                   ),
                   body: Column(
