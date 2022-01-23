@@ -1,5 +1,4 @@
 import 'dart:io' show Platform;
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:window_size/window_size.dart';
 
@@ -56,18 +55,14 @@ class MyApp extends StatelessWidget {
           create: (_) => CustomListDao(),
         ),
       ],
-      child: StreamBuilder<User?>(
-          stream: FirebaseAuth.instance.authStateChanges(),
-          builder: (context, snapshot) {
-            return MaterialApp(
-              title: 'todoaholic',
-              theme: AppTheme.light(),
-              darkTheme: AppTheme.dark(),
-              debugShowCheckedModeBanner: false,
-              initialRoute: !snapshot.hasData ? Routes.auth : Routes.home,
-              routes: Routes.appRoutes,
-            );
-          }),
+      child: MaterialApp(
+        title: 'todoaholic',
+        theme: AppTheme.light(),
+        darkTheme: AppTheme.dark(),
+        debugShowCheckedModeBanner: false,
+        initialRoute: Routes.home,
+        routes: Routes.appRoutes,
+      ),
     );
   }
 }
