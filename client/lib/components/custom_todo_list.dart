@@ -59,7 +59,28 @@ class CustomTodoList extends StatelessWidget {
           },
         );
       } else {
-        return const Center(child: CircularProgressIndicator());
+        return Center(
+          child: Flex(
+            direction: Axis.vertical,
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                'No list selected',
+                style: Theme.of(context).textTheme.headline2,
+                textAlign: TextAlign.center,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 8),
+                child: Text(
+                  'Please select a list from the drawer',
+                  style: Theme.of(context).textTheme.bodyText1,
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ],
+          ),
+        );
       }
     });
   }

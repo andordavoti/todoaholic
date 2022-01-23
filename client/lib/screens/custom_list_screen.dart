@@ -69,7 +69,8 @@ class CustomListScreen extends StatelessWidget {
                   ],
                   title: Align(
                       alignment: Alignment.topCenter,
-                      child: Text(appState.selectedList?.name ?? "")),
+                      child: Text(
+                          appState.selectedList?.name ?? "No list selected")),
                 ),
                 floatingActionButton: FloatingActionButton(
                   onPressed: () {
