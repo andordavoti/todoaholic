@@ -60,7 +60,7 @@ class MyApp extends StatelessWidget {
         theme: AppTheme.light(),
         darkTheme: AppTheme.dark(),
         debugShowCheckedModeBanner: false,
-        initialRoute: Routes.authGate,
+        initialRoute: Routes.home,
         routes: Routes.appRoutes,
       ),
     );
