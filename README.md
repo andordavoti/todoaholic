@@ -10,7 +10,9 @@ A minimalist open-source and free todo app for iOS, Android, macOS & web.
 
 - iOS: [App Store](https://apps.apple.com/us/app/todoaholic/id1601535769)
 - Android: [Google Play Store](https://play.google.com/store/apps/details?id=com.andordavoti.todoaholic)
-- macOS only in TestFlight for now
+- macOS: only in TestFlight for now
+- Windows: see future plans section
+- Linux: see future plans section
 - web (PWA): [todoaholic.com](https://todoaholic.com/)
 
 ## Features
@@ -31,6 +33,13 @@ A minimalist open-source and free todo app for iOS, Android, macOS & web.
   - Press "H" to go "home" and view your current tasks
   - Press "T" to view the timeline
   - Press "P" to view your profile
+
+## Future plans
+
+- Support Windows & Linux (will be added when FlutterFire is supported on the platforms: [FlutterFire Desktop](https://github.com/invertase/flutterfire_desktop))
+- Calendar integration
+- Recurring tasks (tasks that repeat every day, week or month)
+- Sign in with Apple, Google, GitHub, etc.
 
 ## Known issues
 
