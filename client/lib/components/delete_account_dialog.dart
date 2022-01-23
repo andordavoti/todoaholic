@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:todoaholic/screens/routes.dart';
 
 class DeleteAccountDialog extends StatelessWidget {
   const DeleteAccountDialog({Key? key}) : super(key: key);
@@ -26,8 +25,8 @@ class DeleteAccountDialog extends StatelessWidget {
           ),
           onPressed: () async {
             HapticFeedback.heavyImpact();
-            Navigator.pushReplacementNamed(context, Routes.auth);
             FirebaseAuth.instance.currentUser?.delete();
+            Navigator.of(context).pop();
           },
           icon: const Icon(Icons.delete),
           label: const Text('Delete account'),

@@ -90,11 +90,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                                           .textTheme
                                           .bodyText2!
                                           .color),
-                                  onPressed: () {
-                                    Navigator.pushReplacementNamed(
-                                        context, Routes.auth);
-                                    FirebaseAuth.instance.signOut();
-                                  },
+                                  onPressed: FirebaseAuth.instance.signOut,
                                 )),
                               ),
                             ],
