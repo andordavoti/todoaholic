@@ -254,35 +254,34 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                                                   label: const Text(
                                                       'Source-Code on GitHub')),
                                             )),
-                                        Padding(
-                                          padding: const EdgeInsets.only(
-                                              top: 8, bottom: 16),
-                                          child: SizedBox(
-                                            width: 275,
-                                            child: OutlinedButton.icon(
-                                                onPressed: () {
-                                                  launch(
-                                                      'https://www.buymeacoffee.com/andordavoti');
-                                                },
-                                                icon: const Icon(
-                                                    MdiIcons.beerOutline),
-                                                label: const Text(
-                                                    'Buy me a beer')),
-                                          ),
-                                        ),
                                         kIsWeb
                                             ? Padding(
-                                                padding:
-                                                    const EdgeInsets.all(8.0),
-                                                child: Text(
-                                                  "Version: ${packageInfo?.version ?? ''}",
-                                                  style: Theme.of(context)
-                                                      .textTheme
-                                                      .bodyText1,
-                                                  textAlign: TextAlign.center,
+                                                padding: const EdgeInsets.only(
+                                                    top: 8, bottom: 16),
+                                                child: SizedBox(
+                                                  width: 275,
+                                                  child: OutlinedButton.icon(
+                                                      onPressed: () {
+                                                        launch(
+                                                            'https://www.buymeacoffee.com/andordavoti');
+                                                      },
+                                                      icon: const Icon(
+                                                          MdiIcons.beerOutline),
+                                                      label: const Text(
+                                                          'Buy me a beer')),
                                                 ),
                                               )
                                             : const SizedBox.shrink(),
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Text(
+                                            "Version: ${packageInfo?.version ?? ''}",
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .bodyText1,
+                                            textAlign: TextAlign.center,
+                                          ),
+                                        ),
                                         Padding(
                                           padding: const EdgeInsets.only(
                                               top: 8, bottom: 16),
