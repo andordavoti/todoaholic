@@ -50,6 +50,9 @@ dependencies:
     git:
       url: git://github.com/google/flutter-desktop-embedding.git
       path: plugins/window_size
+  device_calendar: ^4.1.0
+  flutter_native_timezone: ^2.0.0
+  flutter_hooks: ^0.18.2+1
 
 dev_dependencies:
   # The "flutter_lints" package below contains a set of recommended lints to
