@@ -12,7 +12,7 @@ class Routes {
   static const String customList = CustomListScreen.routeName;
 
   static Map<String, Widget Function(BuildContext)> appRoutes = {
-    Routes.home: (context) => Home(),
+    Routes.home: (context) => const Home(),
     Routes.timeline: (context) => const TimelineScreen(),
     Routes.customList: (context) => const CustomListScreen(),
     Routes.profile: (context) => const UserProfileScreen(),

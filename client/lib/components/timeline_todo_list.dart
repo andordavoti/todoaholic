@@ -12,10 +12,10 @@ import 'package:intl/intl.dart';
 import 'package:todoaholic/utils/timestamp_converter.dart';
 
 class TimelineTodoList extends StatelessWidget {
-  final ScrollController _scrollController = ScrollController();
   final bool noPastTasks;
 
-  TimelineTodoList({Key? key, required this.noPastTasks}) : super(key: key);
+  const TimelineTodoList({Key? key, required this.noPastTasks})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -73,10 +73,7 @@ class TimelineTodoList extends StatelessWidget {
   Widget _buildList(BuildContext context, List<DocumentSnapshot>? snapshot) {
     return GroupedListView<Todo, String>(
       shrinkWrap: true,
-      physics: noPastTasks
-          ? const BouncingScrollPhysics()
-          : const NeverScrollableScrollPhysics(),
-      controller: _scrollController,
+      physics: noPastTasks ? null : const NeverScrollableScrollPhysics(),
       elements: snapshot!.map((doc) => Todo.fromSnapshot(doc)).toList(),
       groupBy: (element) => element.date.toString(),
       groupSeparatorBuilder: (groupByValue) => TodoListHeader(

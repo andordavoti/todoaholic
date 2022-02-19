@@ -24,7 +24,6 @@ class TimelineScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ScrollController _scrollController = ScrollController();
     final todoDao = Provider.of<TodoDao>(context, listen: false);
     return StreamBuilder<User?>(
         stream: FirebaseAuth.instance.authStateChanges(),
@@ -69,12 +68,9 @@ class TimelineScreen extends StatelessWidget {
                                       pastSnapshot.data!.docs.isNotEmpty;
                               return pastTasksExist
                                   ? SingleChildScrollView(
-                                      physics: const BouncingScrollPhysics(),
-                                      controller: _scrollController,
                                       child: Column(
-                                        children: [
-                                          const PastTodoList(
-                                              type: TodoItemType.past),
+                                        children: const [
+                                          PastTodoList(type: TodoItemType.past),
                                           TimelineTodoList(noPastTasks: false),
                                         ],
                                       ),

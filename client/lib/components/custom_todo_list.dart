@@ -9,9 +9,7 @@ import 'package:provider/provider.dart';
 import 'package:todoaholic/data/todo_item_type.dart';
 
 class CustomTodoList extends StatelessWidget {
-  final ScrollController _scrollController = ScrollController();
-
-  CustomTodoList({Key? key}) : super(key: key);
+  const CustomTodoList({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -97,8 +95,6 @@ class CustomTodoList extends StatelessWidget {
         todoDao.setOrder(todoMoved, newIndex);
       },
       shrinkWrap: true,
-      scrollController: _scrollController,
-      physics: const BouncingScrollPhysics(),
       padding: EdgeInsets.only(
           bottom: 56 +
               kFloatingActionButtonMargin * 2 +
