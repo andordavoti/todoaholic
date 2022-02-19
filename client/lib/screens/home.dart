@@ -11,7 +11,6 @@ import 'package:provider/provider.dart';
 import 'package:todoaholic/data/todo_dao.dart';
 import 'package:todoaholic/data/todo_item_type.dart';
 import 'package:todoaholic/screens/routes.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'auth_screen.dart';
 import 'manage_todo_screen.dart';
@@ -32,9 +31,7 @@ class AddTaskIntent extends Intent {}
 class Home extends StatelessWidget {
   static const String routeName = '/home';
 
-  final ScrollController _scrollController = ScrollController();
-
-  Home({Key? key}) : super(key: key);
+  const Home({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -95,30 +92,19 @@ class Home extends StatelessWidget {
                         autofocus: true,
                         child: Scaffold(
                           drawer: const AppDrawer(),
-                          body: StreamBuilder<QuerySnapshot>(
-                              stream: todoDao.getUndonePastStream(),
-                              builder: (context, pastSnapshot) {
-                                final bool pastTasksExist =
-                                    pastSnapshot.hasData &&
-                                        pastSnapshot.data!.docs.isNotEmpty;
-
-                                return appState.selectedDate == currentDate &&
-                                        pastTasksExist
-                                    ? SingleChildScrollView(
-                                        physics: const BouncingScrollPhysics(),
-                                        controller: _scrollController,
-                                        child: Column(
-                                          children: [
-                                            const PastTodoList(
-                                                type: TodoItemType.past),
-                                            TodoList(noPastTasks: false),
-                                          ],
-                                        ),
-                                      )
-                                    : TodoList(
-                                        noPastTasks: true,
-                                      );
-                              }),
+                          body: SingleChildScrollView(
+                            child: Column(
+                              children: [
+                                appState.selectedDate == currentDate
+                                    ? const PastTodoList(
+                                        type: TodoItemType.past)
+                                    : const SizedBox.shrink(),
+                                TodoList(
+                                    noPastTasks:
+                                        appState.selectedDate != currentDate),
+                              ],
+                            ),
+                          ),
                           resizeToAvoidBottomInset: false,
                           floatingActionButton: Padding(
                             padding: const EdgeInsets.only(left: 20, right: 20),

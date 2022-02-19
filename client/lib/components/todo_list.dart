@@ -9,10 +9,9 @@ import 'package:provider/provider.dart';
 import 'package:todoaholic/data/todo_item_type.dart';
 
 class TodoList extends StatelessWidget {
-  final ScrollController _scrollController = ScrollController();
   final bool noPastTasks;
 
-  TodoList({Key? key, required this.noPastTasks}) : super(key: key);
+  const TodoList({Key? key, required this.noPastTasks}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -69,35 +68,25 @@ class TodoList extends StatelessWidget {
 
   Widget _buildList(BuildContext context, List<DocumentSnapshot> snapshot) {
     final todoDao = Provider.of<TodoDao>(context, listen: false);
-    return Column(
-      children: [
-        noPastTasks
-            ? const SizedBox.shrink()
-            : const TodoListHeader(title: "Today's tasks"),
-        Expanded(
-          child: ReorderableListView(
-            onReorder: (int oldIndex, int newIndex) {
-              if (oldIndex < newIndex) {
-                newIndex -= 1;
-              }
+    return ReorderableListView(
+      onReorder: (int oldIndex, int newIndex) {
+        if (oldIndex < newIndex) {
+          newIndex -= 1;
+        }
 
-              final todoMoved = Todo.fromSnapshot(snapshot.elementAt(oldIndex));
-              todoDao.setOrder(todoMoved, newIndex);
-            },
-            shrinkWrap: true,
-            scrollController: _scrollController,
-            physics: noPastTasks
-                ? const BouncingScrollPhysics()
-                : const NeverScrollableScrollPhysics(),
-            padding: EdgeInsets.only(
-                bottom: 56 +
-                    kFloatingActionButtonMargin * 2 +
-                    MediaQuery.of(context).padding.bottom),
-            children:
-                snapshot.map((data) => _buildListItem(context, data)).toList(),
-          ),
-        ),
-      ],
+        final todoMoved = Todo.fromSnapshot(snapshot.elementAt(oldIndex));
+        todoDao.setOrder(todoMoved, newIndex);
+      },
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      padding: EdgeInsets.only(
+          bottom: 56 +
+              kFloatingActionButtonMargin * 2 +
+              MediaQuery.of(context).padding.bottom),
+      header: noPastTasks
+          ? const SizedBox.shrink()
+          : const TodoListHeader(title: "Today's tasks"),
+      children: snapshot.map((data) => _buildListItem(context, data)).toList(),
     );
   }
 
