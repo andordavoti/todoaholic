@@ -8,10 +8,12 @@ import 'package:todoaholic/data/todo_dao.dart';
 import 'package:provider/provider.dart';
 import 'package:todoaholic/data/todo_item_type.dart';
 
-class TodoList extends StatelessWidget {
-  final bool noPastTasks;
+import '../utils/datetime_extension.dart';
 
-  const TodoList({Key? key, required this.noPastTasks}) : super(key: key);
+class TodoList extends StatelessWidget {
+  final bool pastTasksExist;
+
+  const TodoList({Key? key, required this.pastTasksExist}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,48 +24,67 @@ class TodoList extends StatelessWidget {
         stream: todoDao.getStream(appState.selectedDate),
         builder: (context, snapshot) {
           if (snapshot.hasError) {
-            return noPastTasks
-                ? const Center(
+            return pastTasksExist || appState.calendarEvents.isNotEmpty
+                ? const SizedBox.shrink()
+                : const Center(
                     child: Text('Something went wrong...'),
-                  )
-                : const SizedBox.shrink();
+                  );
           }
           if (!snapshot.hasData) {
-            return noPastTasks
-                ? const Center(child: CircularProgressIndicator())
-                : const SizedBox.shrink();
+            return pastTasksExist || appState.calendarEvents.isNotEmpty
+                ? const SizedBox.shrink()
+                : const Center(child: CircularProgressIndicator());
           }
 
           if (snapshot.data!.docs.isEmpty) {
-            return noPastTasks
-                ? Center(
-                    child: Flex(
-                      direction: Axis.vertical,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text(
-                          'Nothing for today',
-                          style: Theme.of(context).textTheme.headline2,
-                          textAlign: TextAlign.center,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 8),
-                          child: Text(
-                            'Add a new task by tapping the + button',
-                            style: Theme.of(context).textTheme.bodyText1,
+            return pastTasksExist || appState.calendarEvents.isNotEmpty
+                ? const SizedBox.shrink()
+                : SizedBox(
+                    height: MediaQuery.of(context).size.height -
+                        MediaQuery.of(context).viewPadding.top -
+                        AppBar().preferredSize.height,
+                    child: Center(
+                      child: Flex(
+                        direction: Axis.vertical,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Nothing for today',
+                            style: Theme.of(context).textTheme.headline2,
                             textAlign: TextAlign.center,
                           ),
-                        ),
-                      ],
+                          Padding(
+                            padding: const EdgeInsets.only(top: 8),
+                            child: Text(
+                              'Add a new task by tapping the + button',
+                              style: Theme.of(context).textTheme.bodyText1,
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                  )
-                : const SizedBox.shrink();
+                  );
           }
           return _buildList(context, snapshot.data!.docs);
         },
       );
     });
+  }
+
+  Widget _buildListHeader(BuildContext context) {
+    final appState = Provider.of<AppState>(context, listen: false);
+
+    final isToday = appState.selectedDate == DateTime.now().getDateOnly();
+
+    if (isToday) {
+      return const TodoListHeader(title: "Today's tasks");
+    } else if (appState.calendarEvents.isNotEmpty) {
+      return const TodoListHeader(title: "Tasks");
+    } else {
+      return const SizedBox.shrink();
+    }
   }
 
   Widget _buildList(BuildContext context, List<DocumentSnapshot> snapshot) {
@@ -83,9 +104,7 @@ class TodoList extends StatelessWidget {
           bottom: 56 +
               kFloatingActionButtonMargin * 2 +
               MediaQuery.of(context).padding.bottom),
-      header: noPastTasks
-          ? const SizedBox.shrink()
-          : const TodoListHeader(title: "Today's tasks"),
+      header: _buildListHeader(context),
       children: snapshot.map((data) => _buildListItem(context, data)).toList(),
     );
   }

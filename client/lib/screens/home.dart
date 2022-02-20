@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:todoaholic/components/app_drawer.dart';
+import 'package:todoaholic/components/calendar_list.dart';
 import 'package:todoaholic/components/date_navigation_buttons.dart';
 import 'package:todoaholic/components/past_todo_list.dart';
 import 'package:todoaholic/components/todo_list.dart';
@@ -11,10 +12,10 @@ import 'package:provider/provider.dart';
 import 'package:todoaholic/data/todo_dao.dart';
 import 'package:todoaholic/data/todo_item_type.dart';
 import 'package:todoaholic/screens/routes.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'auth_screen.dart';
 import 'manage_todo_screen.dart';
-import '../utils/datetime_extension.dart';
 
 class PrevDayIntent extends Intent {}
 
@@ -35,7 +36,6 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final currentDate = DateTime.now().getDateOnly();
     final todoDao = Provider.of<TodoDao>(context, listen: false);
 
     return StreamBuilder<User?>(
@@ -90,86 +90,98 @@ class Home extends StatelessWidget {
                       },
                       child: Focus(
                         autofocus: true,
-                        child: Scaffold(
-                          drawer: const AppDrawer(),
-                          body: SingleChildScrollView(
-                            child: Column(
-                              children: [
-                                appState.selectedDate == currentDate
-                                    ? const PastTodoList(
-                                        type: TodoItemType.past)
-                                    : const SizedBox.shrink(),
-                                TodoList(
-                                    noPastTasks:
-                                        appState.selectedDate != currentDate),
-                              ],
-                            ),
-                          ),
-                          resizeToAvoidBottomInset: false,
-                          floatingActionButton: Padding(
-                            padding: const EdgeInsets.only(left: 20, right: 20),
-                            child: Stack(
-                              children: <Widget>[
-                                Align(
-                                  alignment: Alignment.bottomLeft,
-                                  child: DateNavigation(
-                                    leftAction: prevDay,
-                                    leftLongPressAction: currentDay,
-                                    rightAction: nextDay,
-                                    rightLongPressAction: oneWeekForward,
+                        child: StreamBuilder<QuerySnapshot>(
+                            stream: todoDao.getUndonePastStream(),
+                            builder: (context, pastSnapshot) {
+                              final bool pastTasksExist =
+                                  pastSnapshot.hasData &&
+                                      pastSnapshot.data!.docs.isNotEmpty;
+
+                              return Scaffold(
+                                drawer: const AppDrawer(),
+                                body: SingleChildScrollView(
+                                  child: Column(
+                                    children: [
+                                      const CalendarList(),
+                                      const PastTodoList(
+                                          type: TodoItemType.past),
+                                      TodoList(pastTasksExist: pastTasksExist),
+                                    ],
                                   ),
                                 ),
-                                Align(
-                                  alignment: Alignment.bottomRight,
-                                  child: FloatingActionButton(
-                                    onPressed: () {
-                                      HapticFeedback.selectionClick();
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                const ManageTodoScreen(null,
-                                                    TodoItemType.present)),
-                                      );
-                                    },
-                                    child: const Icon(Icons.add),
+                                resizeToAvoidBottomInset: false,
+                                floatingActionButton: Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 20, right: 20),
+                                  child: Stack(
+                                    children: <Widget>[
+                                      Align(
+                                        alignment: Alignment.bottomLeft,
+                                        child: DateNavigation(
+                                          leftAction: prevDay,
+                                          leftLongPressAction: currentDay,
+                                          rightAction: nextDay,
+                                          rightLongPressAction: oneWeekForward,
+                                        ),
+                                      ),
+                                      Align(
+                                        alignment: Alignment.bottomRight,
+                                        child: FloatingActionButton(
+                                          onPressed: () {
+                                            HapticFeedback.selectionClick();
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      const ManageTodoScreen(
+                                                          null,
+                                                          TodoItemType
+                                                              .present)),
+                                            );
+                                          },
+                                          child: const Icon(Icons.add),
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ),
-                              ],
-                            ),
-                          ),
-                          floatingActionButtonLocation:
-                              FloatingActionButtonLocation.centerFloat,
-                          appBar: AppBar(
-                            title: Align(
-                              alignment: Alignment.topCenter,
-                              child: InkWell(
-                                  onTap: () async {
-                                    final currentDate = DateTime.now();
+                                floatingActionButtonLocation:
+                                    FloatingActionButtonLocation.centerFloat,
+                                appBar: AppBar(
+                                  title: Align(
+                                    alignment: Alignment.topCenter,
+                                    child: InkWell(
+                                        onTap: () async {
+                                          final currentDate = DateTime.now();
 
-                                    final pickedDate = await showDatePicker(
-                                      context: context,
-                                      initialDate: appState.selectedDate,
-                                      firstDate: DateTime(currentDate.year - 5),
-                                      lastDate: DateTime(currentDate.year + 5),
-                                    );
+                                          final pickedDate =
+                                              await showDatePicker(
+                                            context: context,
+                                            initialDate: appState.selectedDate,
+                                            firstDate:
+                                                DateTime(currentDate.year - 5),
+                                            lastDate:
+                                                DateTime(currentDate.year + 5),
+                                          );
 
-                                    if (pickedDate != null) {
-                                      appState.setSelectedDate(pickedDate);
-                                    }
-                                  },
-                                  child: Text(DateFormat('EEEE, MMMM d')
-                                      .format(appState.selectedDate))),
-                            ),
-                            actions: const [
-                              IconButton(
-                                color: Colors.transparent,
-                                icon: SizedBox.shrink(),
-                                onPressed: null,
-                              )
-                            ],
-                          ),
-                        ),
+                                          if (pickedDate != null) {
+                                            appState
+                                                .setSelectedDate(pickedDate);
+                                          }
+                                        },
+                                        child: Text(DateFormat('EEEE, MMMM d')
+                                            .format(appState.selectedDate))),
+                                  ),
+                                  actions: const [
+                                    IconButton(
+                                      color: Colors.transparent,
+                                      icon: SizedBox.shrink(),
+                                      onPressed: null,
+                                    )
+                                  ],
+                                ),
+                              );
+                            }),
                       ),
                     ),
                   );
