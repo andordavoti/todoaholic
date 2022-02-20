@@ -8,6 +8,8 @@ import 'package:todoaholic/data/todo_dao.dart';
 import 'package:provider/provider.dart';
 import 'package:todoaholic/data/todo_item_type.dart';
 
+import '../utils/datetime_extension.dart';
+
 class PastTodoList extends StatelessWidget {
   final TodoItemType type;
 
@@ -17,7 +19,14 @@ class PastTodoList extends StatelessWidget {
   Widget build(BuildContext context) {
     final todoDao = Provider.of<TodoDao>(context, listen: false);
 
+    final currentDate = DateTime.now().getDateOnly();
+
     return Consumer<AppState>(builder: (context, appState, child) {
+      final isToday = appState.selectedDate == currentDate;
+      if (!isToday) {
+        return const SizedBox.shrink();
+      }
+
       return StreamBuilder<QuerySnapshot>(
         stream: todoDao.getUndonePastStream(),
         builder: (context, snapshot) {
