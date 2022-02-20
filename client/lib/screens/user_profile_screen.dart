@@ -80,7 +80,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                       child: Scaffold(
                           drawer: const AppDrawer(),
                           appBar: AppBar(
-                            title: const Text('Profile'),
+                            title: const Center(child: Text('Profile')),
                             actions: [
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
