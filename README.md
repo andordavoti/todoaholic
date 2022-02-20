@@ -41,9 +41,10 @@ A minimalist open-source and free todo app for iOS, Android, macOS & web.
 - Recurring tasks (tasks that repeat every day, week or month)
 - Sign in with Apple, Google, GitHub, etc.
 
-## Known issues
+## Known limitations
 
 - Reordering tasks is not working properly for now.
+- The calendar integration only works on mobile. It uses the calendar API of the device, which is not available for web.
 
 ## Tech Stack
 
