@@ -23,6 +23,10 @@ class TodoList extends StatelessWidget {
       return StreamBuilder<QuerySnapshot>(
         stream: todoDao.getStream(appState.selectedDate),
         builder: (context, snapshot) {
+          final height = MediaQuery.of(context).size.height -
+              MediaQuery.of(context).viewPadding.top -
+              AppBar().preferredSize.height;
+
           if (snapshot.hasError) {
             return pastTasksExist || appState.calendarEvents.isNotEmpty
                 ? const SizedBox.shrink()
@@ -33,16 +37,16 @@ class TodoList extends StatelessWidget {
           if (!snapshot.hasData) {
             return pastTasksExist || appState.calendarEvents.isNotEmpty
                 ? const SizedBox.shrink()
-                : const Center(child: CircularProgressIndicator());
+                : SizedBox(
+                    height: height,
+                    child: const Center(child: CircularProgressIndicator()));
           }
 
           if (snapshot.data!.docs.isEmpty) {
             return pastTasksExist || appState.calendarEvents.isNotEmpty
                 ? const SizedBox.shrink()
                 : SizedBox(
-                    height: MediaQuery.of(context).size.height -
-                        MediaQuery.of(context).viewPadding.top -
-                        AppBar().preferredSize.height,
+                    height: height,
                     child: Center(
                       child: Flex(
                         direction: Axis.vertical,

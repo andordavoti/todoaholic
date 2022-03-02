@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-const blackColor = Color(0xff1c1c1c);
-const blackColor2 = Colors.black12;
-const lightGreyColor = Color(0xffeeeeee);
-
 class AppTheme {
+  static const blackColor = Color(0xff1c1c1c);
+  static const blackColor2 = Colors.black12;
+  static const lightGreyColor = Color(0xffeeeeee);
+
   static TextTheme lightTextTheme = TextTheme(
     bodyText1: GoogleFonts.exo2(
       fontSize: 16.0,
@@ -131,6 +131,7 @@ class AppTheme {
       indicatorColor: blackColor,
       progressIndicatorTheme: const ProgressIndicatorThemeData(
         color: blackColor,
+        refreshBackgroundColor: Colors.white,
       ),
     );
   }
@@ -193,7 +194,9 @@ class AppTheme {
       ),
       indicatorColor: Colors.white,
       progressIndicatorTheme: const ProgressIndicatorThemeData(
-          color: Colors.white, circularTrackColor: Colors.white),
+        color: Colors.white,
+        refreshBackgroundColor: blackColor,
+      ),
     );
   }
 }
