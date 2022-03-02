@@ -98,7 +98,7 @@ class CustomListScreen extends StatelessWidget {
                               },
                               child: const Icon(Icons.add),
                             ),
-                            body: CustomTodoList()),
+                            body: const CustomTodoList()),
                       ),
                     ),
                   );

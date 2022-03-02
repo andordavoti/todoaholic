@@ -75,7 +75,7 @@ class TimelineScreen extends StatelessWidget {
                                         ],
                                       ),
                                     )
-                                  : TimelineTodoList(noPastTasks: true);
+                                  : const TimelineTodoList(noPastTasks: true);
                             }),
                       ),
                     ),
