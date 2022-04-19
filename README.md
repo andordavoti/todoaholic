@@ -17,22 +17,35 @@ A minimalist open-source and free todo app for iOS, Android, macOS & web.
 
 ## Features
 
-- Manage tasks cross-platform in real-time. No need to refresh the browser if you made a change through the mobile app. Everything syncs across all of your devices in real-time automatically.
-- Create custom lists (ex. shopping list, bucket list, reading list, movie list).
-- Intuitive gestures to cross out, move, remove and edit tasks.
-  - Tap a task to cross it of your list
-  - Slide a task to the right to move it to the next day
-  - Slide an undone task to the left to edit it
-  - Slide a done task to the left to delete it
-  - Slide a list in the drawer to the left to edit or remove it
-- Task timeline. Get an overview of what you have going on in the coming days.
-- Offline support for the mobile and desktop apps.
-- Keyboard shortcuts for desktop and web:
-  - Navigate the day you are viewing on the home screen with the left and right arrow keys (current date with arrow down)
-  - Press "A" or "+" on the task or custom list screen to quickly add a task
-  - Press "H" to go "home" and view your current tasks
-  - Press "T" to view the timeline
-  - Press "P" to view your profile
+Manage tasks cross-platform in real-time. No need to refresh the browser if you made a change through the mobile app. Everything syncs across all of your devices in real-time automatically.
+
+Create custom lists (ex. shopping list, bucket list, reading list, movie list).
+
+<details>
+<summary>Intuitive gestures to cross out, move, remove and edit tasks.</summary>
+  <ul>
+    <li>Tap a task to cross it of your list</li>
+    <li>Slide a task to the right to move it to the next day</li>
+    <li>Slide an undone task to the left to edit it</li>
+    <li>Slide a done task to the left to delete it</li>
+    <li>Slide a list in the drawer to the left to edit or remove it</li>
+  </ul>
+</details>
+
+Task timeline. Get an overview of what you have going on in the coming days.
+
+Offline support for the mobile and desktop apps.
+
+<details>
+<summary>Keyboard shortcuts for desktop and web.</summary>
+  <ul>
+    <li>Navigate the day you are viewing on the home screen with the left and right arrow keys (current date with arrow down)</li>
+    <li>Press "A" or "+" on the task or custom list screen to quickly add a task</li>
+    <li>Press "H" to go "home" and view your current tasks</li>
+    <li>Press "T" to view the timeline</li>
+    <li>Press "P" to view your profile</li>
+  </ul>
+</details>
 
 ## Future plans
 
