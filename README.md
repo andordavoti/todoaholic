@@ -66,16 +66,29 @@ Offline support for the mobile and desktop apps.
 
 ### Backend:
 
-- Auth: [Firebase Auth](https://firebase.google.com/products/auth)
-- DB: [Firestore](https://firebase.google.com/products/firestore)
-  - Composite indexes on collection ID "todos":
-    - date Ascending, isDone Ascending, order Ascending
-    - date Ascending, order Ascending, isDone Ascending
-    - date Ascending, order Ascending, isDone Descending
-    - isDone Ascending, date Ascending
-    - isDone Ascending order Ascending
-- [Firebase Cloud Functions](https://firebase.google.com/docs/functions)
-  - Custom schedule function that runs once every week to check for users that have been inactive for three months and removes them. Their user data is then removed by this extension: [Firebase Delete User Data Extension](https://firebase.google.com/products/extensions/firebase-delete-user-data).
+**Auth:** [Firebase Auth](https://firebase.google.com/products/auth)
+
+<details>
+  <summary><strong>DB:</strong> <a href="https://firebase.google.com/products/firestore">Firestore</a></summary>
+
+  <ul>
+    <lh><strong>Composite indexes on collection ID "todos":</strong></lh>
+    <li>date Ascending, isDone Ascending, order Ascending</li>
+    <li>date Ascending, order Ascending, isDone Ascending</li>
+    <li>date Ascending, order Ascending, isDone Descending</li>
+    <li>isDone Ascending, date Ascending</li>
+    <li>isDone Ascending order Ascending</li>
+  </ul>
+</details>
+
+
+<details>
+  <summary><a href="https://firebase.google.com/docs/functions">Firebase Cloud Functions</a></summary>
+
+  Custom schedule function that runs once every week to check for users that have been inactive for three months and removes them. Their user data is then removed by this extension: <a href="https://firebase.google.com/products/extensions/firebase-delete-user-data">Firebase Delete User Data Extension</a>.
+  
+ 
+</details>
 
 ## CI/CD pipelines
 
