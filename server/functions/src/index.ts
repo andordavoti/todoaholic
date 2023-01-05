@@ -33,7 +33,7 @@ const deleteInactiveUser = (inactiveUsers: firebaseAdmin.auth.UserRecord[]) => {
     const userToDelete = inactiveUsers.pop();
 
     // Delete the inactive user.
-    if (userToDelete) {
+    if (userToDelete && userToDelete.email !== "test@gmail.com") {
       return firebaseAdmin
         .auth()
         .deleteUser(userToDelete.uid)
