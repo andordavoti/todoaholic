@@ -48,14 +48,14 @@ class TimelineTodoList extends StatelessWidget {
                       children: [
                         Text(
                           'Nothing to do...',
-                          style: Theme.of(context).textTheme.headline2,
+                          style: Theme.of(context).textTheme.displayMedium,
                           textAlign: TextAlign.center,
                         ),
                         Padding(
                           padding: const EdgeInsets.only(top: 8),
                           child: Text(
                             'Go back and add some tasks',
-                            style: Theme.of(context).textTheme.bodyText1,
+                            style: Theme.of(context).textTheme.bodyLarge,
                             textAlign: TextAlign.center,
                           ),
                         ),

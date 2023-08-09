@@ -47,7 +47,7 @@ class _ManageTodoScreenState extends State<ManageTodoScreen> {
       });
 
       SchedulerBinding.instance!.addPostFrameCallback(
-          (_) => {FocusScope.of(context).requestFocus(textFocusNode)});
+          (_) => FocusScope.of(context).requestFocus(textFocusNode));
     });
   }
 
@@ -171,7 +171,7 @@ class _ManageTodoScreenState extends State<ManageTodoScreen> {
                                     ? DateFormat('EEEE, MMMM d')
                                         .format(selectedDate!)
                                     : '',
-                                style: Theme.of(context).textTheme.bodyText2,
+                                style: Theme.of(context).textTheme.bodyMedium,
                               ),
                               IconButton(
                                   icon: const Icon(Icons.date_range),

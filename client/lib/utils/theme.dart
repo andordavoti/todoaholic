@@ -7,32 +7,32 @@ const lightGreyColor = Color(0xffeeeeee);
 
 class AppTheme {
   static TextTheme lightTextTheme = TextTheme(
-    bodyText1: GoogleFonts.exo2(
+    bodyLarge: GoogleFonts.exo2(
       fontSize: 16.0,
       fontWeight: FontWeight.w500,
       color: Colors.grey,
     ),
-    bodyText2: GoogleFonts.exo2(
+    bodyMedium: GoogleFonts.exo2(
       fontSize: 16.0,
       fontWeight: FontWeight.w500,
       color: blackColor,
     ),
-    headline1: GoogleFonts.exo2(
+    displayLarge: GoogleFonts.exo2(
       fontSize: 32.0,
       fontWeight: FontWeight.bold,
       color: blackColor,
     ),
-    headline2: GoogleFonts.exo2(
+    displayMedium: GoogleFonts.exo2(
       fontSize: 21.0,
       fontWeight: FontWeight.w700,
       color: blackColor,
     ),
-    headline3: GoogleFonts.exo2(
+    displaySmall: GoogleFonts.exo2(
       fontSize: 16.0,
       fontWeight: FontWeight.w600,
       color: blackColor,
     ),
-    headline6: GoogleFonts.exo2(
+    titleLarge: GoogleFonts.exo2(
       fontSize: 20.0,
       fontWeight: FontWeight.w600,
       color: blackColor,
@@ -40,32 +40,32 @@ class AppTheme {
   );
 
   static TextTheme darkTextTheme = TextTheme(
-    bodyText1: GoogleFonts.exo2(
+    bodyLarge: GoogleFonts.exo2(
       fontSize: 16.0,
       fontWeight: FontWeight.w500,
       color: Colors.grey,
     ),
-    bodyText2: GoogleFonts.exo2(
+    bodyMedium: GoogleFonts.exo2(
       fontSize: 16.0,
       fontWeight: FontWeight.w500,
       color: Colors.white,
     ),
-    headline1: GoogleFonts.exo2(
+    displayLarge: GoogleFonts.exo2(
       fontSize: 32.0,
       fontWeight: FontWeight.bold,
       color: Colors.white,
     ),
-    headline2: GoogleFonts.exo2(
+    displayMedium: GoogleFonts.exo2(
       fontSize: 21.0,
       fontWeight: FontWeight.w700,
       color: Colors.white,
     ),
-    headline3: GoogleFonts.exo2(
+    displaySmall: GoogleFonts.exo2(
       fontSize: 16.0,
       fontWeight: FontWeight.w600,
       color: Colors.white,
     ),
-    headline6: GoogleFonts.exo2(
+    titleLarge: GoogleFonts.exo2(
       fontSize: 20.0,
       fontWeight: FontWeight.w600,
       color: Colors.white,
@@ -118,7 +118,7 @@ class AppTheme {
       ),
       textButtonTheme: TextButtonThemeData(
           style: TextButton.styleFrom(
-        primary: blackColor,
+        foregroundColor: blackColor,
       )),
       iconTheme: const IconThemeData(
         color: blackColor,
@@ -181,7 +181,7 @@ class AppTheme {
       ),
       textButtonTheme: TextButtonThemeData(
           style: TextButton.styleFrom(
-        primary: Colors.white,
+        foregroundColor: Colors.white,
       )),
       iconTheme: const IconThemeData(
         color: Colors.white,
@@ -191,9 +191,10 @@ class AppTheme {
         selectionColor: Colors.grey,
         selectionHandleColor: blackColor,
       ),
-      indicatorColor: Colors.white,
+      indicatorColor: blackColor,
       progressIndicatorTheme: const ProgressIndicatorThemeData(
-          color: Colors.white, circularTrackColor: Colors.white),
+        color: Colors.white,
+      ),
     );
   }
 }

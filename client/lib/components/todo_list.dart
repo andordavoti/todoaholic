@@ -45,14 +45,14 @@ class TodoList extends StatelessWidget {
                       children: [
                         Text(
                           'Nothing for today',
-                          style: Theme.of(context).textTheme.headline2,
+                          style: Theme.of(context).textTheme.displayMedium,
                           textAlign: TextAlign.center,
                         ),
                         Padding(
                           padding: const EdgeInsets.only(top: 8),
                           child: Text(
                             'Add a new task by tapping the + button',
-                            style: Theme.of(context).textTheme.bodyText1,
+                            style: Theme.of(context).textTheme.bodyLarge,
                             textAlign: TextAlign.center,
                           ),
                         ),

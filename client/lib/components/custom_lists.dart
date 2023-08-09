@@ -22,7 +22,7 @@ class CustomLists extends StatelessWidget {
           if (snapshot.hasError) {
             return ListTile(
               title: Text('Something went wrong...',
-                  style: Theme.of(context).textTheme.bodyText2),
+                  style: Theme.of(context).textTheme.bodyMedium),
             );
           }
           if (!snapshot.hasData) {
@@ -93,7 +93,7 @@ class CustomLists extends StatelessWidget {
       ),
       child: ListTile(
           key: ObjectKey(list),
-          title: Text(list.name, style: Theme.of(context).textTheme.bodyText2),
+          title: Text(list.name, style: Theme.of(context).textTheme.bodyMedium),
           onTap: () {
             appState.setSelectedList(list);
             HapticFeedback.selectionClick();

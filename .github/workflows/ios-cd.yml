@@ -20,6 +20,11 @@ jobs:
       - uses: actions/setup-java@v1
         with:
           java-version: "12.x"
+      - name: Decrypt Android keys
+        run: cd .github/scripts && chmod +x decrypt_ios_secrets.sh && ./decrypt_ios_secrets.sh
+        shell: bash
+        env:
+          ANDROID_KEYS_SECRET_PASSPHRASE: ${{ secrets.IOS_KEYS_SECRET_PASSPHRASE }}
       - name: Run Flutter tasks
         uses: subosito/flutter-action@v1
         with:

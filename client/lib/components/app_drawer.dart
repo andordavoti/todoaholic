@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutterfire_ui/auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:provider/provider.dart';
 import 'package:todoaholic/components/manage_custom_list_dialog.dart';
@@ -17,7 +17,7 @@ class AppDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     final displayName = FirebaseAuth.instance.currentUser!.displayName;
 
-    _getFirstName() {
+    getFirstName() {
       if (displayName != null) {
         List<String> wordList = displayName.split(" ");
         return wordList[0];
@@ -26,14 +26,14 @@ class AppDrawer extends StatelessWidget {
       }
     }
 
-    _getGreeting() {
+    getGreeting() {
       final currentHour = DateTime.now().hour;
       if (currentHour < 12) {
-        return 'Good morning${_getFirstName().isNotEmpty ? ', ${_getFirstName()}!' : '!'}';
+        return 'Good morning${getFirstName().isNotEmpty ? ', ${getFirstName()}!' : '!'}';
       } else if (currentHour < 18) {
-        return 'Good afternoon${_getFirstName().isNotEmpty ? ', ${_getFirstName()}!' : '!'}';
+        return 'Good afternoon${getFirstName().isNotEmpty ? ', ${getFirstName()}!' : '!'}';
       } else {
-        return 'Good evening${_getFirstName().isNotEmpty ? ', ${_getFirstName()}!' : '!'}';
+        return 'Good evening${getFirstName().isNotEmpty ? ', ${getFirstName()}!' : '!'}';
       }
     }
 
@@ -52,8 +52,8 @@ class AppDrawer extends StatelessWidget {
                   ),
                   ListTile(
                     title: Text(
-                      _getGreeting(),
-                      style: Theme.of(context).textTheme.bodyText2,
+                      getGreeting(),
+                      style: Theme.of(context).textTheme.bodyMedium,
                       textAlign: TextAlign.center,
                     ),
                   ),
@@ -62,10 +62,10 @@ class AppDrawer extends StatelessWidget {
             ),
             ListTile(
               leading: Icon(Icons.task_alt,
-                  color: Theme.of(context).textTheme.bodyText2!.color),
+                  color: Theme.of(context).textTheme.bodyMedium!.color),
               title: Text(
                 'Tasks',
-                style: Theme.of(context).textTheme.bodyText2,
+                style: Theme.of(context).textTheme.bodyMedium,
               ),
               onTap: () {
                 HapticFeedback.selectionClick();
@@ -74,10 +74,10 @@ class AppDrawer extends StatelessWidget {
             ),
             ListTile(
               leading: Icon(Icons.timeline,
-                  color: Theme.of(context).textTheme.bodyText2!.color),
+                  color: Theme.of(context).textTheme.bodyMedium!.color),
               title: Text(
                 'Timeline',
-                style: Theme.of(context).textTheme.bodyText2,
+                style: Theme.of(context).textTheme.bodyMedium,
               ),
               onTap: () {
                 HapticFeedback.selectionClick();
@@ -86,10 +86,10 @@ class AppDrawer extends StatelessWidget {
             ),
             ListTile(
               leading: Icon(Icons.person_sharp,
-                  color: Theme.of(context).textTheme.bodyText2!.color),
+                  color: Theme.of(context).textTheme.bodyMedium!.color),
               title: Text(
                 'Profile',
-                style: Theme.of(context).textTheme.bodyText2,
+                style: Theme.of(context).textTheme.bodyMedium,
               ),
               onTap: () {
                 HapticFeedback.selectionClick();
@@ -100,7 +100,7 @@ class AppDrawer extends StatelessWidget {
             ListTile(
               title: Text(
                 'Your lists',
-                style: Theme.of(context).textTheme.headline2,
+                style: Theme.of(context).textTheme.displayMedium,
               ),
             ),
             _buildList(context),
@@ -109,9 +109,9 @@ class AppDrawer extends StatelessWidget {
                   bottom: MediaQuery.of(context).padding.bottom),
               child: ListTile(
                   leading: Icon(Icons.add,
-                      color: Theme.of(context).textTheme.bodyText2!.color),
+                      color: Theme.of(context).textTheme.bodyMedium!.color),
                   title: Text('Add a new list',
-                      style: Theme.of(context).textTheme.bodyText2),
+                      style: Theme.of(context).textTheme.bodyMedium),
                   onTap: () {
                     HapticFeedback.selectionClick();
                     showDialog(
@@ -135,7 +135,7 @@ class AppDrawer extends StatelessWidget {
           if (snapshot.hasError) {
             return ListTile(
               title: Text('Something went wrong...',
-                  style: Theme.of(context).textTheme.bodyText2),
+                  style: Theme.of(context).textTheme.bodyMedium),
             );
           }
           if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
@@ -200,7 +200,7 @@ class AppDrawer extends StatelessWidget {
       ),
       child: ListTile(
           key: ObjectKey(list),
-          title: Text(list.name, style: Theme.of(context).textTheme.bodyText2),
+          title: Text(list.name, style: Theme.of(context).textTheme.bodyMedium),
           onTap: () {
             appState.setSelectedList(list);
             HapticFeedback.selectionClick();

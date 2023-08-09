@@ -7,12 +7,10 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:todoaholic/components/app_drawer.dart';
 import 'package:todoaholic/components/delete_account_dialog.dart';
 import 'package:todoaholic/components/verify_email_dialog.dart';
-import 'package:todoaholic/main.dart';
 import 'package:todoaholic/screens/routes.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:touchable_opacity/touchable_opacity.dart';
-
-import 'package:flutterfire_ui/auth.dart';
+import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 
 import 'auth_screen.dart';
 
@@ -26,10 +24,10 @@ class UserProfileScreen extends StatefulWidget {
   const UserProfileScreen({Key? key}) : super(key: key);
 
   @override
-  _UserProfileScreenState createState() => _UserProfileScreenState();
+  UserProfileScreenState createState() => UserProfileScreenState();
 }
 
-class _UserProfileScreenState extends State<UserProfileScreen> {
+class UserProfileScreenState extends State<UserProfileScreen> {
   PackageInfo? packageInfo;
 
   @override
@@ -88,7 +86,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                                   icon: Icon(Icons.logout,
                                       color: Theme.of(context)
                                           .textTheme
-                                          .bodyText2!
+                                          .bodyMedium!
                                           .color),
                                   onPressed: FirebaseAuth.instance.signOut,
                                 )),
@@ -117,16 +115,13 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                                           padding: EdgeInsets.only(top: 16.0),
                                           child: EditableUserDisplayName(),
                                         ),
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(top: 32),
+                                        const Padding(
+                                          padding: EdgeInsets.only(top: 32),
                                           child: Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.center,
                                             children: [
-                                              LinkedProvidersRow(
-                                                  providerConfigs:
-                                                      MyApp.providerConfigs),
+                                              // LinkedProvidersRow(),
                                             ],
                                           ),
                                         ),
@@ -157,7 +152,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                                                               );
                                                             });
                                                       },
-                                                      icon: const Icon(MdiIcons
+                                                      icon: Icon(MdiIcons
                                                           .emailAlertOutline),
                                                       label: const Text(
                                                           'Verify email')),
@@ -175,12 +170,12 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                                                     text: 'Developed by ',
                                                     style: Theme.of(context)
                                                         .textTheme
-                                                        .headline6),
+                                                        .titleLarge),
                                                 TextSpan(
                                                     text: 'Davoti Solutions',
                                                     style: Theme.of(context)
                                                         .textTheme
-                                                        .headline6!
+                                                        .titleLarge!
                                                         .copyWith(
                                                             fontFamily:
                                                                 'mustang')),
@@ -201,7 +196,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                                                 'www.davotisolutions.com',
                                                 style: Theme.of(context)
                                                     .textTheme
-                                                    .bodyText2!
+                                                    .bodyMedium!
                                                     .copyWith(
                                                         color: isDarkMode
                                                             ? Colors
@@ -225,8 +220,8 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                                                     path:
                                                         'contact@davotisolutions.com',
                                                     query:
-                                                        encodeQueryParameters(<
-                                                            String, String>{
+                                                        encodeQueryParameters(<String,
+                                                            String>{
                                                       'subject':
                                                           'Regarding todoaholic'
                                                     }),
@@ -249,8 +244,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                                                     launch(
                                                         'https://github.com/andordavoti/todoaholic');
                                                   },
-                                                  icon: const Icon(
-                                                      MdiIcons.github),
+                                                  icon: Icon(MdiIcons.github),
                                                   label: const Text(
                                                       'Source-Code on GitHub')),
                                             )),
@@ -265,7 +259,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                                                         launch(
                                                             'https://www.buymeacoffee.com/andordavoti');
                                                       },
-                                                      icon: const Icon(
+                                                      icon: Icon(
                                                           MdiIcons.beerOutline),
                                                       label: const Text(
                                                           'Buy me a beer')),
@@ -278,7 +272,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                                             "Version: ${packageInfo?.version ?? ''}",
                                             style: Theme.of(context)
                                                 .textTheme
-                                                .bodyText1,
+                                                .bodyLarge,
                                             textAlign: TextAlign.center,
                                           ),
                                         ),

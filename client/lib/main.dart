@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:window_size/window_size.dart';
 
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutterfire_ui/auth.dart';
 import 'package:provider/provider.dart';
 import 'package:todoaholic/data/app_state_provider.dart';
 import 'package:todoaholic/data/lists_dao.dart';
@@ -30,10 +29,6 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
-
-  static final providerConfigs = [
-    const EmailProviderConfiguration(),
-  ];
 
   @override
   Widget build(BuildContext context) {

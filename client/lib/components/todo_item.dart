@@ -121,7 +121,7 @@ class TodoItem extends StatelessWidget {
                 padding: const EdgeInsets.only(left: 16.0),
                 child: Row(children: [
                   Text(getSwipeNextTitle(appState.selectedDate),
-                      style: Theme.of(context).textTheme.bodyText2!.copyWith(
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                           color: Theme.of(context)
                               .floatingActionButtonTheme
                               .foregroundColor)),
@@ -157,9 +157,9 @@ class TodoItem extends StatelessWidget {
                       style: todo.isDone
                           ? Theme.of(context)
                               .textTheme
-                              .bodyText1!
+                              .bodyLarge!
                               .copyWith(decoration: TextDecoration.lineThrough)
-                          : Theme.of(context).textTheme.bodyText2,
+                          : Theme.of(context).textTheme.bodyMedium,
                     ),
                   ),
                 ],
