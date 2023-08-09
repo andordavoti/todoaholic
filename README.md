@@ -39,7 +39,7 @@ Offline support for the mobile and desktop apps.
 <details>
 <summary>Keyboard shortcuts for desktop and web.</summary>
   <ul>
-    <li>Navigate the day you are viewing on the home screen with the left and right arrow keys (current date with arrow down)</li>
+    <li>Navigate the day you are viewing on the home screen with the left and right arrow keys (current date with arrow down, one week forward with arrow up)</li>
     <li>Press "A" or "+" on the task or custom list screen to quickly add a task</li>
     <li>Press "H" to go "home" and view your current tasks</li>
     <li>Press "T" to view the timeline</li>
@@ -81,13 +81,11 @@ Offline support for the mobile and desktop apps.
   </ul>
 </details>
 
-
 <details>
   <summary><a href="https://firebase.google.com/docs/functions">Firebase Cloud Functions</a></summary>
 
-  Custom schedule function that runs once every week to check for users that have been inactive for three months and removes them. Their user data is then removed by this extension: <a href="https://firebase.google.com/products/extensions/firebase-delete-user-data">Firebase Delete User Data Extension</a>.
-  
- 
+Custom schedule function that runs once every week to check for users that have been inactive for three months and removes them. Their user data is then removed by this extension: <a href="https://firebase.google.com/products/extensions/firebase-delete-user-data">Firebase Delete User Data Extension</a>.
+
 </details>
 
 ## CI/CD pipelines

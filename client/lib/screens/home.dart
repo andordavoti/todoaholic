@@ -19,6 +19,8 @@ import '../utils/datetime_extension.dart';
 
 class PrevDayIntent extends Intent {}
 
+class WeekAheadIntent extends Intent {}
+
 class CurrentDayIntent extends Intent {}
 
 class NextDayIntent extends Intent {}
@@ -57,6 +59,8 @@ class Home extends StatelessWidget {
                     shortcuts: {
                       LogicalKeySet(LogicalKeyboardKey.arrowLeft):
                           PrevDayIntent(),
+                      LogicalKeySet(LogicalKeyboardKey.arrowUp):
+                          WeekAheadIntent(),
                       LogicalKeySet(LogicalKeyboardKey.arrowDown):
                           CurrentDayIntent(),
                       LogicalKeySet(LogicalKeyboardKey.arrowRight):
@@ -70,6 +74,8 @@ class Home extends StatelessWidget {
                       actions: {
                         PrevDayIntent: CallbackAction<PrevDayIntent>(
                             onInvoke: (intent) => prevDay()),
+                        WeekAheadIntent: CallbackAction<WeekAheadIntent>(
+                            onInvoke: (intent) => oneWeekForward()),
                         CurrentDayIntent: CallbackAction<CurrentDayIntent>(
                             onInvoke: (intent) => currentDay()),
                         NextDayIntent: CallbackAction<NextDayIntent>(
