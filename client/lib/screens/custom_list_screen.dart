@@ -8,6 +8,7 @@ import 'package:todoaholic/data/app_state_provider.dart';
 import 'package:todoaholic/data/todo_item_type.dart';
 import 'package:todoaholic/screens/routes.dart';
 
+import '../components/manage_custom_list_dialog.dart';
 import 'auth_screen.dart';
 import 'manage_todo_screen.dart';
 
@@ -71,11 +72,19 @@ class CustomListScreen extends StatelessWidget {
                         child: Scaffold(
                             drawer: const AppDrawer(),
                             appBar: AppBar(
-                              actions: const [
+                              actions: [
                                 IconButton(
-                                  color: Colors.transparent,
-                                  icon: SizedBox.shrink(),
-                                  onPressed: null,
+                                  icon: const Icon(Icons.more_vert),
+                                  onPressed: () {
+                                    HapticFeedback.selectionClick();
+                                    showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return ManageCustomListDialog(
+                                              editList: appState.selectedList);
+                                        });
+                                    // Action
+                                  },
                                 )
                               ],
                               title: Align(

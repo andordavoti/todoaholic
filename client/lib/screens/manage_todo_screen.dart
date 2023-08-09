@@ -25,10 +25,10 @@ class ManageTodoScreen extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _ManageTodoScreenState createState() => _ManageTodoScreenState();
+  ManageTodoScreenState createState() => ManageTodoScreenState();
 }
 
-class _ManageTodoScreenState extends State<ManageTodoScreen> {
+class ManageTodoScreenState extends State<ManageTodoScreen> {
   final _textController = TextEditingController();
   final textFocusNode = FocusNode();
   DateTime? selectedDate;
@@ -38,7 +38,7 @@ class _ManageTodoScreenState extends State<ManageTodoScreen> {
     super.initState();
     _textController.text = widget.originalTodo?.text ?? '';
 
-    WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       final appState = Provider.of<AppState>(context, listen: false);
 
       setState(() {
@@ -46,7 +46,7 @@ class _ManageTodoScreenState extends State<ManageTodoScreen> {
             widget.originalTodo?.date.toDate() ?? appState.selectedDate;
       });
 
-      SchedulerBinding.instance!.addPostFrameCallback(
+      SchedulerBinding.instance.addPostFrameCallback(
           (_) => FocusScope.of(context).requestFocus(textFocusNode));
     });
   }
