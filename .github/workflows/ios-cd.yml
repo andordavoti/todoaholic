@@ -20,7 +20,7 @@ jobs:
       - uses: actions/setup-java@v1
         with:
           java-version: "12.x"
-      - name: Decrypt Android keys
+      - name: Decrypt iOS keys
         run: cd .github/scripts && chmod +x decrypt_ios_secrets.sh && ./decrypt_ios_secrets.sh
         shell: bash
         env:
