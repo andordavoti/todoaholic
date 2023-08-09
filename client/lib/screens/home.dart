@@ -159,6 +159,8 @@ class Home extends StatelessWidget {
                               alignment: Alignment.topCenter,
                               child: InkWell(
                                   onTap: () async {
+                                    HapticFeedback.selectionClick();
+
                                     final currentDate = DateTime.now();
 
                                     final pickedDate = await showDatePicker(
