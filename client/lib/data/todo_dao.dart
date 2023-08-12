@@ -48,7 +48,7 @@ class TodoDao {
 
   Stream<QuerySnapshot> getStream(DateTime selectedDate) {
     CollectionReference collection = firestore
-        .collection('users/"${FirebaseAuth.instance.currentUser!.uid}/todos');
+        .collection('users/${FirebaseAuth.instance.currentUser!.uid}/todos');
 
     final currentDate = DateTime.now().getDateOnly();
 
