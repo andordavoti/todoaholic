@@ -137,8 +137,7 @@ class UserProfileScreenState extends State<UserProfileScreen> {
                                                       onPressed: () async {
                                                         HapticFeedback
                                                             .selectionClick();
-                                                        await user
-                                                            .sendEmailVerification();
+                                                        user.sendEmailVerification();
 
                                                         showDialog(
                                                             context: context,
