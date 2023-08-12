@@ -23,8 +23,8 @@ class _ManageCustomListDialogState extends State<ManageCustomListDialog> {
   void initState() {
     super.initState();
 
-    WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
-      SchedulerBinding.instance!.addPostFrameCallback((_) => {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      SchedulerBinding.instance.addPostFrameCallback((_) => {
             FocusScope.of(context).requestFocus(textFocusNode),
             _textController.text = widget.editList?.name ?? '',
           });
@@ -73,8 +73,8 @@ class _ManageCustomListDialogState extends State<ManageCustomListDialog> {
       actionsAlignment: MainAxisAlignment.center,
       actions: [
         OutlinedButton(
-          child: Text(editList != null ? "Edit" : "Add"),
           onPressed: onSubmit,
+          child: Text(editList != null ? "Edit" : "Add"),
         ),
         editList != null
             ? OutlinedButton(

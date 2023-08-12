@@ -8,10 +8,11 @@ import 'package:todoaholic/components/delete_account_dialog.dart';
 import 'package:todoaholic/components/scaffold_wrapper.dart';
 import 'package:todoaholic/components/verify_email_dialog.dart';
 import 'package:todoaholic/screens/timeline_screen.dart';
-import 'package:todoaholic/utils/createRoute.dart';
+import 'package:todoaholic/utils/create_route.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:touchable_opacity/touchable_opacity.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 import '../constants.dart';
 import 'auth_screen.dart';
 import 'home.dart';
@@ -189,7 +190,8 @@ class UserProfileScreenState extends State<UserProfileScreen> {
                                             child: TouchableOpacity(
                                               activeOpacity: 0.4,
                                               onTap: () {
-                                                launch(companyWebsiteUrl);
+                                                launchUrlString(
+                                                    companyWebsiteUrl);
                                               },
                                               child: Text(
                                                 'www.davotisolutions.com',
@@ -225,8 +227,7 @@ class UserProfileScreenState extends State<UserProfileScreen> {
                                                     }),
                                                   );
 
-                                                  launch(emailLaunchUri
-                                                      .toString());
+                                                  launchUrl(emailLaunchUri);
                                                 },
                                                 label:
                                                     const Text('Contact us')),
@@ -239,7 +240,8 @@ class UserProfileScreenState extends State<UserProfileScreen> {
                                               width: 275,
                                               child: OutlinedButton.icon(
                                                   onPressed: () {
-                                                    launch(githubRepoUrl);
+                                                    launchUrlString(
+                                                        githubRepoUrl);
                                                   },
                                                   icon: Icon(MdiIcons.github),
                                                   label: const Text(
@@ -253,7 +255,8 @@ class UserProfileScreenState extends State<UserProfileScreen> {
                                                   width: 275,
                                                   child: OutlinedButton.icon(
                                                       onPressed: () {
-                                                        launch(donationUrl);
+                                                        launchUrlString(
+                                                            donationUrl);
                                                       },
                                                       icon: Icon(
                                                           MdiIcons.beerOutline),

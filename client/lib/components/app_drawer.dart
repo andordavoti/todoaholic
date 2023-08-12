@@ -10,7 +10,7 @@ import 'package:todoaholic/data/custom_list.dart';
 import 'package:todoaholic/data/lists_dao.dart';
 import 'package:todoaholic/screens/home.dart';
 import 'package:todoaholic/screens/timeline_screen.dart';
-import 'package:todoaholic/utils/createRoute.dart';
+import 'package:todoaholic/utils/create_route.dart';
 import '../screens/custom_list_screen.dart';
 import '../screens/user_profile_screen.dart';
 

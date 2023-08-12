@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
 import '../utils/datetime_extension.dart';
 import 'todo.dart';
 
@@ -8,8 +7,8 @@ class TodoDao {
   final firestore = FirebaseFirestore.instance;
 
   Future<void> save(Todo todo) async {
-    CollectionReference collection = firestore.collection(
-        "users/" + (FirebaseAuth.instance.currentUser!.uid) + "/todos");
+    CollectionReference collection = firestore
+        .collection('users/${FirebaseAuth.instance.currentUser!.uid}/todos');
 
     await collection.add(todo.toJson());
   }
@@ -48,8 +47,8 @@ class TodoDao {
   }
 
   Stream<QuerySnapshot> getStream(DateTime selectedDate) {
-    CollectionReference collection = firestore.collection(
-        "users/" + (FirebaseAuth.instance.currentUser!.uid) + "/todos");
+    CollectionReference collection = firestore
+        .collection('users/"${FirebaseAuth.instance.currentUser!.uid}/todos');
 
     final currentDate = DateTime.now().getDateOnly();
 
@@ -69,8 +68,8 @@ class TodoDao {
   }
 
   Stream<QuerySnapshot> getUndonePastStream() {
-    CollectionReference collection = firestore.collection(
-        "users/" + (FirebaseAuth.instance.currentUser!.uid) + "/todos");
+    CollectionReference collection = firestore
+        .collection('users/${FirebaseAuth.instance.currentUser!.uid}/todos');
 
     return collection
         .where('isDone', isEqualTo: false)
@@ -80,8 +79,8 @@ class TodoDao {
   }
 
   Stream<QuerySnapshot> getTimelineStream() {
-    CollectionReference collection = firestore.collection(
-        "users/" + (FirebaseAuth.instance.currentUser!.uid) + "/todos");
+    CollectionReference collection = firestore
+        .collection('users/${FirebaseAuth.instance.currentUser!.uid}/todos');
 
     final currentDate = DateTime.now().getDateOnly();
     return collection

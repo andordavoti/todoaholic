@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -10,7 +9,7 @@ import 'package:todoaholic/components/timeline_todo_list.dart';
 import 'package:todoaholic/data/todo_dao.dart';
 import 'package:todoaholic/data/todo_item_type.dart';
 import 'package:todoaholic/screens/user_profile_screen.dart';
-import 'package:todoaholic/utils/createRoute.dart';
+import 'package:todoaholic/utils/create_route.dart';
 
 import 'auth_screen.dart';
 import 'home.dart';
@@ -26,7 +25,7 @@ class TimelineScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ScrollController _scrollController = ScrollController();
+    final ScrollController scrollController = ScrollController();
     final todoDao = Provider.of<TodoDao>(context, listen: false);
     return StreamBuilder<User?>(
         stream: FirebaseAuth.instance.authStateChanges(),
@@ -62,7 +61,7 @@ class TimelineScreen extends StatelessWidget {
                               return pastTasksExist
                                   ? SingleChildScrollView(
                                       physics: const BouncingScrollPhysics(),
-                                      controller: _scrollController,
+                                      controller: scrollController,
                                       child: Column(
                                         children: [
                                           const PastTodoList(

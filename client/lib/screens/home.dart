@@ -13,7 +13,7 @@ import 'package:todoaholic/data/todo_item_type.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:todoaholic/screens/timeline_screen.dart';
 import 'package:todoaholic/screens/user_profile_screen.dart';
-import 'package:todoaholic/utils/createRoute.dart';
+import 'package:todoaholic/utils/create_route.dart';
 
 import '../constants.dart';
 import 'auth_screen.dart';

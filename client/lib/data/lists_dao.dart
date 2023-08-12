@@ -6,8 +6,8 @@ class ListsDao {
   final firestore = FirebaseFirestore.instance;
 
   Future<void> save(CustomList list) async {
-    CollectionReference collection = firestore.collection(
-        "users/" + (FirebaseAuth.instance.currentUser!.uid) + "/lists");
+    CollectionReference collection = firestore
+        .collection('users/${FirebaseAuth.instance.currentUser!.uid}/lists');
 
     await collection.add(list.toJson());
   }
@@ -27,8 +27,8 @@ class ListsDao {
   }
 
   Stream<QuerySnapshot> getStream() {
-    CollectionReference collection = firestore.collection(
-        "users/" + (FirebaseAuth.instance.currentUser!.uid) + "/lists");
+    CollectionReference collection = firestore
+        .collection('users/${FirebaseAuth.instance.currentUser!.uid}/lists');
 
     return collection.orderBy('order').snapshots();
   }

@@ -40,14 +40,14 @@ class CustomTodoList extends StatelessWidget {
                   children: [
                     Text(
                       'Nothing in this list',
-                      style: Theme.of(context).textTheme.headline2,
+                      style: Theme.of(context).textTheme.displayMedium,
                       textAlign: TextAlign.center,
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 8),
                       child: Text(
                         'Add something by tapping the + button',
-                        style: Theme.of(context).textTheme.bodyText1,
+                        style: Theme.of(context).textTheme.bodyLarge,
                         textAlign: TextAlign.center,
                       ),
                     ),
@@ -67,14 +67,14 @@ class CustomTodoList extends StatelessWidget {
             children: [
               Text(
                 'No list selected',
-                style: Theme.of(context).textTheme.headline2,
+                style: Theme.of(context).textTheme.displayMedium,
                 textAlign: TextAlign.center,
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 8),
                 child: Text(
                   'Please select a list from the drawer',
-                  style: Theme.of(context).textTheme.bodyText1,
+                  style: Theme.of(context).textTheme.bodyLarge,
                   textAlign: TextAlign.center,
                 ),
               ),

@@ -47,6 +47,7 @@ dependencies:
   firebase_analytics: ^10.4.4
   # firebase_crashlytics: ^2.4.4 bug in macOS: lib not found
   firebase_performance: ^0.9.2+4
+  intl: ^0.18.0
   window_size:
     git:
       url: https://github.com/google/flutter-desktop-embedding.git

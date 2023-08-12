@@ -8,7 +8,7 @@ import 'package:todoaholic/data/app_state_provider.dart';
 import 'package:todoaholic/data/todo_item_type.dart';
 import 'package:todoaholic/screens/timeline_screen.dart';
 import 'package:todoaholic/screens/user_profile_screen.dart';
-import 'package:todoaholic/utils/createRoute.dart';
+import 'package:todoaholic/utils/create_route.dart';
 import '../components/manage_custom_list_dialog.dart';
 import 'auth_screen.dart';
 import 'home.dart';

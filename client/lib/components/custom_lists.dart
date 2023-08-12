@@ -6,7 +6,7 @@ import 'package:todoaholic/data/app_state_provider.dart';
 import 'package:todoaholic/data/lists_dao.dart';
 import 'package:todoaholic/data/custom_list.dart';
 import 'package:todoaholic/screens/custom_list_screen.dart';
-import 'package:todoaholic/utils/createRoute.dart';
+import 'package:todoaholic/utils/create_route.dart';
 import 'manage_custom_list_dialog.dart';
 
 class CustomLists extends StatelessWidget {
