@@ -47,10 +47,9 @@ Offline support for the mobile and desktop apps.
 
 ## Future plans
 
-- Support Windows & Linux (will be added when FlutterFire is supported on the platforms: [FlutterFire Desktop](https://github.com/invertase/flutterfire_desktop))
 - Calendar integration
 - Recurring tasks (tasks that repeat every day, week or month)
-- Sign in with Apple, Google, GitHub, etc.
+- Sign in with Apple & Google
 
 ## Known issues
 
