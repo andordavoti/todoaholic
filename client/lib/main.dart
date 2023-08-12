@@ -1,5 +1,6 @@
 import 'dart:io' show Platform;
 import 'package:flutter/material.dart';
+import 'package:todoaholic/screens/home.dart';
 import 'package:window_size/window_size.dart';
 
 import 'package:firebase_core/firebase_core.dart';
@@ -7,7 +8,6 @@ import 'package:provider/provider.dart';
 import 'package:todoaholic/data/app_state_provider.dart';
 import 'package:todoaholic/data/lists_dao.dart';
 import 'package:todoaholic/data/todo_dao.dart';
-import 'package:todoaholic/screens/routes.dart';
 import 'package:todoaholic/utils/theme.dart';
 import 'data/custom_list_dao.dart';
 import 'firebase_options.dart';
@@ -55,8 +55,7 @@ class MyApp extends StatelessWidget {
         theme: AppTheme.light(),
         darkTheme: AppTheme.dark(),
         debugShowCheckedModeBanner: false,
-        initialRoute: Routes.home,
-        routes: Routes.appRoutes,
+        home: Home(),
       ),
     );
   }

@@ -10,8 +10,10 @@ import 'package:todoaholic/data/app_state_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:todoaholic/data/todo_dao.dart';
 import 'package:todoaholic/data/todo_item_type.dart';
-import 'package:todoaholic/screens/routes.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:todoaholic/screens/timeline_screen.dart';
+import 'package:todoaholic/screens/user_profile_screen.dart';
+import 'package:todoaholic/utils/createRoute.dart';
 
 import '../constants.dart';
 import 'auth_screen.dart';
@@ -45,6 +47,7 @@ class Home extends StatelessWidget {
     final todoDao = Provider.of<TodoDao>(context, listen: false);
 
     double screenWidth = MediaQuery.of(context).size.width;
+    bool hideTrailingIcon = screenWidth < drawerBreakPoint ? false : true;
     double dateNavLeftPadding = screenWidth < drawerBreakPoint ? 20 : 320;
 
     return StreamBuilder<User?>(
@@ -85,13 +88,13 @@ class Home extends StatelessWidget {
                         NextDayIntent: CallbackAction<NextDayIntent>(
                             onInvoke: (intent) => nextDay()),
                         TimelineIntent: CallbackAction<TimelineIntent>(
-                            onInvoke: (intent) =>
-                                Navigator.pushReplacementNamed(
-                                    context, Routes.timeline)),
+                          onInvoke: (intent) => Navigator.of(context)
+                              .push(createRoute(const TimelineScreen())),
+                        ),
                         ProfileIntent: CallbackAction<ProfileIntent>(
-                            onInvoke: (intent) =>
-                                Navigator.pushReplacementNamed(
-                                    context, Routes.profile)),
+                          onInvoke: (intent) => Navigator.of(context)
+                              .push(createRoute(const UserProfileScreen())),
+                        ),
                         AddTaskIntent: CallbackAction<AddTaskIntent>(
                             onInvoke: (intent) => Navigator.push(
                                   context,
@@ -149,6 +152,9 @@ class Home extends StatelessWidget {
                             ),
                           ),
                           appBar: AppBar(
+                            leading: hideTrailingIcon
+                                ? const SizedBox.shrink()
+                                : null,
                             title: Align(
                               alignment: Alignment.topCenter,
                               child: InkWell(

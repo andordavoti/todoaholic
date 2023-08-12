@@ -2,15 +2,16 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:todoaholic/components/app_drawer.dart';
 import 'package:todoaholic/components/custom_todo_list.dart';
 import 'package:todoaholic/components/scaffold_wrapper.dart';
 import 'package:todoaholic/data/app_state_provider.dart';
 import 'package:todoaholic/data/todo_item_type.dart';
-import 'package:todoaholic/screens/routes.dart';
-
+import 'package:todoaholic/screens/timeline_screen.dart';
+import 'package:todoaholic/screens/user_profile_screen.dart';
+import 'package:todoaholic/utils/createRoute.dart';
 import '../components/manage_custom_list_dialog.dart';
 import 'auth_screen.dart';
+import 'home.dart';
 import 'manage_todo_screen.dart';
 
 class TasksIntent extends Intent {}
@@ -48,17 +49,17 @@ class CustomListScreen extends StatelessWidget {
                     child: Actions(
                       actions: {
                         TasksIntent: CallbackAction<TasksIntent>(
-                            onInvoke: (intent) =>
-                                Navigator.pushReplacementNamed(
-                                    context, Routes.home)),
+                          onInvoke: (intent) =>
+                              Navigator.of(context).push(createRoute(Home())),
+                        ),
                         TimelineIntent: CallbackAction<TimelineIntent>(
-                            onInvoke: (intent) =>
-                                Navigator.pushReplacementNamed(
-                                    context, Routes.timeline)),
+                          onInvoke: (intent) => Navigator.of(context)
+                              .push(createRoute(const TimelineScreen())),
+                        ),
                         ProfileIntent: CallbackAction<ProfileIntent>(
-                            onInvoke: (intent) =>
-                                Navigator.pushReplacementNamed(
-                                    context, Routes.profile)),
+                          onInvoke: (intent) => Navigator.of(context)
+                              .push(createRoute(const UserProfileScreen())),
+                        ),
                         AddTaskIntent: CallbackAction<AddTaskIntent>(
                             onInvoke: (intent) => Navigator.push(
                                   context,

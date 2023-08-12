@@ -1,18 +1,19 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:provider/provider.dart';
-import 'package:todoaholic/components/app_drawer.dart';
-
 import 'package:todoaholic/components/past_todo_list.dart';
 import 'package:todoaholic/components/scaffold_wrapper.dart';
 import 'package:todoaholic/components/timeline_todo_list.dart';
 import 'package:todoaholic/data/todo_dao.dart';
 import 'package:todoaholic/data/todo_item_type.dart';
-import 'package:todoaholic/screens/routes.dart';
+import 'package:todoaholic/screens/user_profile_screen.dart';
+import 'package:todoaholic/utils/createRoute.dart';
 
 import 'auth_screen.dart';
+import 'home.dart';
 
 class TasksIntent extends Intent {}
 
@@ -40,28 +41,18 @@ class TimelineScreen extends StatelessWidget {
                   child: Actions(
                     actions: {
                       TasksIntent: CallbackAction<TasksIntent>(
-                          onInvoke: (intent) => Navigator.pushReplacementNamed(
-                              context, Routes.home)),
+                        onInvoke: (intent) =>
+                            Navigator.of(context).push(createRoute(Home())),
+                      ),
                       ProfileIntent: CallbackAction<ProfileIntent>(
-                          onInvoke: (intent) => Navigator.pushReplacementNamed(
-                              context, Routes.profile)),
+                        onInvoke: (intent) => Navigator.of(context)
+                            .push(createRoute(const UserProfileScreen())),
+                      ),
                     },
                     child: Focus(
                       autofocus: true,
                       child: ScaffoldWrapper(
                         title: "Timeline",
-                        appBar: AppBar(
-                          actions: const [
-                            IconButton(
-                              color: Colors.transparent,
-                              icon: SizedBox.shrink(),
-                              onPressed: null,
-                            )
-                          ],
-                          title: const Align(
-                              alignment: Alignment.topCenter,
-                              child: Text('Timeline')),
-                        ),
                         body: StreamBuilder<QuerySnapshot>(
                             stream: todoDao.getUndonePastStream(),
                             builder: (context, pastSnapshot) {

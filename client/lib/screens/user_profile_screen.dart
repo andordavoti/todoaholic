@@ -7,13 +7,14 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:todoaholic/components/delete_account_dialog.dart';
 import 'package:todoaholic/components/scaffold_wrapper.dart';
 import 'package:todoaholic/components/verify_email_dialog.dart';
-import 'package:todoaholic/screens/routes.dart';
+import 'package:todoaholic/screens/timeline_screen.dart';
+import 'package:todoaholic/utils/createRoute.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:touchable_opacity/touchable_opacity.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
-
 import '../constants.dart';
 import 'auth_screen.dart';
+import 'home.dart';
 
 class TasksIntent extends Intent {}
 
@@ -68,11 +69,12 @@ class UserProfileScreenState extends State<UserProfileScreen> {
                   child: Actions(
                     actions: {
                       TasksIntent: CallbackAction<TasksIntent>(
-                          onInvoke: (intent) => Navigator.pushReplacementNamed(
-                              context, Routes.home)),
+                          onInvoke: (intent) =>
+                              Navigator.of(context).push(createRoute(Home()))),
                       TimelineIntent: CallbackAction<TimelineIntent>(
-                          onInvoke: (intent) => Navigator.pushReplacementNamed(
-                              context, Routes.timeline)),
+                        onInvoke: (intent) => Navigator.of(context)
+                            .push(createRoute(const TimelineScreen())),
+                      ),
                     },
                     child: Focus(
                         autofocus: true,

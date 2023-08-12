@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:todoaholic/components/app_drawer.dart';
-
 import '../constants.dart';
 
 class ScaffoldWrapper extends StatelessWidget {
@@ -26,8 +25,17 @@ class ScaffoldWrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
+    bool hideTrailingIcon = screenWidth < drawerBreakPoint ? false : true;
 
-    AppBar appBar = this.appBar ?? AppBar(title: Text(title), actions: actions);
+    AppBar appBar = this.appBar ??
+        AppBar(
+          title: Align(
+            alignment: Alignment.topCenter,
+            child: Text(title),
+          ),
+          actions: actions,
+          leading: hideTrailingIcon ? const SizedBox.shrink() : null,
+        );
 
     if (screenWidth < drawerBreakPoint) {
       return Scaffold(

@@ -8,7 +8,11 @@ import 'package:todoaholic/components/manage_custom_list_dialog.dart';
 import 'package:todoaholic/data/app_state_provider.dart';
 import 'package:todoaholic/data/custom_list.dart';
 import 'package:todoaholic/data/lists_dao.dart';
-import 'package:todoaholic/screens/routes.dart';
+import 'package:todoaholic/screens/home.dart';
+import 'package:todoaholic/screens/timeline_screen.dart';
+import 'package:todoaholic/utils/createRoute.dart';
+import '../screens/custom_list_screen.dart';
+import '../screens/user_profile_screen.dart';
 
 class AppDrawer extends StatelessWidget {
   const AppDrawer({Key? key}) : super(key: key);
@@ -70,7 +74,7 @@ class AppDrawer extends StatelessWidget {
               ),
               onTap: () {
                 HapticFeedback.selectionClick();
-                Navigator.pushReplacementNamed(context, Routes.home);
+                Navigator.of(context).push(createRoute(Home()));
               },
             ),
             ListTile(
@@ -82,7 +86,7 @@ class AppDrawer extends StatelessWidget {
               ),
               onTap: () {
                 HapticFeedback.selectionClick();
-                Navigator.pushReplacementNamed(context, Routes.timeline);
+                Navigator.of(context).push(createRoute(const TimelineScreen()));
               },
             ),
             ListTile(
@@ -94,7 +98,8 @@ class AppDrawer extends StatelessWidget {
               ),
               onTap: () {
                 HapticFeedback.selectionClick();
-                Navigator.pushReplacementNamed(context, Routes.profile);
+                Navigator.of(context)
+                    .push(createRoute(const UserProfileScreen()));
               },
             ),
             const Divider(),
@@ -205,7 +210,7 @@ class AppDrawer extends StatelessWidget {
           onTap: () {
             appState.setSelectedList(list);
             HapticFeedback.selectionClick();
-            Navigator.pushReplacementNamed(context, Routes.customList);
+            Navigator.of(context).push(createRoute(const CustomListScreen()));
           }),
     );
   }
