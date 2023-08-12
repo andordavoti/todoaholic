@@ -12,6 +12,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:touchable_opacity/touchable_opacity.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 
+import '../constants.dart';
 import 'auth_screen.dart';
 
 class TasksIntent extends Intent {}
@@ -186,8 +187,7 @@ class UserProfileScreenState extends State<UserProfileScreen> {
                                             child: TouchableOpacity(
                                               activeOpacity: 0.4,
                                               onTap: () {
-                                                launch(
-                                                    'https://davotisolutions.com/');
+                                                launch(companyWebsiteUrl);
                                               },
                                               child: Text(
                                                 'www.davotisolutions.com',
@@ -214,8 +214,7 @@ class UserProfileScreenState extends State<UserProfileScreen> {
                                                   final Uri emailLaunchUri =
                                                       Uri(
                                                     scheme: 'mailto',
-                                                    path:
-                                                        'contact@davotisolutions.com',
+                                                    path: contactEmail,
                                                     query:
                                                         encodeQueryParameters(<String,
                                                             String>{
@@ -238,8 +237,7 @@ class UserProfileScreenState extends State<UserProfileScreen> {
                                               width: 275,
                                               child: OutlinedButton.icon(
                                                   onPressed: () {
-                                                    launch(
-                                                        'https://github.com/andordavoti/todoaholic');
+                                                    launch(githubRepoUrl);
                                                   },
                                                   icon: Icon(MdiIcons.github),
                                                   label: const Text(
@@ -253,8 +251,7 @@ class UserProfileScreenState extends State<UserProfileScreen> {
                                                   width: 275,
                                                   child: OutlinedButton.icon(
                                                       onPressed: () {
-                                                        launch(
-                                                            'https://www.buymeacoffee.com/andordavoti');
+                                                        launch(donationUrl);
                                                       },
                                                       icon: Icon(
                                                           MdiIcons.beerOutline),
