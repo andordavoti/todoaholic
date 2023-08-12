@@ -36,7 +36,7 @@ jobs:
         run: cd .github/scripts && chmod +x decrypt_ios_secrets.sh && ./decrypt_ios_secrets.sh
         shell: bash
         env:
-          ANDROID_KEYS_SECRET_PASSPHRASE: ${{ secrets.IOS_KEYS_SECRET_PASSPHRASE }}
+          IOS_KEYS_SECRET_PASSPHRASE: ${{ secrets.IOS_KEYS_SECRET_PASSPHRASE }}
       - name: Run Flutter tasks
         uses: subosito/flutter-action@v1
         with:
