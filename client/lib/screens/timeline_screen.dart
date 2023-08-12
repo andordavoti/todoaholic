@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:todoaholic/components/app_drawer.dart';
 
 import 'package:todoaholic/components/past_todo_list.dart';
+import 'package:todoaholic/components/scaffold_wrapper.dart';
 import 'package:todoaholic/components/timeline_todo_list.dart';
 import 'package:todoaholic/data/todo_dao.dart';
 import 'package:todoaholic/data/todo_item_type.dart';
@@ -47,8 +48,8 @@ class TimelineScreen extends StatelessWidget {
                     },
                     child: Focus(
                       autofocus: true,
-                      child: Scaffold(
-                        drawer: const AppDrawer(),
+                      child: ScaffoldWrapper(
+                        title: "Timeline",
                         appBar: AppBar(
                           actions: const [
                             IconButton(

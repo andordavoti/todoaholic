@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-import 'package:todoaholic/components/app_drawer.dart';
 import 'package:todoaholic/components/delete_account_dialog.dart';
+import 'package:todoaholic/components/scaffold_wrapper.dart';
 import 'package:todoaholic/components/verify_email_dialog.dart';
 import 'package:todoaholic/screens/routes.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -34,7 +34,7 @@ class UserProfileScreenState extends State<UserProfileScreen> {
   void initState() {
     super.initState();
 
-    WidgetsBinding.instance!.addPostFrameCallback((_) async {
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
       PackageInfo info = await PackageInfo.fromPlatform();
       setState(() {
         packageInfo = info;
@@ -74,25 +74,22 @@ class UserProfileScreenState extends State<UserProfileScreen> {
                               context, Routes.timeline)),
                     },
                     child: Focus(
-                      autofocus: true,
-                      child: Scaffold(
-                          drawer: const AppDrawer(),
-                          appBar: AppBar(
-                            title: const Text('Profile'),
-                            actions: [
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: (IconButton(
-                                  icon: Icon(Icons.logout,
-                                      color: Theme.of(context)
-                                          .textTheme
-                                          .bodyMedium!
-                                          .color),
-                                  onPressed: FirebaseAuth.instance.signOut,
-                                )),
-                              ),
-                            ],
-                          ),
+                        autofocus: true,
+                        child: ScaffoldWrapper(
+                          title: 'Profile',
+                          actions: [
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: (IconButton(
+                                icon: Icon(Icons.logout,
+                                    color: Theme.of(context)
+                                        .textTheme
+                                        .bodyMedium!
+                                        .color),
+                                onPressed: FirebaseAuth.instance.signOut,
+                              )),
+                            ),
+                          ],
                           body: StreamBuilder<User?>(
                               stream: FirebaseAuth.instance.userChanges(),
                               builder: (context, snapshot) {
@@ -307,8 +304,8 @@ class UserProfileScreenState extends State<UserProfileScreen> {
                                     ),
                                   ),
                                 ]);
-                              })),
-                    ),
+                              }),
+                        )),
                   ),
                 );
         });

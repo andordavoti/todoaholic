@@ -38,6 +38,7 @@ class AppDrawer extends StatelessWidget {
     }
 
     return Drawer(
+      width: 300,
       backgroundColor: Theme.of(context).primaryColor,
       child: Consumer<AppState>(builder: (context, appState, child) {
         return ListView(

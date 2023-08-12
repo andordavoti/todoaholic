@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:todoaholic/components/app_drawer.dart';
 import 'package:todoaholic/components/custom_todo_list.dart';
+import 'package:todoaholic/components/scaffold_wrapper.dart';
 import 'package:todoaholic/data/app_state_provider.dart';
 import 'package:todoaholic/data/todo_item_type.dart';
 import 'package:todoaholic/screens/routes.dart';
@@ -68,10 +69,10 @@ class CustomListScreen extends StatelessWidget {
                                 )),
                       },
                       child: Focus(
-                        autofocus: true,
-                        child: Scaffold(
-                            drawer: const AppDrawer(),
-                            appBar: AppBar(
+                          autofocus: true,
+                          child: ScaffoldWrapper(
+                              title: appState.selectedList?.name ??
+                                  "No list selected",
                               actions: [
                                 IconButton(
                                   icon: const Icon(Icons.more_vert),
@@ -87,28 +88,22 @@ class CustomListScreen extends StatelessWidget {
                                   },
                                 )
                               ],
-                              title: Align(
-                                  alignment: Alignment.topCenter,
-                                  child: Text(appState.selectedList?.name ??
-                                      "No list selected")),
-                            ),
-                            floatingActionButton: FloatingActionButton(
-                              onPressed: () {
-                                if (appState.selectedList != null) {
-                                  HapticFeedback.selectionClick();
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            const ManageTodoScreen(
-                                                null, TodoItemType.custom)),
-                                  );
-                                }
-                              },
-                              child: const Icon(Icons.add),
-                            ),
-                            body: CustomTodoList()),
-                      ),
+                              floatingActionButton: FloatingActionButton(
+                                onPressed: () {
+                                  if (appState.selectedList != null) {
+                                    HapticFeedback.selectionClick();
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const ManageTodoScreen(
+                                                  null, TodoItemType.custom)),
+                                    );
+                                  }
+                                },
+                                child: const Icon(Icons.add),
+                              ),
+                              body: CustomTodoList())),
                     ),
                   );
                 });

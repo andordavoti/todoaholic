@@ -2,9 +2,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
-import 'package:todoaholic/components/app_drawer.dart';
 import 'package:todoaholic/components/date_navigation_buttons.dart';
 import 'package:todoaholic/components/past_todo_list.dart';
+import 'package:todoaholic/components/scaffold_wrapper.dart';
 import 'package:todoaholic/components/todo_list.dart';
 import 'package:todoaholic/data/app_state_provider.dart';
 import 'package:provider/provider.dart';
@@ -13,6 +13,7 @@ import 'package:todoaholic/data/todo_item_type.dart';
 import 'package:todoaholic/screens/routes.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import '../constants.dart';
 import 'auth_screen.dart';
 import 'manage_todo_screen.dart';
 import '../utils/datetime_extension.dart';
@@ -42,6 +43,9 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     final currentDate = DateTime.now().getDateOnly();
     final todoDao = Provider.of<TodoDao>(context, listen: false);
+
+    double screenWidth = MediaQuery.of(context).size.width;
+    double dateNavLeftPadding = screenWidth < drawerBreakPoint ? 20 : 320;
 
     return StreamBuilder<User?>(
         stream: FirebaseAuth.instance.authStateChanges(),
@@ -99,35 +103,21 @@ class Home extends StatelessWidget {
                       },
                       child: Focus(
                         autofocus: true,
-                        child: Scaffold(
-                          drawer: const AppDrawer(),
-                          body: StreamBuilder<QuerySnapshot>(
-                              stream: todoDao.getUndonePastStream(),
-                              builder: (context, pastSnapshot) {
-                                final bool pastTasksExist =
-                                    pastSnapshot.hasData &&
-                                        pastSnapshot.data!.docs.isNotEmpty;
-
-                                return appState.selectedDate == currentDate &&
-                                        pastTasksExist
-                                    ? SingleChildScrollView(
-                                        physics: const BouncingScrollPhysics(),
-                                        controller: _scrollController,
-                                        child: Column(
-                                          children: [
-                                            const PastTodoList(
-                                                type: TodoItemType.past),
-                                            TodoList(noPastTasks: false),
-                                          ],
-                                        ),
-                                      )
-                                    : TodoList(
-                                        noPastTasks: true,
-                                      );
-                              }),
+                        child: ScaffoldWrapper(
+                          title: "",
+                          actions: const [
+                            IconButton(
+                              color: Colors.transparent,
+                              icon: SizedBox.shrink(),
+                              onPressed: null,
+                            )
+                          ],
                           resizeToAvoidBottomInset: false,
+                          floatingActionButtonLocation:
+                              FloatingActionButtonLocation.centerFloat,
                           floatingActionButton: Padding(
-                            padding: const EdgeInsets.only(left: 20, right: 20),
+                            padding: EdgeInsets.only(
+                                left: dateNavLeftPadding, right: 20),
                             child: Stack(
                               children: <Widget>[
                                 Align(
@@ -158,8 +148,6 @@ class Home extends StatelessWidget {
                               ],
                             ),
                           ),
-                          floatingActionButtonLocation:
-                              FloatingActionButtonLocation.centerFloat,
                           appBar: AppBar(
                             title: Align(
                               alignment: Alignment.topCenter,
@@ -183,14 +171,31 @@ class Home extends StatelessWidget {
                                   child: Text(DateFormat('EEEE, MMMM d')
                                       .format(appState.selectedDate))),
                             ),
-                            actions: const [
-                              IconButton(
-                                color: Colors.transparent,
-                                icon: SizedBox.shrink(),
-                                onPressed: null,
-                              )
-                            ],
                           ),
+                          body: StreamBuilder<QuerySnapshot>(
+                              stream: todoDao.getUndonePastStream(),
+                              builder: (context, pastSnapshot) {
+                                final bool pastTasksExist =
+                                    pastSnapshot.hasData &&
+                                        pastSnapshot.data!.docs.isNotEmpty;
+
+                                return appState.selectedDate == currentDate &&
+                                        pastTasksExist
+                                    ? SingleChildScrollView(
+                                        physics: const BouncingScrollPhysics(),
+                                        controller: _scrollController,
+                                        child: Column(
+                                          children: [
+                                            const PastTodoList(
+                                                type: TodoItemType.past),
+                                            TodoList(noPastTasks: false),
+                                          ],
+                                        ),
+                                      )
+                                    : TodoList(
+                                        noPastTasks: true,
+                                      );
+                              }),
                         ),
                       ),
                     ),
