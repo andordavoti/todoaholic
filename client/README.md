@@ -36,12 +36,6 @@ Open the project in xcode with the following command:
 open ios/Runner.xcworkspace
 ```
 
-**macOS**
-
-```sh
-open macos/Runner.xcworkspace
-```
-
 Then in the menu bar, select `Product -> Archive`.
 
 ### **web**
@@ -74,12 +68,6 @@ Then open the project in xcode with the following command:
 
 ```sh
 open ios/Runner.xcworkspace
-```
-
-**macOS**
-
-```sh
-open macos/Runner.xcworkspace
 ```
 
 Go to the Assets -> AppIcon in xcode, and drag in the icons.

@@ -10,9 +10,7 @@ A minimalist open-source and free todo app for iOS, Android, macOS & web.
 
 - iOS: [App Store](https://apps.apple.com/us/app/todoaholic/id1601535769)
 - Android: [Google Play Store](https://play.google.com/store/apps/details?id=com.andordavoti.todoaholic)
-- macOS: only in TestFlight for now
-- Windows: see future plans section
-- Linux: see future plans section
+- macOS: [App Store](https://apps.apple.com/us/app/todoaholic/id1601535769) (only for Apple Silicon Macs)
 - web (PWA): [todoaholic.com](https://todoaholic.com/)
 
 ## Features
@@ -97,10 +95,6 @@ A [GitHub Action](https://github.com/features/actions) automatically builds the 
 ### Android:
 
 A [GitHub Action](https://github.com/features/actions) automatically builds the Flutter Android app bundle, and deploys it to Google Play Store Internal Test Track with [Fastlane](https://fastlane.tools/), when there is a push to the master branch or a PR merge.
-
-### macOS:
-
-Manual build and deployment through Xcode for now...
 
 ### web:
 

@@ -53,13 +53,10 @@ android_keys.zip
 *.jks
 android/app/google-services.json
 
-# Firebase iOS & MacOS
+# Firebase iOS
 firebase_app_id_file.json
 GoogleService-Info.plist
 
 # iOS build artifacts
 *.ipa
 *.zip
-
-# macOS build artifacts
-*.app
