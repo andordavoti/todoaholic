@@ -20,6 +20,18 @@ jobs:
       - uses: actions/setup-java@v1
         with:
           java-version: "12.x"
+      - name: Install Homebrew, step 1
+        run: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+        shell: bash
+      - name: Install Homebrew, step 2
+        run: echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
+        shell: bash
+      - name: Install Homebrew, step 3
+        run: eval "$(/opt/homebrew/bin/brew shellenv)"   
+        shell: bash
+      - name: Install gnupg
+        run: brew install gnupg
+        shell: bash
       - name: Decrypt iOS keys
         run: cd .github/scripts && chmod +x decrypt_ios_secrets.sh && ./decrypt_ios_secrets.sh
         shell: bash
